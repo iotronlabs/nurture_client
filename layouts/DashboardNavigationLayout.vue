@@ -82,7 +82,7 @@
 			<v-toolbar-side-icon
 				@click.stop="primaryDrawer.model = !primaryDrawer.model"
 			></v-toolbar-side-icon>
-			<v-toolbar-title>Classmate</v-toolbar-title>
+			<v-toolbar-title>Nurture</v-toolbar-title>
 			<v-spacer />
 
 			<span class="toolbar-icons">

@@ -9,19 +9,23 @@
 					<v-list-tile-title><h3>John Leider</h3></v-list-tile-title>
 				</v-list-tile-content>
 			</v-list-tile>
-
+			<br>
 			<div>
-				<v-chip small outline color="#087a49" >
+
+				<v-chip small color="#3cba92" text-color="white">
+              		<v-avatar class="student-color"> {{selectItems.avatar_1}}</v-avatar>
+              		{{selectItems.title_1}}
+            	</v-chip>
+				<!-- <v-chip small outline color="#087a49" >
 					<v-avatar class="student-color"> {{selectItems.avatar_1}} </v-avatar>
 						{{selectItems.title_1}}
 						<v-spacer />
-				</v-chip>
-
-				<v-chip small outline color="#4e54c8" >
+				</v-chip> -->
+				<!-- <v-chip small outline color="#4e54c8" >
 					<v-avatar class="subject-color"> {{selectItems.avatar_2}} </v-avatar>
 						{{selectItems.title_2}}
 						<v-spacer />
-				</v-chip>
+				</v-chip> -->
 			</div>
 		</v-list>
     </div>
