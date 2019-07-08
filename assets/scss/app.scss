@@ -1,0 +1,22 @@
+//Global scss file
+
+
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
+@import '_student';
+@import '_teacher';
+@import '_admin';
+@import '_staff';
+// @import '_audit';
+@import '_variables';
+
+
+.global-font {
+	font-family: 'Fira Sans', sans-serif;
+}
+
+
+
+
+
+
