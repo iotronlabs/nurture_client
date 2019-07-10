@@ -10,15 +10,6 @@ const studentItems = {
 		{
 			icon: {
 				prefix: 'fas',
-				name: 'border-all'
-			},
-			title: 'Welcome',
-			to: '/',
-			items: []
-		},
-		{
-			icon: {
-				prefix: 'fas',
 				name: 'users'
 			},
 			title: 'Forum',
@@ -104,15 +95,7 @@ const teacherItems = {
 		title_2: "Subject"
 	},
 	items:[
-	{
-		icon: {
-			prefix: 'fas',
-			name: 'border-all'
-		},
-		title: 'Welcome',
-		to: '/',
-		items: []
-	},
+	
 		{
 			icon: {
 				prefix: 'fas',
@@ -194,14 +177,7 @@ const teacherItems = {
 const staffItems = {
 	active: false,
 	items: [
-		{
-			icon: {
-				prefix: 'fas',
-				name: 'border-all'
-			},
-			title: 'Welcome to staff dashboard',
-			to: '/'
-		},
+		
 		{
 			icon: {
 				prefix: 'fas',
@@ -296,14 +272,7 @@ const staffItems = {
 const adminItems = {
 	active: false,
 	items: [
-		{
-			icon: {
-				prefix: 'fas',
-				name: 'border-all'
-			},
-			title: 'Welcome to admin dashboard',
-			to: '/'
-		},
+		
 		{
 			icon: {
 				prefix: 'fas',

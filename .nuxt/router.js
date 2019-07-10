@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 
 const _7a3c5304 = () => interopDefault(import('..\\pages\\addStaff.vue' /* webpackChunkName: "pages_addStaff" */))
+const _01996003 = () => interopDefault(import('..\\pages\\calendar.vue' /* webpackChunkName: "pages_calendar" */))
 const _7e6cf99d = () => interopDefault(import('..\\pages\\chat.vue' /* webpackChunkName: "pages_chat" */))
 const _d4fa50c2 = () => interopDefault(import('..\\pages\\dashboard.vue' /* webpackChunkName: "pages_dashboard" */))
 const _07dba91e = () => interopDefault(import('..\\pages\\exam\\index.vue' /* webpackChunkName: "pages_exam_index" */))
@@ -102,6 +103,10 @@ export function createRouter() {
       path: "/addStaff",
       component: _7a3c5304,
       name: "addStaff"
+    }, {
+      path: "/calendar",
+      component: _01996003,
+      name: "calendar"
     }, {
       path: "/chat",
       component: _7e6cf99d,

@@ -6,7 +6,7 @@
 				<v-flex xs12 sm8 md4>
 					<v-card class="elevation-12 card-design">
 						<v-toolbar class="login-grad">
-							<center><img src="/classmate.png"></center>
+							<!-- <center><img src="/classmate.png"></center> -->
 						</v-toolbar>
 						<v-card-text>
 							
@@ -43,7 +43,8 @@ export default {
 
 .container-grad
 {
-	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	
+	/* background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	 */
+	background-image: linear-gradient(to top,#10cf99 0%, #5effd1 100%);	
 }
 .login-grad
 {
@@ -71,7 +72,7 @@ img
 }
 .footer
 {
-	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);
+	background-image: linear-gradient(to top,#0fb485 0%, #2fe9b4 100%);	
 	text-align: center;
 	color: white;
 	
