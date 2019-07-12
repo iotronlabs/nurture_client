@@ -10,9 +10,8 @@
 			<v-tab-item v-for="n in 3" :key="n" >
 				<v-card flat>
 					<v-card-text>
-						<div v-if="n==1"><TableSubAdmin /></div>
-						<div v-if="n==2"><TableFacultyHead /></div>
-						<div v-if="n==3"><TableStudent /></div>
+						<div v-if="n==1"><TableStudent /></div>
+						<div v-if="n==2"><TableFaculty /></div>
 					</v-card-text>
 				</v-card>
 			</v-tab-item>
@@ -24,18 +23,16 @@
 
 <script>
 import TableStudent from '@/components/UserConfig/TableStudent'
-import TableFacultyHead from '@/components/UserConfig/TableFacultyHead'
-import TableSubAdmin from '@/components/UserConfig/TableSubAdmin'
+import TableFaculty from '@/components/UserConfig/TableFaculty'
 
 export default {
 	components: {
 		TableStudent,
-		TableFacultyHead,
-		TableSubAdmin
+		TableFaculty
 	},
   	data: () => ({
 		active: '',
-		heading : ['Sub-admin' , 'Faculty Heads','Student'],
+		heading : ['Students' , 'Faculties'],
 
 		dialog: false,
 

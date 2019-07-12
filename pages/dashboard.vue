@@ -22,7 +22,7 @@
  //import Table from '../components/studentexamtable'
 
 export default {
-	middleware: ['auth'],
+	// middleware: ['auth'],
 	components: {
 		//Calendar,
 		// exam,

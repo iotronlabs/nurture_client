@@ -4,6 +4,7 @@
 			<v-layout align-center justify-center>
 				<v-flex xs12>
 					<Table />
+					<Table2 />
 				</v-flex>
 			</v-layout>
 		</v-container>
@@ -12,10 +13,12 @@
 
 <script>
 import Table from '@/components/table'
+import Table2 from '@/components/table2'
 export default {
-	middleware: ['auth'],
+	// middleware: ['auth'],
 	components: {
 		Table,
+		Table2
 	},
 	layout: 'DashboardNavigationLayout',
 	mounted() {

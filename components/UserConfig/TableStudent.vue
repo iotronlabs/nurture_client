@@ -52,15 +52,6 @@
 								</v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.s_mname"
-									type="text"
-									placeholder="Middle"
-									:disabled="disabled"
-								>
-								</v-text-field>
-							</v-flex>
 
 							<v-flex xs12 sm6 md3>
 								<v-text-field
@@ -116,17 +107,7 @@
 								</v-menu>
 							</v-flex>
 						</v-layout>
-						<v-layout>
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.s_age"
-									type="text"
-									label="Age"
-									placeholder="Age"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-						</v-layout>
+
 
 						<!-- email -->
 						<v-layout row wrap >
@@ -149,23 +130,6 @@
 									v-model="editedItem.s_contact"
 									type="tel"
 									label="Contact no"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-						</v-layout>
-						<!-- religion nationality -->
-						<v-layout row wrap>
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.s_religion"
-									label="Religion"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.s_nationality"
-									label="Nationality"
 									:disabled="disabled"
 								></v-text-field>
 							</v-flex>
@@ -202,7 +166,6 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-if="editedItem.s_nationality=='Indian' || editedItem.s_nationality=='indian' || editedItem.s_nationality=='INDIAN' || editedItem.s_nationality=='India' || editedItem.s_nationality=='india' || editedItem.s_nationality=='INDIA'"
 									v-model="editedItem.s_state"
 									:items="states"
 									label="State"
@@ -233,14 +196,6 @@
 							</v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.guardian_mname"
-									type="text"
-									placeholder="Middle"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
 
 							<v-flex xs12 sm6 md3>
 								<v-text-field
@@ -251,6 +206,18 @@
 								>
 								</v-text-field>
 							</v-flex>
+
+							<v-flex xs12 sm6 md3>
+								<v-select
+									v-model="editedItem.guardian_relation"
+									:items="relations"
+									label="Relationship with guaridan"
+									solo
+									:disabled="disabled"
+								></v-select>
+							</v-flex>
+
+
 						</v-layout >
 						<br>
 					<!-- email -->
@@ -311,13 +278,17 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-if="editedItem.s_nationality=='Indian' || editedItem.s_nationality=='indian' || editedItem.s_nationality=='INDIAN' || editedItem.s_nationality=='India' || editedItem.s_nationality=='india' || editedItem.s_nationality=='INDIA'"
 									v-model="editedItem.guardian_state"
 									:items="states"
 									label="State"
 									solo
 									:disabled="disabled"
 								></v-select>
+							</v-flex>
+							<v-flex xs12 sm6 md3>
+								<v-checkbox v-model="checkbox" color="info"
+									@change="address"
+									label="Same as above"></v-checkbox>
 							</v-flex>
 						</v-layout>
 						<v-layout row>
@@ -327,9 +298,9 @@
 						<v-layout row wrap>
 							<v-flex xs12 sm12 md4>
 								<v-select
-									v-model="editedItem.department"
-									:items="departments"
-									label="Department"
+									v-model="editedItem.centre"
+									:items="centres"
+									label="Assign Centre"
 									required
 									solo
 									:disabled="disabled"
@@ -337,9 +308,9 @@
 							</v-flex>
 							<v-flex xs12 sm12 md4>
 								<v-select
-									v-model="editedItem.stream"
-									:items="streams"
-									label="Streams"
+									v-model="editedItem.course"
+									:items="courses"
+									label="Assign Course"
 									required
 									solo
 									:disabled="disabled"
@@ -349,7 +320,49 @@
 								<v-select
 									v-model="editedItem.clas"
 									:items="classes"
-									label="Class"
+									label="Assign Class"
+									required
+									solo
+									:disabled="disabled"
+								></v-select>
+							</v-flex>
+						</v-layout>
+						<h1>Fee Details</h1>
+						<v-layout>
+							<v-flex xs12 sm12 md3>
+								<v-select
+									v-model="editedItem.fee_structure"
+									:items="fee_structures"
+									label="Fee Structure"
+									required
+									solo
+									:disabled="disabled"
+								></v-select>
+							</v-flex>
+							<v-flex xs12 sm12 md3>
+								<v-text-field
+									v-model="editedItem.scholarship"
+									label="Scholarship Discount"
+									placeholder=""
+									required
+									:disabled="disabled"
+								></v-text-field>
+							</v-flex>
+							<v-flex xs12 sm12 md3>
+								<v-select
+									v-model="editedItem.fee_period"
+									:items="fee_periods"
+									label="Fee Installment Period"
+									required
+									solo
+									:disabled="disabled"
+								></v-select>
+							</v-flex>
+							<v-flex xs12 sm12 md3>
+								<v-select
+									v-model="editedItem.payment_mode"
+									:items="payment_modes"
+									label="Payment Mode"
 									required
 									solo
 									:disabled="disabled"
@@ -410,12 +423,15 @@
 					></v-checkbox>
 				</td>
 				<td class="text-xs-center">{{ props.item.s_id }}</td>
-				<td class="text-xs-right">{{ props.item.s_fname + ' ' + props.item.s_mname + ' ' + props.item.s_surname}}</td>
-				<td class="text-xs-right">{{ props.item.s_dob }}</td>
+				<td class="text-xs-right">{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
 				<td class="text-xs-right">{{ props.item.s_email }}</td>
 				<td class="text-xs-right">{{ props.item.s_contact }}</td>
-				<td class="text-xs-right">{{ props.item.stream }}</td>
-				<td class="text-xs-right">{{ props.item.class_id }}</td>
+				<td class="text-xs-right">{{ props.item.class }}</td>
+				<td class="text-xs-right">{{ props.item.course }}</td>
+				<td class="text-xs-right">{{ props.item.centre }}</td>
+				<td class="text-xs-right">{{ props.item.state }}</td>
+				<td class="text-xs-right">{{ props.item.status }}</td>
+
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -478,6 +494,8 @@ export default {
 		selected: [],
 		settings :
 		[
+			{ title: 'Approve'},
+			{ title: 'Set as inactive'},
 			{ title: 'View' },
 			{ title: 'Edit' }
 		],
@@ -488,8 +506,11 @@ export default {
 			{ text: 'Date of birth ', value: 's_dob', sortable: false },
 			{ text: 'Email', value: 's_email', sortable: false },
 			{ text: 'Contact Number', value: 's_contact', sortable: false },
-			{ text: 'Stream', value: 'stream', sortable: false },
-			{ text: 'Section', value: 'class_id', sortable: true }
+			{ text: 'Class', value: 'class', sortable: false },
+			{ text: 'Course', value: 'course', sortable: true },
+			{ text: 'Centre', value: 'centre', sortable: true },
+			{ text: 'State', value: 'state', sortable: true },
+			{ text: 'Status', value: 'status', sortable: true }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,
@@ -501,14 +522,20 @@ export default {
 			'Mizoram', 'Nagaland', 'Odisha', 'Punjab','Rajasthan',
 			'Sikkim', 'TamilNadu' ,'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand',' West Bengal'
 		],
+
+		relations: ['Father','Mother','Other'],
+		checkbox: false,
 		genders: [
 			{label: 'Male', value: 'M'},
 			{label: 'Female',value: 'F'},
 			{label: 'Others',value: 'O'}
 		],
-		departments:[],
-		streams: [],
+		schools:[],
+		courses: [],
 		classes:[],
+		fee_structures: [],
+		fee_periods: ['At a time','Quarterly','Monthly'],
+		payment_modes: [],
 		rules: {
 			required: v => !!v || 'Required.',
 			emailValid : v=> /.+@.+/.test(v) || 'E-mail must be valid'
@@ -519,21 +546,16 @@ export default {
 		editedItem: {
 			s_id: '',
 			s_fname: '',
-			s_mname: '',
 			s_surname: '',
 			s_email: '',
 			s_gender: '',
 			s_contact: '',
 			s_dob: '',
-			s_age: '',
-			s_religion: '',
-			s_nationality: '',
 			s_address_city: '',
 			s_address: '',
 			s_address_pin: '',
 			s_address_state: '',
 			guardian_fname: '',
-			guardian_mname: '',
 			guardian_surname: '',
 			guardian_email: '',
 			guardian_contact: '',
@@ -541,16 +563,19 @@ export default {
 			guardian_city: '',
 			guardian_pin: '',
 			guardian_state: '',
-			department: '',
-			stream: '',
-			class: '',
+			centre: '',
+			course: '',
+			clas: '',
+			fee_structure: '',
+			scholarship: '',
+			fee_period: '',
+			payment_mode: '',
 			image:null,
 			imageUrl:'',
 		},
 		defaultItem: {
 			s_id: '',
 			s_fname: '',
-			s_mname: '',
 			s_surname: '',
 			s_email: '',
 			s_gender: '',
@@ -563,7 +588,6 @@ export default {
 			s_address_pin: '',
 			s_address_state: '',
 			guardian_fname: '',
-			guardian_mname: '',
 			guardian_surname: '',
 			guardian_email: '',
 			guardian_contact: '',
@@ -571,9 +595,13 @@ export default {
 			guardian_city: '',
 			guardian_pin: '',
 			guardian_state: '',
-			department: '',
-			stream: '',
-			class: '',
+			centre: '',
+			course: '',
+			clas: '',
+			fee_structure: '',
+			scholarship: '',
+			fee_period: '',
+			payment_mode: '',
 			image:null,
 			imageUrl:'',
 		}
@@ -612,6 +640,22 @@ export default {
 			})
 			fileReader.readAsDataURL(files[0])
 			this.editedItem.image=files[0]
+		},
+		address() {
+			if(this.checkbox)
+			{
+				this.editedItem.guardian_address = this.editedItem.s_address
+				this.editedItem.guardian_city = this.editedItem.s_address_city
+				this.editedItem.guardian_pin = this.editedItem.s_address_pin
+				this.editedItem.guardian_state = this.editedItem.s_address_state
+			}
+			else
+			{
+				this.editedItem.guardian_address = ''
+				this.editedItem.guardian_city = ''
+				this.editedItem.guardian_pin = ''
+				this.editedItem.guardian_state = ''
+			}
 		},
 		async initialize () {
 			const student_response = await this.$axios.get('/api/students')
@@ -689,22 +733,17 @@ export default {
 			{
 				response = await this.$axios.post(`/api/students/register`,{
 					s_fname: this.editedItem.s_fname,
-					s_mname: this.editedItem.s_mname,
 					s_surname: this.editedItem.s_surname,
 					s_email: this.editedItem.s_email,
 					s_gender: this.editedItem.s_gender,
 					password: this.editedItem.s_contact,
 					s_contact: this.editedItem.s_contact,
 					s_dob: this.date,
-					s_age: this.editedItem.s_age,
-					s_religion: this.editedItem.s_religion,
-					s_nationality: this.editedItem.s_nationality,
 					s_address: this.editedItem.s_address,
 					s_address_city: this.editedItem.s_address_city,
 					s_address_pin: this.editedItem.s_address_pin,
 					s_address_state: this.editedItem.s_address_state,
 					guardian_fname: this.editedItem.guardian_fname,
-					guardian_mname: this.editedItem.guardian_mname,
 					guardian_surname: this.editedItem.guardian_surname,
 					guardian_email: this.editedItem.guardian_email,
 					guardian_contact: this.editedItem.guardian_contact,
@@ -712,8 +751,13 @@ export default {
 					guardian_city: this.editedItem.guardian_city,
 					guardian_pin: this.editedItem.guardian_pin,
 					guardian_state: this.editedItem.guardian_state,
-					// s_profile_picture: this.imageUrl,
-					class_id: '123'
+					s_centre: this.editedItem.s_centre,
+					s_course: this.editedItem.s_course,
+					s_clas: this.editedItem.s_clas,
+					fee_structure: this.editedItem,fee_structure,
+					scholarship: this.editedItem.scholarship,
+					fee_period: this.editedItem.fee_period,
+					// s_profile_picture: this.imageUrl
 				})
 				if(response.data.success==true)
 				{
@@ -728,21 +772,16 @@ export default {
 				var id= this.editedItem.s_id
 				response = await this.$axios.post(`/api/students/${id}`,{
 					s_fname: this.editedItem.s_fname,
-					s_mname: this.editedItem.s_mname,
 					s_surname: this.editedItem.s_surname,
 					s_email: this.editedItem.s_email,
 					s_gender: this.editedItem.s_gender,
 					s_contact: this.editedItem.s_contact,
 					s_dob: this.date,
-					s_age: this.editedItem.s_age,
-					s_religion: this.editedItem.s_religion,
-					s_nationality: this.editedItem.s_nationality,
 					s_address: this.editedItem.s_address,
 					s_address_city: this.editedItem.s_address_city,
 					s_address_pin: this.editedItem.s_address_pin,
 					s_address_state: this.editedItem.s_address_state,
 					guardian_fname: this.editedItem.guardian_fname,
-					guardian_mname: this.editedItem.guardian_mname,
 					guardian_surname: this.editedItem.guardian_surname,
 					guardian_email: this.editedItem.guardian_email,
 					guardian_contact: this.editedItem.guardian_contact,
@@ -750,8 +789,13 @@ export default {
 					guardian_city: this.editedItem.guardian_city,
 					guardian_pin: this.editedItem.guardian_pin,
 					guardian_state: this.editedItem.guardian_state,
+					s_centre: this.editedItem.s_centre,
+					s_course: this.editedItem.s_course,
+					s_clas: this.editedItem.s_clas,
+					fee_structure: this.editedItem,fee_structure,
+					scholarship: this.editedItem.scholarship,
+					fee_period: this.editedItem.fee_period,
 					// s_profile_picture: this.imageUrl,
-					class_id: '123'
 				})
 				if(response.data.success==true)
 				{

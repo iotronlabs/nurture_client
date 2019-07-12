@@ -1,6 +1,6 @@
 # client
 
-> Frontend of the project ClassMate
+> Frontend of the project Nurture
 
 ## Build Setup
 

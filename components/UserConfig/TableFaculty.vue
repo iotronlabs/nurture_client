@@ -10,7 +10,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
-					<v-toolbar-title>Teacher Form</v-toolbar-title>
+					<v-toolbar-title>Faculty Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>
@@ -40,7 +40,7 @@
 
 							<v-flex xs12 sm6 md3 >
 								<v-text-field
-									v-model="editedItem.t_fname"
+									v-model="editedItem.faculty_fname"
 									:rules="[rules.required]"
 									label="Name"
 									type="text"
@@ -51,19 +51,10 @@
 								</v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.t_mname"
-									type="text"
-									placeholder="Middle"
-									:disabled="disabled"
-								>
-								</v-text-field>
-							</v-flex>
 
 							<v-flex xs12 sm6 md3>
 								<v-text-field
-									v-model="editedItem.t_surname"
+									v-model="editedItem.faculty_surname"
 									type="text"
 									placeholder="Last"
 									:disabled="disabled"
@@ -73,7 +64,7 @@
 						</v-layout>
 						<v-layout  wrap>
 							<v-flex xs12 sm6 md3>
-									<v-radio-group v-model="editedItem.t_gender" label="Gender">
+									<v-radio-group v-model="editedItem.faculty_gender" label="Gender">
 									<v-radio
 										v-for="gender in genders"
 										:key="gender.value"
@@ -87,7 +78,7 @@
 							<v-flex xs12 sm6 md3>
 								<v-menu
 									ref="menu"
-									v-model="editedItem.t_dob"
+									v-model="editedItem.faculty_dob"
 									:close-on-content-click="false"
 									:nudge-right="40"
 									:return-value.sync="date"
@@ -115,17 +106,6 @@
 								</v-menu>
 							</v-flex>
 						</v-layout>
-						<v-layout>
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.t_age"
-									type="text"
-									label="Age"
-									placeholder="Age"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-						</v-layout>
 
 						<!-- email -->
 						<v-layout row wrap >
@@ -133,7 +113,7 @@
 								<v-text-field
 									name="email"
 									type="email"
-									v-model="editedItem.t_email"
+									v-model="editedItem.faculty_email"
 									:rules="[rules.required,rules.emailValid]"
 									label=" Email id"
 									placeholder="Enter Email id"
@@ -145,36 +125,20 @@
 							<!-- contact  -->
 							<v-flex xs12 sm12 md3>
 								<v-text-field
-									v-model="editedItem.t_contact"
+									v-model="editedItem.faculty_contact"
 									type="tel"
 									label="Contact no"
 									:disabled="disabled"
 								></v-text-field>
 							</v-flex>
 						</v-layout>
-						<!-- religion nationality -->
-						<v-layout row wrap>
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.t_religion"
-									label="Religion"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-							<v-flex xs12 sm6 md3>
-								<v-text-field
-									v-model="editedItem.t_nationality"
-									label="Nationality"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-						</v-layout>
+
 						<!-- address   address pincode state-->
 							<v-flex xs12 sm12 md9>
 								<v-text-field
 									name="streetaddress"
 									type="text"
-									v-model="editedItem.t_address"
+									v-model="editedItem.faculty_address"
 									label=" Address"
 									placeholder="Street address"
 									autocomplete="off"
@@ -185,7 +149,7 @@
 						<v-layout row wrap>
 							<v-flex xs12 sm6 md3>
 								<v-text-field
-									v-model="editedItem.t_address_city"
+									v-model="editedItem.faculty_address_city"
 									type="text"
 									placeholder="City"
 									:disabled="disabled"
@@ -193,7 +157,7 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-text-field
-									v-model="editedItem.t_address_pin"
+									v-model="editedItem.faculty_address_pin"
 									type="text"
 									placeholder="Pin/zip code"
 									:disabled="disabled"
@@ -201,8 +165,7 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-if="editedItem.t_nationality=='Indian' || editedItem.t_nationality=='indian' || editedItem.t_nationality=='INDIAN' || editedItem.t_nationality=='India' || editedItem.t_nationality=='india' || editedItem.t_nationality=='INDIA'"
-									v-model="editedItem.t_state"
+									v-model="editedItem.faculty_state"
 									:items="states"
 									label="State"
 									solo
@@ -212,7 +175,11 @@
 						</v-layout>
 						<v-layout>
 							<v-flex xs12 sm6 md3>
-								<v-select v-model="editedItem.t_sub" :items="subjects" label="Choose Subject" solo :disabled="disabled">
+								<v-select v-model="editedItem.centre" :items="centres" label="Choose Centre" solo :disabled="disabled">
+								</v-select>
+							</v-flex>
+							<v-flex xs12 sm6 md3>
+								<v-select v-model="editedItem.faculty_sub" :items="subjects" label="Choose Subject" solo :disabled="disabled">
 								</v-select>
 							</v-flex>
 						</v-layout>
@@ -226,7 +193,7 @@
     </v-toolbar>
 
 
-    <v-data-table :headers="headers" :items="user_details" item-key="st_id" v-model="selected" select-All class="elevation-1">
+    <v-data-table :headers="headers" :items="user_details" item-key="faculty_id" v-model="selected" select-All class="elevation-1">
 	 	<template v-slot:headers="props">
 			<tr>
 				<th v-if="deleteMode==true">
@@ -269,12 +236,13 @@
 						:input-value="props.selected"
 					></v-checkbox>
 				</td>
-				<td class="text-xs-center">{{ props.item.t_id }}</td>
-				<td class="text-xs-right">{{ props.item.t_fname + ' ' + props.item.t_mname + ' ' + props.item.t_surname}}</td>
-				<td class="text-xs-right">{{ props.item.t_dob }}</td>
-				<td class="text-xs-right">{{ props.item.t_email }}</td>
-				<td class="text-xs-right">{{ props.item.t_contact }}</td>
-				<td class="text-xs-right">{{ props.item.t_sub }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_id }}</td>
+				<td class="text-xs-right">{{ props.item.faculty_fname + ' ' +  props.item.faculty_surname}}</td>
+				<td class="text-xs-right">{{ props.item.faculty_dob }}</td>
+				<td class="text-xs-right">{{ props.item.faculty_email }}</td>
+				<td class="text-xs-right">{{ props.item.faculty_contact }}</td>
+				<td class="text-xs-right">{{ props.item.faculty_sub }}</td>
+				<td class="text-xs-right">{{ props.item.centre }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -337,17 +305,20 @@ export default {
 		selected: [],
 		settings :
 		[
-			{ title: 'View' },
-			{ title: 'Edit' }
+			{ title: 'Set as Inactive'},
+			{ title: 'Edit' },
+			{ title: 'Delete'}
 		],
 
 		headers: [
-		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 't_id'},
+		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'faculty_id'},
 			{ text: 'Name', sortable: false},
-			{ text: 'Date of birth ', value: 't_dob', sortable: false },
-			{ text: 'Email', value: 't_email', sortable: false },
-			{ text: 'Contact Number', value: 't_contact', sortable: false },
-			{ text: 'Subject', value: 't_sub', sortable: false }
+			{ text: 'Date of birth ', value: 'faculty_dob', sortable: false },
+			{ text: 'Email', value: 'faculty_email', sortable: false },
+			{ text: 'Contact Number', value: 'faculty_contact', sortable: false },
+			{ text: 'Subject', value: 'faculty_sub', sortable: false },
+			{ text: 'Centre', value: 'centre', sortable: false },
+			{ text: 'State', value: 'faculty_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,
@@ -366,6 +337,7 @@ export default {
 		],
 
 		subjects: [],
+		centres: [],
 
 		rules: {
 			required: v => !!v || 'Required.',
@@ -375,41 +347,36 @@ export default {
 		user_details: [],
 		editedIndex: -1,
 		editedItem: {
-			t_id: '',
-			t_fname: '',
-			t_mname: '',
-			t_surname: '',
-			t_email: '',
-			t_gender: '',
-			t_contact: '',
-			t_dob: '',
-			t_age: '',
-			t_religion: '',
-			t_nationality: '',
-			t_address_city: '',
-			t_address: '',
-			t_address_pin: '',
-			t_address_state: '',
-			t_sub: '',
+			faculty_id: '',
+			faculty_fname: '',
+			faculty_surname: '',
+			faculty_email: '',
+			faculty_gender: '',
+			faculty_contact: '',
+			faculty_dob: '',
+			faculty_address_city: '',
+			faculty_address: '',
+			faculty_address_pin: '',
+			faculty_address_state: '',
+			faculty_sub: '',
+			centre: '',
 			image:null,
 			imageUrl:'',
 		},
 		defaultItem: {
-			t_id: '',
-			t_fname: '',
-			t_mname: '',
-			t_surname: '',
-			t_email: '',
-			t_gender: '',
-			t_contact: '',
-			t_dob: '',
-			t_religion: '',
-			t_nationality: '',
-			t_address: '',
-			t_address_city: '',
-			t_address_pin: '',
-			t_address_state: '',
-			t_sub: '',
+			faculty_id: '',
+			faculty_fname: '',
+			faculty_surname: '',
+			faculty_email: '',
+			faculty_gender: '',
+			faculty_contact: '',
+			faculty_dob: '',
+			faculty_address: '',
+			faculty_address_city: '',
+			faculty_address_pin: '',
+			faculty_address_state: '',
+			faculty_sub: '',
+			centre: '',
 			image:null,
 			imageUrl:'',
 		}
@@ -450,13 +417,19 @@ export default {
 			this.editedItem.image=files[0]
 		},
 		async initialize () {
-			const teacher_response = await this.$axios.get('/api/teachers')
-			this.user_details = teacher_response.data
+			const faculties_response = await this.$axios.get('/api/faculties')
+			this.user_details = faculties_response.data
 			const subjects_data = await this.$axios.get('/api/subjects')
 			this.subjects = new Array()
 			for(var i in subjects_data.data)
 			{
-				this.subjects.push(subjects_data.data[i].sub_name)
+				this.subjects.push(subjects_data.data[i].centre_name)
+			}
+			const centres_data = await this.$axios.get('/api/centres')
+			this.centres = new Array()
+			for(var i in centres_data.data)
+			{
+				this.subjects.push(centres_data.data[i].centre_name)
 			}
 		},
 		addItem() {
@@ -481,8 +454,8 @@ export default {
 			let index
 			for(i=0;i<(this.selected.length);i++)
 			{
-				id=this.selected[i].t_id
-				response = await this.$axios.delete(`/api/teachers/${id}`)
+				id=this.selected[i].faculty_id
+				response = await this.$axios.delete(`/api/faculties/${id}`)
 				if(response.data.success==true)
 				{
 					if(this.selected.length!=1)
@@ -495,7 +468,7 @@ export default {
 					}
 					this.snackbar=true
 				}
-				index=this.user_details.map((e) => e.t_id).indexOf(id)
+				index=this.user_details.map((e) => e.faculty_id).indexOf(id)
 				this.user_details.splice(index,1)
 			}
 			this.deleteMode=false
@@ -537,24 +510,22 @@ export default {
 			let response
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/teachers/register`,{
-					t_fname: this.editedItem.t_fname,
-					t_mname: this.editedItem.t_mname,
-					t_surname: this.editedItem.t_surname,
-					t_email: this.editedItem.t_email,
-					t_gender: this.editedItem.t_gender,
-					password: this.editedItem.t_contact,
-					t_contact: this.editedItem.t_contact,
-					t_dob: this.date,
-					t_age: this.editedItem.t_age,
-					t_religion: this.editedItem.t_religion,
-					t_nationality: this.editedItem.t_nationality,
-					t_address: this.editedItem.t_address,
-					t_address_city: this.editedItem.t_address_city,
-					t_address_pin: this.editedItem.t_address_pin,
-					t_address_state: this.editedItem.t_address_state,
-					t_sub: this.editedItem.t_sub
-					// t_profile_picture: this.imageUrl
+				response = await this.$axios.post(`/api/faculties/register`,{
+					faculty_fname: this.editedItem.faculty_fname,
+					faculty_surname: this.editedItem.faculty_surname,
+					faculty_email: this.editedItem.faculty_email,
+					faculty_gender: this.editedItem.faculty_gender,
+					password: this.editedItem.faculty_contact,
+					faculty_contact: this.editedItem.faculty_contact,
+					faculty_dob: this.date,
+					faculty_nationality: this.editedItem.faculty_nationality,
+					faculty_address: this.editedItem.faculty_address,
+					faculty_address_city: this.editedItem.faculty_address_city,
+					faculty_address_pin: this.editedItem.faculty_address_pin,
+					faculty_address_state: this.editedItem.faculty_address_state,
+					faculty_sub: this.editedItem.faculty_sub,
+					centre: this.editedItem.centre
+					// faculty_profile_picture: this.imageUrl
 				})
 				if(response.data.success==true)
 				{
@@ -566,24 +537,21 @@ export default {
 			}
 			else
 			{
-				var id= this.editedItem.t_id
-				response = await this.$axios.post(`/api/teachers/${id}`,{
-					t_fname: this.editedItem.t_fname,
-					t_mname: this.editedItem.t_mname,
-					t_surname: this.editedItem.t_surname,
-					t_email: this.editedItem.t_email,
-					t_gender: this.editedItem.t_gender,
-					t_contact: this.editedItem.t_contact,
-					t_dob: this.date,
-					t_age: this.editedItem.t_age,
-					t_religion: this.editedItem.t_religion,
-					t_nationality: this.editedItem.t_nationality,
-					t_address: this.editedItem.t_address,
-					t_address_city: this.editedItem.t_address_city,
-					t_address_pin: this.editedItem.t_address_pin,
-					t_address_state: this.editedItem.t_address_state,
-					t_sub: this.editedItem.t_sub
-					// t_profile_picture: this.imageUrl,
+				var id= this.editedItem.faculty_id
+				response = await this.$axios.post(`/api/faculties/${id}`,{
+					faculty_fname: this.editedItem.faculty_fname,
+					faculty_surname: this.editedItem.faculty_surname,
+					faculty_email: this.editedItem.faculty_email,
+					faculty_gender: this.editedItem.faculty_gender,
+					faculty_contact: this.editedItem.faculty_contact,
+					faculty_dob: this.date,
+					faculty_address: this.editedItem.faculty_address,
+					faculty_address_city: this.editedItem.faculty_address_city,
+					faculty_address_pin: this.editedItem.faculty_address_pin,
+					faculty_address_state: this.editedItem.faculty_address_state,
+					faculty_sub: this.editedItem.faculty_sub,
+					centre: this.editedItem.centre
+					// faculty_profile_picture: this.imageUrl,
 				})
 				if(response.data.success==true)
 				{

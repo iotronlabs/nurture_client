@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "Frontend of the project ClassMate",
+  "description": "Frontend of the project Nurture",
   "author": "IotronLabs",
   "private": true,
   "scripts": {
