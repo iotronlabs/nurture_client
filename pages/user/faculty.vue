@@ -1,37 +1,33 @@
 <template>
   	<div>
-		<v-toolbar class="login-grad">
+		  <v-toolbar class="login-grad">
 		<div class="text-xs-center">
-			<v-chip color="#ff5512" >
-				<v-avatar class="admin-color"> A </v-avatar>
-				Admin
+			<v-chip color="#6E7FF3" text-color="white">
+				<v-avatar class="teacher-color"> FC </v-avatar>
+				Faculty Login
 				<v-spacer />
 			</v-chip>
 		</div>
-	  </v-toolbar>
+		  </v-toolbar>
 		<br>
-		<LoginForm id="super-admin" />
-	</div>
+		<LoginForm id="faculty" />
+  	</div>
 </template>
 
 <script>
 import LoginForm from '@/components/LoginForm'
-export default {
-	layout: 'LoginLayout',
-	components : {
+  export default {
+	layout : 'LoginLayout',
+	components: {
 		LoginForm
 	}
 }
-
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 .login-grad
 {
 	background-image: linear-gradient(to bottom,#434343 0%, black 100%);
 	border-radius: 15px 15px 15px 15px;
-}
-v-toolbar{
-	justify-content:center;
 }
 </style>

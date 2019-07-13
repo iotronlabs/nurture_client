@@ -1,5 +1,6 @@
 <template>
 <div>
+	<br>
 	<v-form @submit.prevent="checkLogin" id="login-form" class="login-form" method="post">
 		<v-text-field
 			prepend-icon="person"
@@ -26,12 +27,20 @@
 			autocomplete="off"
 			@click:append="show = !show">
 		</v-text-field>
-		&nbsp;&nbsp;<a href="#">forgot password?</a>
-		<v-checkbox
-			v-model="checkbox"
-			label="Remember Me"
-		></v-checkbox>
-
+		<v-layout row wrap>
+			
+			<v-flex xs5 sm5 md5>
+				<v-checkbox
+					v-model="checkbox"
+					label="Remember Me"
+				></v-checkbox>
+			</v-flex>
+			<v-flex xs4 sm4 md4 offset-xs3 offset-sm3 offset-md3>
+				<br>
+				<nuxt-link to="/">forgot password?</nuxt-link>
+				
+			</v-flex>
+		</v-layout>
 
 
 			<v-btn
@@ -42,8 +51,6 @@
 				form="login-form"
 				:class="disabled ? 'btn-login' : 'btn-login-color'"
 			>LogIn</v-btn>
-
-
 		{{message}}
 	</v-form>
 	<!-- snackbar -->
