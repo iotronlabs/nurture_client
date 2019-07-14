@@ -50,7 +50,12 @@
 							</v-layout> -->
 							<br><br>
 							<v-layout>
-								<v-btn to="result"> Submit</v-btn>
+								
+								<v-btn color="blue"
+								to="result"
+								nuxt>
+								Submit
+								</v-btn>
 							</v-layout>
 						</v-card>
 

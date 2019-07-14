@@ -210,7 +210,7 @@ export default {
                 t_id : 'EX-911600',
                 t_stat : 'ACTIVE'
             },
-             {
+            {
                 t_name : 'Ms Office Tools',
                 t_cat : 'Computer Application 1',
                 t_sub : 'Office Automation 1',

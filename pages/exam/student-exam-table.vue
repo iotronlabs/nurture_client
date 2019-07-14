@@ -15,7 +15,12 @@
 				<td >{{ props.item.exm_sub }}</td>
 				<td >{{ props.item.exm_dead }}</td>
 				<td >{{ props.item.exm_sta }}</td>
-				<td ><v-btn>Take Assessment</v-btn></td>
+				<td >
+				<v-btn color="blue"
+							to="rules"
+							nuxt
+						>Take Assessment</v-btn>	  
+					</td>
 				<td class="justify-center layout px-0">
 	
 				</td>
