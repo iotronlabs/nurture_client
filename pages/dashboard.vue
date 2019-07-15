@@ -22,7 +22,7 @@
  //import Table from '../components/studentexamtable'
 
 export default {
-	// middleware: ['auth'],
+	middleware: 'auth',
 	components: {
 		//Calendar,
 		// exam,
@@ -30,7 +30,11 @@ export default {
 		 //Table,
 	},
 	layout: 'DashboardNavigationLayout',
-	mounted() {
+	created() {
+		// if(this.$auth.loggedIn==false)
+		// {
+		// 	this.redirect('/')
+		// }
 		console.log(this.$auth.loggedIn)
 		console.log(this.$auth.user)
 	}

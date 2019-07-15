@@ -164,8 +164,7 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-if="editedItem.faculty_head_nationality=='Indian' || editedItem.faculty_head_nationality=='indian' || editedItem.faculty_head_nationality=='INDIAN' || editedItem.faculty_head_nationality=='India' || editedItem.faculty_head_nationality=='india' || editedItem.faculty_head_nationality=='INDIA'"
-									v-model="editedItem.faculty_head_state"
+									v-model="editedItem.faculty_head_address_state"
 									:items="states"
 									label="State"
 									solo
@@ -400,7 +399,7 @@ export default {
 			this.editedItem.image=files[0]
 		},
 		async initialize () {
-			const head_faculty_response = await this.$axios.get('/api/head_faculties')
+			const head_faculty_response = await this.$axios.get('/api/facultyheads')
 			this.user_details = head_faculty_response.data
 		},
 		addItem() {
@@ -426,7 +425,7 @@ export default {
 			for(i=0;i<(this.selected.length);i++)
 			{
 				id=this.selected[i].faculty_head_id
-				response = await this.$axios.delete(`/api/head_faculties/${id}`)
+				response = await this.$axios.delete(`/api/facultyheads/${id}`)
 				if(response.data.success==true)
 				{
 					if(this.selected.length!=1)
@@ -481,7 +480,7 @@ export default {
 			let response
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/head_faculties/register`,{
+				response = await this.$axios.post(`/api/facultyheads/register`,{
 					faculty_head_fname: this.editedItem.faculty_head_fname,
 					faculty_head_mname: this.editedItem.faculty_head_mname,
 					faculty_head_surname: this.editedItem.faculty_head_surname,
@@ -507,7 +506,7 @@ export default {
 			else
 			{
 				var id= this.editedItem.faculty_head_id
-				response = await this.$axios.post(`/api/head_faculties/${id}`,{
+				response = await this.$axios.post(`/api/facultyheads/${id}`,{
 					faculty_head_fname: this.editedItem.faculty_head_fname,
 					faculty_head_mname: this.editedItem.faculty_head_mname,
 					faculty_head_surname: this.editedItem.faculty_head_surname,

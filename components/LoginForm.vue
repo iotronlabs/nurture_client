@@ -28,7 +28,7 @@
 			@click:append="show = !show">
 		</v-text-field>
 		<v-layout row wrap>
-			
+
 			<v-flex xs5 sm5 md5>
 				<v-checkbox
 					v-model="checkbox"
@@ -38,7 +38,7 @@
 			<v-flex xs4 sm4 md4 offset-xs3 offset-sm3 offset-md3>
 				<br>
 				<nuxt-link to="/">forgot password?</nuxt-link>
-				
+
 			</v-flex>
 		</v-layout>
 
@@ -118,13 +118,17 @@ export default {
 			{
 				this.authentication="student"
 			}
-			else if(this.id == "teacher")
+			else if(this.id == "faculty")
 			{
-				this.authentication="teacher"
+				this.authentication="faculty"
 			}
-			else if(this.id ="staff")
+			else if(this.id ="faculty-head")
 			{
-				this.authentication="staff"
+				this.authentication="facultyhead"
+			}
+			else if(this.id ="sub-admin")
+			{
+				this.authentication="subadmin"
 			}
 			else if(this.id == "admin")
 			{
@@ -155,62 +159,7 @@ export default {
 				this.message = "Invalid email or password"
 				this.snackbar = true
 			}
-		},
-		// async checkLogin() {
-		// 	// await this.getActiveUser(this.id)
-		// 	let response
-		// 	let authentication
-		// 	if(this.id=='student')
-		// 	{
-		// 		// response = await this.$axios.post('/api/students/login',{
-		// 		// 	s_email: this.email,
-		// 		// 	password: this.password
-		// 		// })
-		// 		await this.$auth.loginWith('local', {
-		// 			data: {
-		// 				email: this.email,
-		// 				password:this.password,
-		// 				authentication: "student"
-		// 			}
-		// 		})
-		// 		console.log(access_token)
-		// 		// console.log(response)
-
-		// 		// this.$router.push({path: '/dashboard'})
-		// 	}
-		// 	// else if(this.id=='teacher')
-		// 	// {
-		// 	// 	response = await this.$axios.post('/api/teachers/login',{
-		// 	// 		t_email: this.email,
-		// 	// 		password: this.password
-		// 	// 	})
-		// 	// }
-		// 	// else if(this.id=='staff')
-		// 	// {
-		// 	// 	response = await this.$axios.post('/api/staffs/login',{
-		// 	// 		st_email: this.email,
-		// 	// 		password: this.password
-		// 	// 	})
-		// 	// }
-		// 	// else if(this.id=='admin')
-		// 	// {
-		// 	// 	response = await this.$axios.post('/api/admins/login',{
-		// 	// 		email: this.email,
-		// 	// 		password: this.password
-		// 	// 	})
-		// 	// }
-
-		// 	// if(response.data.success == true)
-		// 	// {
-		// 	// 	this.$router.push('/dashboard')
-		// 	// }
-		// 	// else
-		// 	// {
-		// 	// 	this.message = response.data.message
-		// 	// }
-		// 	// this.message = response.data.data
-		// 	// this.$router.push('/dashboard')
-		// }
+		}
 	}
 }
 </script>

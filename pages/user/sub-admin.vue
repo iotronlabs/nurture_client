@@ -10,7 +10,7 @@
 		</div>
 	  </v-toolbar>
 		<br>
-		<LoginForm id="admin" />
+		<LoginForm id="sub-admin" />
 	</div>
 </template>
 

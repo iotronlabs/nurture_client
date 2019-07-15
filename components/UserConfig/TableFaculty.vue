@@ -165,7 +165,7 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-model="editedItem.faculty_state"
+									v-model="editedItem.faculty_address_state"
 									:items="states"
 									label="State"
 									solo
@@ -175,7 +175,7 @@
 						</v-layout>
 						<v-layout>
 							<v-flex xs12 sm6 md3>
-								<v-select v-model="editedItem.centre" :items="centres" label="Choose Centre" solo :disabled="disabled">
+								<v-select v-model="editedItem.faculty_centre" :items="centres" label="Choose Centre" solo :disabled="disabled">
 								</v-select>
 							</v-flex>
 							<v-flex xs12 sm6 md3>
@@ -242,7 +242,8 @@
 				<td class="text-xs-right">{{ props.item.faculty_email }}</td>
 				<td class="text-xs-right">{{ props.item.faculty_contact }}</td>
 				<td class="text-xs-right">{{ props.item.faculty_sub }}</td>
-				<td class="text-xs-right">{{ props.item.centre }}</td>
+				<td class="text-xs-right">{{ props.item.faculty_centre }}</td>
+				<td class="text-xs-right">{{ props.item.faculty_address_state }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -317,7 +318,7 @@ export default {
 			{ text: 'Email', value: 'faculty_email', sortable: false },
 			{ text: 'Contact Number', value: 'faculty_contact', sortable: false },
 			{ text: 'Subject', value: 'faculty_sub', sortable: false },
-			{ text: 'Centre', value: 'centre', sortable: false },
+			{ text: 'Centre', value: 'faculty_centre', sortable: false },
 			{ text: 'State', value: 'faculty_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
@@ -358,8 +359,8 @@ export default {
 			faculty_address: '',
 			faculty_address_pin: '',
 			faculty_address_state: '',
-			faculty_sub: '',
-			centre: '',
+			faculty_sub: 'abc',
+			faculty_centre: 'def',
 			image:null,
 			imageUrl:'',
 		},
@@ -375,8 +376,8 @@ export default {
 			faculty_address_city: '',
 			faculty_address_pin: '',
 			faculty_address_state: '',
-			faculty_sub: '',
-			centre: '',
+			faculty_sub: 'abc',
+			faculty_centre: 'def',
 			image:null,
 			imageUrl:'',
 		}
@@ -417,7 +418,7 @@ export default {
 			this.editedItem.image=files[0]
 		},
 		async initialize () {
-			const faculties_response = await this.$axios.get('/api/faculties')
+			const faculties_response = await this.$axios.get('/api/faculty')
 			this.user_details = faculties_response.data
 			const subjects_data = await this.$axios.get('/api/subjects')
 			this.subjects = new Array()
@@ -455,7 +456,7 @@ export default {
 			for(i=0;i<(this.selected.length);i++)
 			{
 				id=this.selected[i].faculty_id
-				response = await this.$axios.delete(`/api/faculties/${id}`)
+				response = await this.$axios.delete(`/api/faculty/${id}`)
 				if(response.data.success==true)
 				{
 					if(this.selected.length!=1)
@@ -510,7 +511,7 @@ export default {
 			let response
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/faculties/register`,{
+				response = await this.$axios.post(`/api/faculty/register`,{
 					faculty_fname: this.editedItem.faculty_fname,
 					faculty_surname: this.editedItem.faculty_surname,
 					faculty_email: this.editedItem.faculty_email,
@@ -524,21 +525,21 @@ export default {
 					faculty_address_pin: this.editedItem.faculty_address_pin,
 					faculty_address_state: this.editedItem.faculty_address_state,
 					faculty_sub: this.editedItem.faculty_sub,
-					centre: this.editedItem.centre
+					faculty_centre: this.editedItem.faculty_centre
 					// faculty_profile_picture: this.imageUrl
 				})
 				if(response.data.success==true)
 				{
 					// this.user_details.push(this.editedItem)
 					this.dialog = false
-					this.message="New Teacher added successfully"
+					this.message="New Faculty added successfully"
 					this.snackbar=true
 				}
 			}
 			else
 			{
 				var id= this.editedItem.faculty_id
-				response = await this.$axios.post(`/api/faculties/${id}`,{
+				response = await this.$axios.post(`/api/faculty/${id}`,{
 					faculty_fname: this.editedItem.faculty_fname,
 					faculty_surname: this.editedItem.faculty_surname,
 					faculty_email: this.editedItem.faculty_email,
@@ -550,13 +551,13 @@ export default {
 					faculty_address_pin: this.editedItem.faculty_address_pin,
 					faculty_address_state: this.editedItem.faculty_address_state,
 					faculty_sub: this.editedItem.faculty_sub,
-					centre: this.editedItem.centre
+					faculty_centre: this.editedItem.faculty_centre
 					// faculty_profile_picture: this.imageUrl,
 				})
 				if(response.data.success==true)
 				{
 					this.dialog=false
-					this.message="Teacher successfully updated"
+					this.message="Faculty successfully updated"
 					this.snackbar=true
 				}
 			}

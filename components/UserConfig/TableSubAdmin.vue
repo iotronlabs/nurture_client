@@ -165,7 +165,7 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-model="editedItem.sub_admin_state"
+									v-model="editedItem.sub_admin_address_state"
 									:items="states"
 									label="State"
 									solo
@@ -356,7 +356,7 @@ export default {
 			sub_admin_address: '',
 			sub_admin_address_pin: '',
 			sub_admin_address_state: '',
-			sub_admin_centre: '',
+			sub_admin_centre: 'abc',
 			image:null,
 			imageUrl:'',
 		},
@@ -413,7 +413,7 @@ export default {
 			this.editedItem.image=files[0]
 		},
 		async initialize () {
-			const sub_admin_response = await this.$axios.get('/api/sub_admins')
+			const sub_admin_response = await this.$axios.get('/api/subadmins')
 			this.user_details = sub_admin_response.data
 			const centres_data = await this.$axios.get('/api/centres')
 			this.centres = new Array()
@@ -445,7 +445,7 @@ export default {
 			for(i=0;i<(this.selected.length);i++)
 			{
 				id=this.selected[i].sub_admin_id
-				response = await this.$axios.delete(`/api/sub_admins/${id}`)
+				response = await this.$axios.delete(`/api/subadmins/${id}`)
 				if(response.data.success==true)
 				{
 					if(this.selected.length!=1)
@@ -500,7 +500,7 @@ export default {
 			let response
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/sub_admins/register`,{
+				response = await this.$axios.post(`/api/subadmins/register`,{
 					sub_admin_fname: this.editedItem.sub_admin_fname,
 					sub_admin_surname: this.editedItem.sub_admin_surname,
 					sub_admin_email: this.editedItem.sub_admin_email,
@@ -526,7 +526,7 @@ export default {
 			else
 			{
 				var id= this.editedItem.sub_admin_id
-				response = await this.$axios.post(`/api/sub_admins/${id}`,{
+				response = await this.$axios.post(`/api/subadmins/${id}`,{
 					sub_admin_fname: this.editedItem.sub_admin_fname,
 					sub_admin_surname: this.editedItem.sub_admin_surname,
 					sub_admin_email: this.editedItem.sub_admin_email,
