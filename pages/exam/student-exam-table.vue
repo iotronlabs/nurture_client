@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="padding-style">
 	<v-toolbar flat color="lightgrey" >
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details ></v-text-field>
       	
@@ -153,6 +153,11 @@ export default {
 	width: 100%;
 	padding-left: 20%;
 	padding-right: 20%;
+}
+.padding-style{
+	padding-top: 100px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 </style>
 

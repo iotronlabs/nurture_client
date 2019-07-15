@@ -142,31 +142,10 @@
         ></v-textarea>
       </v-flex>
     </v-layout>
-       
-       
-
-
-         
-
-         
-        
-        
-
+              
       <v-spacer></v-spacer><br>
       	<v-btn round color="success" light type="submit" form="login-form" >Submit</v-btn>
        <v-btn  round color="primary" type="submit" form="login-form"  @click="reset">Clear form</v-btn>
-
-
-
-
-
-  
-
-        
-
-
-
-        
 
      
     </v-container>
@@ -212,7 +191,7 @@ export default {
 </script>
 <style scoped>
 .card-content{
-  padding : 50px 20px 10px 20px;
+  padding : 100px 20px 50px 20px;
 
 }
 

@@ -7,7 +7,7 @@
 						<img class="logo" src="/nurture-logo.png">
 					</v-flex>	
 					
-					<v-flex xs12 sm6 md4>
+					<v-flex xs12 sm6 md4 :class="this.$vuetify.breakpoint.smAndDown ? 'device-sm' : ''">
 						
 						<v-card class="elevation-12 card-design">
 							<!-- <v-toolbar class="login-grad" >
@@ -44,7 +44,10 @@ export default {
 </script>
 
 <style scoped>
-
+.device-sm
+{
+	padding-top: 10%;
+}
 .container-grad
 {
 	/* background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	 */

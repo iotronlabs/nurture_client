@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="padding-style">
     <br><br><br><br>
 	<v-toolbar flat color="lightgrey">
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
@@ -110,6 +110,7 @@
                 <!--<td >  <v-select :items="items" label="Solo field" solo></v-select></td>-->
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
+						<!-- dropdown action menu -->
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
 								<v-btn dark	v-on="on">Actions</v-btn>
@@ -118,10 +119,13 @@
 								<v-list-tile
 									v-for="(item, index) in settings"
 									:key="index"
-									@click="changed(item.title)"
+									@click="" 
 								>
-								<v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title>
-								</v-list-tile>
+								<!-- <v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title> -->
+								<v-list-tile-content @click="" :to="rules">{{ item.title }}</v-list-tile-content>
+								
+								
+								</v-list-tile> 
 							</v-list>
 							</v-menu>
 					</span>
@@ -170,12 +174,13 @@ export default {
 		disabled: false,
 		selected: [],
 		settings :
-		[
-			{ title: 'Make Inactive' },
-            { title: 'Edit Exam' },
-            { title: 'View Questions' },
-            { title: 'Add questions ' },
-            { title: 'Drop Exam' }
+		[	
+			// page is a flag denoting whether action leads to new page
+			{ page: false, title: 'Make Inactive', action:'inactive'  },
+            { page: true, title: 'Edit Exam', link: "add-exam"},
+            { page: true, title: 'View Questions', link:"add-exam" },
+            { page: true, title: 'Add questions ', link:"add-exam" },
+            { page: false, title: 'Drop Exam', action:'drop' }
         ],
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
@@ -402,5 +407,11 @@ export default {
 	padding-left: 20%;
 	padding-right: 20%;
 }
+.padding-style{
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 </style>
 
