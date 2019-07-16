@@ -166,7 +166,7 @@
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select
-									v-model="editedItem.s_state"
+									v-model="editedItem.s_address_state"
 									:items="states"
 									label="State"
 									solo
@@ -318,7 +318,7 @@
 							</v-flex>
 							<v-flex xs12 sm12 md4>
 								<v-select
-									v-model="editedItem.clas"
+									v-model="editedItem.class"
 									:items="classes"
 									label="Assign Class"
 									required
@@ -328,7 +328,7 @@
 							</v-flex>
 						</v-layout>
 						<h1>Fee Details</h1>
-						<v-layout>
+						<v-layout row wrap>
 							<v-flex xs12 sm12 md3>
 								<v-select
 									v-model="editedItem.fee_structure"
@@ -530,7 +530,7 @@ export default {
 			{label: 'Female',value: 'F'},
 			{label: 'Others',value: 'O'}
 		],
-		schools:[],
+		centres:[],
 		courses: [],
 		classes:[],
 		fee_structures: [],
@@ -565,7 +565,7 @@ export default {
 			guardian_state: '',
 			centre: '',
 			course: '',
-			clas: '',
+			class: '',
 			fee_structure: '',
 			scholarship: '',
 			fee_period: '',
@@ -597,7 +597,7 @@ export default {
 			guardian_state: '',
 			centre: '',
 			course: '',
-			clas: '',
+			class: '',
 			fee_structure: '',
 			scholarship: '',
 			fee_period: '',
@@ -751,12 +751,18 @@ export default {
 					guardian_city: this.editedItem.guardian_city,
 					guardian_pin: this.editedItem.guardian_pin,
 					guardian_state: this.editedItem.guardian_state,
-					s_centre: this.editedItem.s_centre,
-					s_course: this.editedItem.s_course,
-					s_clas: this.editedItem.s_clas,
-					fee_structure: this.editedItem,fee_structure,
-					scholarship: this.editedItem.scholarship,
-					fee_period: this.editedItem.fee_period,
+					// s_centre: this.editedItem.s_centre,
+					// s_course: this.editedItem.s_course,
+					// s_clas: this.editedItem.s_clas,
+					// fee_structure: this.editedItem.fee_structure,
+					// scholarship: this.editedItem.scholarship,
+					// fee_period: this.editedItem.fee_period,
+					s_centre: 'asd',
+					s_course: 'asda',
+					s_class: 'asd',
+					fee_structure: 'adas',
+					scholarship: 'asd',
+					fee_period: 'dsa',
 					// s_profile_picture: this.imageUrl
 				})
 				if(response.data.success==true)
@@ -791,7 +797,7 @@ export default {
 					guardian_state: this.editedItem.guardian_state,
 					s_centre: this.editedItem.s_centre,
 					s_course: this.editedItem.s_course,
-					s_clas: this.editedItem.s_clas,
+					s_class: this.editedItem.s_class,
 					fee_structure: this.editedItem,fee_structure,
 					scholarship: this.editedItem.scholarship,
 					fee_period: this.editedItem.fee_period,

@@ -122,11 +122,11 @@ export default {
 			{
 				this.authentication="faculty"
 			}
-			else if(this.id ="faculty-head")
+			else if(this.id == "faculty-head")
 			{
 				this.authentication="facultyhead"
 			}
-			else if(this.id ="sub-admin")
+			else if(this.id == "sub-admin")
 			{
 				this.authentication="subadmin"
 			}
