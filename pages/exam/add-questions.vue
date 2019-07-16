@@ -15,81 +15,158 @@
                <v-layout wrap align-center>
 
                    <v-flex xs12 sm6 md9 d-flex>
-                       <v-select :items="items" label="---Select exam---" solo outline  >
+                       <v-select :items="items" label="---Select exam---" solo outline>
                        </v-select>
                     </v-flex>
               </v-layout>
+              
               <v-subheader large > Question</v-subheader>
               <v-layout  wrap v-if = "n==1">
                   <v-flex xs12 sm6 md9 d-flex>
                     <v-text-field label="Enter Question" solo outline ></v-text-field>
                   </v-flex>
-                   <v-flex xs12 sm6 md9 >
-             <br>
-              <h3>Option1</h3><br>
-             <v-text-field
-             v-model="a"
-              type="text"
-             placeholder="Enter exam name"         
-             required
-             outline
-             solo
-         
-           >
-           </v-text-field>
-          </v-flex>
+                  <v-flex xs12 sm6 md9 >
+                  <br>
+                  <h3>Option1</h3><br>
+                  <v-text-field
+                  v-model="a"
+                    type="text"
+                  placeholder="Enter option or upload image"              
+                  required
+                  outline
+                  solo
+                  >
+                  </v-text-field>
+              </v-flex>
+
+            <!-- image upload -->
+              <v-layout>
+							<v-flex xs12 sm6 >
+								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
+								<input
+									type="file"
+									ref="fileInput"
+									accept="image/*"
+									@change="onFilePicked"
+								>
+							</v-flex>
+						</v-layout>
+       
+						<!-- <v-layout row>
+							<v-flex xs12 sm6>
+								<img :src="editedItem.imageUrl">
+							</v-flex>
+						</v-layout> -->
+
+
               <v-flex xs12 sm6 md9 >
              <br>
               <h3>Option2</h3><br>
              <v-text-field
              v-model="a"
               type="text"
-             placeholder="Enter exam name"         
+             placeholder="Enter option or upload image"                  
              required
              outline
          
            >
            </v-text-field>
           </v-flex>
-              <v-flex xs12 sm6 md9 >
-             <br>
-              <h3>Option3</h3><br>
-             <v-text-field
+
+          <!-- image upload -->
+            <v-layout>
+							<v-flex xs12 sm6 >
+								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
+								<input
+									type="file"
+									ref="fileInput"
+									accept="image/*"
+									@change="onFilePicked"
+								>
+							</v-flex>
+						</v-layout>
+
+          <v-flex xs12 sm6 md9 >
+            <br>
+            <h3>Option3</h3><br>
+            <v-text-field
              v-model="a"
               type="text"
-             placeholder="Enter exam name"         
+             placeholder="Enter option or upload image"                 
              required
-             outline
-         
-           >
-           </v-text-field>
+             outline>
+            </v-text-field>
           </v-flex>
-              <v-flex xs12 sm6 md9 >
+          <!-- image upload -->
+            <v-layout>
+							<v-flex xs12 sm6 >
+								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
+								<input
+									type="file"
+									ref="fileInput"
+									accept="image/*"
+									@change="onFilePicked"
+								>
+							</v-flex>
+						</v-layout>
+
+
+            <v-flex xs12 sm6 md9 >
              <br>
               <h3>Option4</h3><br>
              <v-text-field
              v-model="a"
               type="text"
-             placeholder="Enter exam name"         
+             placeholder="Enter option or upload image"         
              required
              outline
          
            >
            </v-text-field>
           </v-flex>
+          <!-- image upload -->
+            <v-layout>
+							<v-flex xs12 sm6 >
+								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
+								<input
+									type="file"
+									ref="fileInput"
+									accept="image/*"
+									@change="onFilePicked"
+								>
+							</v-flex>
+						</v-layout>
+            
            <v-flex xs12 sm6 md9>
-               
-          <v-select :items="items" label="-Select answer" solo outline  >
+               <br>
+          <v-select :items="items" label="Select answer" solo outline  >
           </v-select>
               
         
         </v-flex>
 
         </v-layout>
-
+              <v-layout  wrap v-if = "n==2">
+                  <v-flex xs12 sm6 md9 d-flex>
+                    <v-text-field label="Enter Question" solo outline ></v-text-field>
+                  </v-flex>
+                  <!-- <v-flex xs12 sm6 md9 >
+                  <br>
+                  <h3>Option1</h3><br>
+                  <v-text-field
+                  v-model="a"
+                    type="text"
+                  placeholder="Enter option or upload image"              
+                  required
+                  outline
+                  solo
+                  >
+                  </v-text-field>
+              </v-flex> -->
+              </v-layout>
               <v-subheader large v-if = "n==2"> Answer </v-subheader>
               <v-layout v-if = "n==2">
-                  <v-flex xs12 sm6 d-flex>
+                  <v-flex xs12 sm6 md9 d-flex>
                     <v-text-field label="Enter Answer" solo outline ></v-text-field>
                   </v-flex>
 
@@ -121,13 +198,10 @@ export default{
  answer:[],
  items:['A','B' ,'C','D'],
 
- 
-
-
   })
-  }
+}
 
-  </script>
+</script>
 
 <style scoped>
 

@@ -4,10 +4,11 @@
 	<v-toolbar flat color="lightgrey">
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
       	<v-spacer></v-spacer>
-		<v-btn v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on">Delete exam</v-btn>
-		<v-dialog v-model="dialog" persistent max-width="600px">
+		<!-- <v-btn v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on">Delete exam</v-btn> -->
+		<v-btn color="primary" to="add-exam" dark v-on="on">Add exam</v-btn>
+		<!-- <v-dialog v-model="dialog" persistent max-width="600px">
 			<template v-slot:activator="{ on }">
-				<v-btn color="primary" @click="addItem" dark v-on="on">Add exam</v-btn>
+				<v-btn color="primary" :to="exam/add-exam" dark v-on="on">Add exam</v-btn>
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
@@ -26,7 +27,7 @@
 								<v-flex xs12 sm6 md6>
 									<v-text-field :disabled="disabled" v-model="editedItem.sub_name" label="Subject Name"></v-text-field>
 								</v-flex>
-								<!-- <v-flex xs12 sm6 md4>
+								<v-flex xs12 sm6 md4>
 									<v-select
 										v-model="editedItem.sub_teacher"
 										:items="teachers"
@@ -34,7 +35,7 @@
 										label="Select Teacher"
 										multiple
 									></v-select>
-								</v-flex> -->
+								</v-flex>
 							</v-layout>
 							<v-layout>
 								<v-flex xs12 sm6 md12>
@@ -54,7 +55,7 @@
 					</v-container>
 				</v-form>
 			</v-card>
-		</v-dialog>
+		</v-dialog> -->
     </v-toolbar>
 
 
@@ -119,10 +120,10 @@
 								<v-list-tile
 									v-for="(item, index) in settings"
 									:key="index"
-									@click="" 
+									@click="" :to="item.link"
 								>
 								<!-- <v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title> -->
-								<v-list-tile-content @click="" :to="rules">{{ item.title }}</v-list-tile-content>
+								<v-list-tile-content >{{ item.title }}</v-list-tile-content>
 								
 								
 								</v-list-tile> 
@@ -176,11 +177,11 @@ export default {
 		settings :
 		[	
 			// page is a flag denoting whether action leads to new page
-			{ page: false, title: 'Make Inactive', action:'inactive'  },
-            { page: true, title: 'Edit Exam', link: "add-exam"},
-            { page: true, title: 'View Questions', link:"add-exam" },
-            { page: true, title: 'Add questions ', link:"add-exam" },
-            { page: false, title: 'Drop Exam', action:'drop' }
+			{ page: false, title: 'Make Inactive', link:"/exam/add-exam"  },
+            { page: true, title: 'Edit Exam', link: "/exam/add-exam"},
+            { page: true, title: 'View Questions', link:"/exam/teacher-exam" },
+            { page: true, title: 'Add questions ', link:"/exam/add-questions" },
+            { page: false, title: 'Drop Exam', link:"/exam/add-exam" }
         ],
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
