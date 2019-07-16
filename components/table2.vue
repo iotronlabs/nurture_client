@@ -36,7 +36,13 @@ export default {
 
 		dialog: false,
 
-  	})
+	}),
+	created(){
+		if(this.$auth.loggedIn==false && this.$auth.user.authentication!=4)
+		{
+			this.$router.go('/')
+		}
+	}
 }
 </script>
 

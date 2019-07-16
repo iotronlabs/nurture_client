@@ -425,11 +425,12 @@
 				<td class="text-xs-center">{{ props.item.s_id }}</td>
 				<td class="text-xs-right">{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
 				<td class="text-xs-right">{{ props.item.s_email }}</td>
+				<td class="text-xs-right">{{ props.item.s_dob }}</td>
 				<td class="text-xs-right">{{ props.item.s_contact }}</td>
-				<td class="text-xs-right">{{ props.item.class }}</td>
-				<td class="text-xs-right">{{ props.item.course }}</td>
-				<td class="text-xs-right">{{ props.item.centre }}</td>
-				<td class="text-xs-right">{{ props.item.state }}</td>
+				<td class="text-xs-right">{{ props.item.s_class }}</td>
+				<td class="text-xs-right">{{ props.item.s_course }}</td>
+				<td class="text-xs-right">{{ props.item.s_centre }}</td>
+				<td class="text-xs-right">{{ props.item.s_address_state }}</td>
 				<td class="text-xs-right">{{ props.item.status }}</td>
 
 				<td class="justify-center layout px-0">
@@ -506,10 +507,10 @@ export default {
 			{ text: 'Date of birth ', value: 's_dob', sortable: false },
 			{ text: 'Email', value: 's_email', sortable: false },
 			{ text: 'Contact Number', value: 's_contact', sortable: false },
-			{ text: 'Class', value: 'class', sortable: false },
-			{ text: 'Course', value: 'course', sortable: true },
-			{ text: 'Centre', value: 'centre', sortable: true },
-			{ text: 'State', value: 'state', sortable: true },
+			{ text: 'Class', value: 's_class', sortable: false },
+			{ text: 'Course', value: 's_course', sortable: true },
+			{ text: 'Centre', value: 's_centre', sortable: true },
+			{ text: 'State', value: 's_address_state', sortable: true },
 			{ text: 'Status', value: 'status', sortable: true }
 		],
 		date: new Date().toISOString().substr(0, 10),
@@ -616,7 +617,19 @@ export default {
 			val || this.close()
 		}
 	},
-	created () {
+	async created () {
+		if(this.$auth.user.authentication==4)
+		{
+			this.editedItem.centre=this.$auth.user.sub_admin_centre
+		}
+		else if(this.$auth.user.authentication==5)
+		{
+			const centre_response = await this.$axios.get('/api/centres')
+			for(var i=0; i<centre_response.data.length;i++)
+			{
+				this.centres.push(centre_response.data[i].centre_name)
+			}
+		}
 		this.initialize()
 	},
     methods: {

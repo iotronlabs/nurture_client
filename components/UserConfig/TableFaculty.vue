@@ -393,6 +393,7 @@ export default {
 		}
 	},
 	created () {
+		this.editedItem.faculty_centre = this.$auth.user.sub_admin_centre
 		this.initialize()
 	},
     methods: {
@@ -426,12 +427,12 @@ export default {
 			{
 				this.subjects.push(subjects_data.data[i].centre_name)
 			}
-			const centres_data = await this.$axios.get('/api/centres')
-			this.centres = new Array()
-			for(var i in centres_data.data)
-			{
-				this.subjects.push(centres_data.data[i].centre_name)
-			}
+			// const centres_data = await this.$axios.get('/api/centres')
+			// this.centres = new Array()
+			// for(var i in centres_data.data)
+			// {
+			// 	this.subjects.push(centres_data.data[i].centre_name)
+			// }
 		},
 		addItem() {
 			this.disabled=false
