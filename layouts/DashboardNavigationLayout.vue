@@ -188,13 +188,17 @@ export default {
 			{
 				return this.studentItems.items
 			}
-			else if(this.teacherItems.active==true)
+			else if(this.facultyItems.active==true)
 			{
-				return this.teacherItems.items
+				return this.facultyItems.items
 			}
-			else if(this.staffItems.active==true)
+			else if(this.headFacultyItems.active==true)
 			{
-				return this.staffItems.items
+				return this.headFacultyItems.items
+			}
+			else if(this.subAdminItems.active==true)
+			{
+				return this.subAdminItems.items
 			}
 			else if(this.adminItems.active==true)
 			{

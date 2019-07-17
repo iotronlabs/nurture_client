@@ -1,5 +1,5 @@
 const studentItems = {
-	active:false,
+	active:true,
 	chipdata: {
 		avatar_1: "S",
 		avatar_2: "St",
@@ -86,12 +86,12 @@ const studentItems = {
 	],
 }
 
-const teacherItems = {
-	active: true,
+const facultyItems = {
+	active: false,
 	chipdata: {
-		avatar_1: "T",
+		avatar_1: "F",
 		avatar_2: "Sb",
-		title_1: "Teacher",
+		title_1: "Faculty",
 		title_2: "Subject"
 	},
 	items:[
@@ -173,9 +173,102 @@ const teacherItems = {
 		}
 	]
 }
-
-const staffItems = {
+const headFacultyItems = {
 	active: false,
+	chipdata: {
+		avatar_1: "HF",
+		avatar_2: "Sb",
+		title_1: "Head Faculty",
+		title_2: "Subject"
+	},
+	items: [
+
+		{
+			icon: {
+				prefix: 'fas',
+				name: 'users'
+			},
+			title: 'Forum',
+			to: '/',
+			items: [
+				{
+					title: 'Saved Posts'
+				},
+				{
+					title: 'Create Post'
+				},
+				{
+					title: 'My Posts'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'far',
+				name: 'calendar-alt'
+			},
+			title: 'Calendar',
+			to: '/',
+			items: [
+				{
+					title: 'Notice'
+				},
+				{
+					title: 'Time-table'
+				},
+				{
+					title: 'Assignments'
+				},
+				{
+					title: 'Events and Activities'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'far',
+				name: 'clipboard'
+			},
+			title: 'Exams',
+			to: '/',
+			items: []
+		},
+		{
+			icon: {
+				prefix: 'fas',
+				name: 'chart-area'
+			},
+			title: 'Reports',
+			to: '/',
+			items: [
+				{
+					title: 'Attendance'
+				},
+				{
+					title: 'Exam'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'far',
+				name: 'question-circle'
+			},
+			title: 'Help desk',
+			to: '/',
+			items: []
+		}
+	]
+}
+
+const subAdminItems = {
+	active: false,
+	chipdata: {
+		avatar_1: "SA",
+		avatar_2: "Sb",
+		title_1: "Sub Admin",
+		title_2: "Subject"
+	},
 	items: [
 		
 		{
@@ -190,7 +283,7 @@ const staffItems = {
 					title: 'Student'
 				},
 				{
-					title: 'Teacher'
+					title: 'Faculty'
 				}
 			]
 		},
@@ -271,6 +364,12 @@ const staffItems = {
 
 const adminItems = {
 	active: false,
+	chipdata: {
+		avatar_1: "A",
+		avatar_2: "Sb",
+		title_1: "Admin",
+		title_2: "Subject"
+	},
 	items: [
 		
 		{
@@ -366,21 +465,111 @@ const adminItems = {
 }
 
 const auditItems = {
-	active: false
+	active: false,
+	chipdata: {
+		avatar_1: "Au",
+		avatar_2: "Sb",
+		title_1: "Audit",
+		title_2: "Subject"
+	},
+	items: [
+
+		{
+			icon: {
+				prefix: 'fas',
+				name: 'user-plus'
+			},
+			title: 'Add User',
+			to: '/',
+			items: [
+				{
+					title: 'Student'
+				},
+				{
+					title: 'Teacher'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'fas',
+				name: 'user-cog'
+			},
+			title: 'Configuration',
+			to: '/',
+			items: [
+				{
+					title: 'Stream'
+				},
+				{
+					title: 'Class'
+				},
+				{
+					title: 'Subject'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'far',
+				name: 'calendar-alt'
+			},
+			title: 'Calender',
+			to: '/',
+			items: [
+				{
+					title: 'Notice'
+				},
+				{
+					title: 'Time-table'
+				},
+				{
+					title: 'Events and Activities'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'far',
+				name: 'clipboard'
+			},
+			title: 'exams',
+			to: '/',
+			items: []
+		},
+		{
+			icon: {
+				prefix: 'fas',
+				name: 'chart-area'
+			},
+			title: 'Reports',
+			to: '/',
+			items: [
+				{
+					title: 'Attendance'
+				},
+				{
+					title: 'Exam'
+				}
+			]
+		},
+		{
+			icon: {
+				prefix: 'far',
+				name: 'question-circle'
+			},
+			title: 'helpdesk',
+			to: '/',
+			items: []
+		}
+	]
+
 }
-
-// export const state = () => ({
-// 	studentItems,
-// 	teacherItems,
-// 	staffItems,
-// 	adminItems,
-// 	auditItems
-// })
-
 export default {
 	studentItems,
-	teacherItems,
-	staffItems,
+	facultyItems,
+	headFacultyItems,
+	subAdminItems,
 	adminItems,
 	auditItems
 }

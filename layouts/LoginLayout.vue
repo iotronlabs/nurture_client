@@ -74,8 +74,8 @@ export default {
 }
 .container-grad
 {
-	/* background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	 */
-	background-image: linear-gradient(to top,#10cf99 0%, #5effd1 100%);
+	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	
+	/* background-image: linear-gradient(to top,#10cf99 0%, #5effd1 100%); */
 }
 .login-grad
 {
@@ -85,6 +85,7 @@ export default {
 .logo{
 	height: 200px;
 	width: 200px;
+	padding-left: 25px;
 }
 .v-toolbar {
 	height: 60px;
@@ -107,7 +108,7 @@ img
 }
 .footer
 {
-	background-image: linear-gradient(to top,#0fb485 0%, #2fe9b4 100%);
+	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	
 	text-align: center;
 	color: white;
 
