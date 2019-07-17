@@ -31,13 +31,13 @@ export default {
 		{
 			this.$router.go('/')
 		}
-		else if(this.$auth.user.authentication!=4 && this.$auth.user.authemtication!=5)
+		else if(this.$auth.user.authentication==4 || this.$auth.user.authentication==5)
 		{
-			this.$router.push('/dashboard')
+			this.authentication = this.$auth.user.authentication
 		}
 		else
 		{
-			this.authentication = this.$auth.user.authentication
+			this.$router.push('/dashboard')
 		}
 	}
 }
