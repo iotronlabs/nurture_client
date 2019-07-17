@@ -25,6 +25,7 @@
 								<v-flex xs12 sm6 md6>
 									<v-text-field :disabled="disabled" v-model="editedItem.sub_name" label="Subject Name"></v-text-field>
 								</v-flex>
+
 								<!-- <v-flex xs12 sm6 md4>
 									<v-select
 										v-model="editedItem.sub_teacher"
@@ -102,9 +103,6 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.sub_code }}</td>
 				<td class="text-xs-right">{{ props.item.sub_name }}</td>
-				<td class="text-xs-right">{{ props.item.sub_stream }}</td>
-				<td class="text-xs-right">{{ props.item.sub_department }}</td>
-				<td class="text-xs-right">{{ props.item.sub_teacher }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -174,10 +172,7 @@ export default {
 		headers: [
 		  	// { text: 'Sl_No', align: 'left', sortable: true,	value: 'sub_code'},
 			{ text: 'Subject Code ', value: 'sub_code', sortable: false },
-			{ text: 'Subject Name', value: 'sub_name' ,sortable: false},
-			{ text: 'Stream', value: 'sub_stream', sortable: false },
-			{ text: 'Department', value: 'sub_department', sortable: false },
-			{ text: 'Teachers', value: 'sub_teacher', sortable: false }
+			{ text: 'Subject Name', value: 'sub_name' ,sortable: false}
 		],
 		rules: {
 			required: v => !!v || 'Required.'
@@ -314,7 +309,6 @@ export default {
 		},
 
 		async submitForm() {
-			console.log(this.editedItem.topics)
 			let response
 			if(this.editedIndex == -1)
 			{

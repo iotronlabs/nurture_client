@@ -18,36 +18,24 @@
 					</v-toolbar>
 					<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 						<v-container fluid>
-							<v-layout>
-								<v-flex xs12 sm6 md4>
+							<v-layout row wrap>
+								<v-flex xs12 sm6 md6>
 									<v-text-field :disabled="disabled" v-model="editedItem.class_name" label="Class Name"></v-text-field>
 								</v-flex>
-								<v-flex xs12 sm6 md4>
-									<v-select :disabled="disabled" v-model="editedItem.class_stream" :items="streams" label="Assign Stream"></v-select>
+								<v-flex xs12 sm6 md6>
+									<v-select :disabled="disabled" v-model="editedItem.class_course" :items="courses" label="Assign Course"></v-select>
 								</v-flex>
 
-								<v-flex xs12 sm6 md4>
+								<!-- <v-flex xs12 sm6 md4>
 									<v-text-field :disabled="disabled" v-model="editedItem.class_teacher" label="Class Teacher"></v-text-field>
-								</v-flex>
-
-								<v-flex xs12 sm6 md4>
-									<!-- Add Sections here multi chip type -->
-									<!-- <v-combobox
-										v-model="topic"
-										:items="topics"
-										label="Enter the topics"
-										multiple
-										chips
-									></v-combobox> -->
-
-								</v-flex>
+								</v-flex> -->
 							</v-layout>
 							<v-layout>
 								<v-flex xs12 sm6 md3>
 									<v-menu
 										:disabled="disabled"
 										ref="menu1"
-										v-model="editedItem.start_date"
+										v-model="editedItem.start_time"
 										:close-on-content-click="false"
 										:nudge-right="40"
 										:return-value.sync="date1"
@@ -78,7 +66,7 @@
 									<v-menu
 										:disabled="disabled"
 										ref="menu2"
-										v-model="editedItem.end_date"
+										v-model="editedItem.end_time"
 										:close-on-content-click="false"
 										:nudge-right="40"
 										:return-value.sync="date2"
@@ -103,6 +91,15 @@
 										<v-btn flat color="primary" @click="$refs.menu2.save(date2)">OK</v-btn>
 									</v-date-picker>
 								</v-menu>
+								</v-flex>
+							</v-layout>
+							<v-layout row wrap>
+								<v-flex xs12 sm6 md5>
+									<v-text-field
+										v-model="editedItem.class_centre_name"
+										label="Centre Name"
+										disabled
+									></v-text-field>
 								</v-flex>
 							</v-layout>
 						<v-spacer></v-spacer><br>
@@ -160,10 +157,9 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.class_id }}</td>
 				<td class="text-xs-right">{{ props.item.class_name }}</td>
-				<td class="text-xs-right">{{ props.item.class_stream }}</td>
-				<td class="text-xs-right">{{ props.item.class_teacher }}</td>
-				<td class="text-xs-right">{{ props.item.start_date }}</td>
-				<td class="text-xs-right">{{ props.item.end_date }}</td>
+				<td class="text-xs-right">{{ props.item.class_course }}</td>
+				<td class="text-xs-right">{{ props.item.start_time }}</td>
+				<td class="text-xs-right">{{ props.item.end_time }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -234,18 +230,17 @@ export default {
 		date2: new Date().toISOString().substr(0, 10),
 		menu1: false,
 		menu2: false,
-		streams: [],
-		teachers: [],
+		courses: [],
+		// teachers: [],
 
 		headers: [
 			  // { text: 'Sl_No', align: 'left', sortable: true,	value: 'sub_code'},
 			{ text:'Class Id', value: 'class_id'},
 			{ text: 'Class Name ', value: 'class_name', sortable: false },
 			// { text: 'Sections', value: '', sortable: false},
-			{ text: 'Stream', value: 'class_stream', sortable: false },
-			{ text: 'Teacher', value: 'class_teacher', sortable: false },
-			{ text: 'Start Date' , value: 'start_date' },
-			{ text: 'End Date', value: 'end_date'}
+			{ text: 'Stream', value: 'class_course', sortable: false },
+			{ text: 'Start Date' , value: 'start_time' },
+			{ text: 'End Date', value: 'end_time'}
 		],
 		rules: {
 			required: v => !!v || 'Required.'
@@ -257,10 +252,11 @@ export default {
 			class_id: '',
 			class_name: '',
 			// sections: [],
-			class_stream: '',
-			class_teacher: '',
-			start_date: '',
-			end_date: ''
+			class_course: '',
+			// class_teacher: '',
+			start_time: '',
+			end_time: '',
+			class_centre_name: ''
 		},
 		defaultItem: {
 			class_id: '',
@@ -268,8 +264,9 @@ export default {
 			// sections: [],
 			class_stream: '',
 			class_teacher: '',
-			start_date: '',
-			end_date: ''
+			start_time: '',
+			end_time: '',
+			class_centre_name: ''
 		}
 	}),
 	computed: {
@@ -283,6 +280,7 @@ export default {
 		}
 	},
 	created () {
+		this.editedItem.class_centre_name=this.$auth.user.sub_admin_centre_name
 		this.initialize()
 	},
     methods: {
@@ -294,8 +292,13 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		async initialize () {
-			// const class_response = await this.$axios.get('/api/subjects')
+			const class_response = await this.$axios.get('/api/classes')
 			this.class_details = class_response.data
+			const course_response = await this.$axios.get('/api/courses')
+			for(var i=0;i<course_response.data.length;i++)
+			{
+				this.courses.push(course_response.data[i].course_name)
+			}
 		},
 		addItem() {
 			this.disabled=false
@@ -372,26 +375,29 @@ export default {
 		},
 
 		async submitForm() {
+			console.log(this.editedItem.start_time)
+			console.log(this.editedItem.end_time)
 			let response
 			// Send classteacher by splitting into fname,mname,surname
-			let teacher = this.editedItem.class_teacher.split(" ")
-			if(teacher.length == 2)
-			{
-				// mname is null
-			}
-			else if(teacher.length == 3)
-			{
+			// let teacher = this.editedItem.class_teacher.split(" ")
+			// if(teacher.length == 2)
+			// {
+			// 	// mname is null
+			// }
+			// else if(teacher.length == 3)
+			// {
 
-			}
+			// }
 			if(this.editedIndex == -1)
 			{
 				response = await this.$axios.post(`/api/classes/register`,{
 					class_name: this.editedItem.class_name,
 					class_teacher: this.editedItem.class_teacher,
-					class_stream: this.editedItem.class_stream,
+					class_course: this.editedItem.class_course,
 					// section: this.editedItem.section,
-					start_date: this.editedItem.start_date,
-					end_date: this.editedItem.end_date
+					start_time: this.date1,
+					end_time: this.date2,
+					class_centre_name: this.editedItem.class_centre_name
 				})
 				if(response.data.success==true)
 				{
@@ -407,10 +413,11 @@ export default {
 				response = await this.$axios.post(`/api/classes/${id}`,{
 					class_name: this.editedItem.class_name,
 					class_teacher: this.editedItem.class_teacher,
-					class_stream: this.editedItem.class_stream,
+					class_course: this.editedItem.class_course,
 					// section: this.editedItem.section,
-					start_date: this.editedItem.start_date,
-					end_date: this.editedItem.end_date
+					start_time: this.date1,
+					end_time: this.date2,
+					class_centre_name: this.editedItem.class_centre_name
 				})
 				if(response.data.success==true)
 				{

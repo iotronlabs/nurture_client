@@ -9,10 +9,11 @@
 							{{ head}}
 						</v-tab>
 
-						<v-tab-item v-for="n in 1" :key="n" >
+						<v-tab-item v-for="n in 2" :key="n" >
 							<v-card flat>
 								<v-card-text>
-									<div v-if="n==1"><TableCourse /></div>
+									<div v-if="n==1"><TableSubject /></div>
+									<div v-if="n==2"><TableCourse /></div>
 								</v-card-text>
 							</v-card>
 						</v-tab-item>
@@ -25,25 +26,35 @@
 </template>
 
 <script>
+import TableSubject from '@/components/CourseConfig/TableSubject'
 import TableCourse from '@/components/CourseConfig/TableCourse'
 
 export default {
 	middleware: 'auth',
 	layout: 'DashboardNavigationLayout',
 	components: {
+		TableSubject,
 		TableCourse
 	},
   	data: () => ({
 		active: '',
-		heading : ['Courses'],
-
+		heading : ['Subjects','Courses'],
+		authentication: '',
 		dialog: false,
 
 	}),
 	created() {
-		if(this.$auth.loggedIn==false && this.$auth.user.authentication)
+		if(this.$auth.loggedIn==false)
 		{
 			this.$router.go('/')
+		}
+		else if(this.$auth.user.authentication==5)
+		{
+			this.authentication = this.$auth.user.authentication
+		}
+		else
+		{
+			this.$router.push('/dashboard')
 		}
 	}
 }

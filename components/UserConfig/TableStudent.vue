@@ -248,6 +248,7 @@
 							</v-flex>
 						</v-layout>
 								<!-- address   address pincode state-->
+						<v-layout row wrap>
 							<v-flex xs12 sm12 md9>
 								<v-text-field
 									name="streetaddress"
@@ -259,6 +260,7 @@
 									:disabled="disabled"
 								></v-text-field>
 							</v-flex>
+						</v-layout>
 						<v-layout row wrap>
 							<v-flex xs12 sm6 md3>
 								<v-text-field
@@ -673,6 +675,11 @@ export default {
 		async initialize () {
 			const student_response = await this.$axios.get('/api/students')
 			this.user_details = student_response.data
+			const courses_response = await this.$axios.get('/api/courses')
+			for(var i=0;i<courses_response.data.length;i++)
+			{
+				courses.push(courses_response.data[i].course_name)
+			}
 		},
 		addItem() {
 			this.disabled=false

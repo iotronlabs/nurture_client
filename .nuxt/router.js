@@ -2,30 +2,30 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _7a3c5304 = () => interopDefault(import('..\\pages\\addStaff.vue' /* webpackChunkName: "pages_addStaff" */))
-const _01996003 = () => interopDefault(import('..\\pages\\calendar.vue' /* webpackChunkName: "pages_calendar" */))
-const _7e6cf99d = () => interopDefault(import('..\\pages\\chat.vue' /* webpackChunkName: "pages_chat" */))
-const _d4fa50c2 = () => interopDefault(import('..\\pages\\dashboard.vue' /* webpackChunkName: "pages_dashboard" */))
-const _07dba91e = () => interopDefault(import('..\\pages\\exam\\index.vue' /* webpackChunkName: "pages_exam_index" */))
-const _2c18ba04 = () => interopDefault(import('..\\pages\\exam2.vue' /* webpackChunkName: "pages_exam2" */))
-const _6b7d9d2c = () => interopDefault(import('..\\pages\\forum.vue' /* webpackChunkName: "pages_forum" */))
-const _5b4ea222 = () => interopDefault(import('..\\pages\\config\\centre.vue' /* webpackChunkName: "pages_config_centre" */))
-const _d5e8d73c = () => interopDefault(import('..\\pages\\config\\course.vue' /* webpackChunkName: "pages_config_course" */))
-const _c50f705c = () => interopDefault(import('..\\pages\\config\\user.vue' /* webpackChunkName: "pages_config_user" */))
-const _6629ffaf = () => interopDefault(import('..\\pages\\exam\\add-exam.vue' /* webpackChunkName: "pages_exam_add-exam" */))
-const _ca3e5826 = () => interopDefault(import('..\\pages\\exam\\add-questions.vue' /* webpackChunkName: "pages_exam_add-questions" */))
-const _b0c917fe = () => interopDefault(import('..\\pages\\exam\\result.vue' /* webpackChunkName: "pages_exam_result" */))
-const _8751a27a = () => interopDefault(import('..\\pages\\exam\\rules.vue' /* webpackChunkName: "pages_exam_rules" */))
-const _64ec4556 = () => interopDefault(import('..\\pages\\exam\\student-exam.vue' /* webpackChunkName: "pages_exam_student-exam" */))
-const _0d92ba54 = () => interopDefault(import('..\\pages\\exam\\student-exam-table.vue' /* webpackChunkName: "pages_exam_student-exam-table" */))
-const _6c3d00e4 = () => interopDefault(import('..\\pages\\exam\\teacher-exam.vue' /* webpackChunkName: "pages_exam_teacher-exam" */))
-const _dde01362 = () => interopDefault(import('..\\pages\\exam\\teacher-exam-table.vue' /* webpackChunkName: "pages_exam_teacher-exam-table" */))
-const _4e3105ef = () => interopDefault(import('..\\pages\\user\\admin.vue' /* webpackChunkName: "pages_user_admin" */))
-const _5861787b = () => interopDefault(import('..\\pages\\user\\audit.vue' /* webpackChunkName: "pages_user_audit" */))
-const _99956ef8 = () => interopDefault(import('..\\pages\\user\\faculty.vue' /* webpackChunkName: "pages_user_faculty" */))
-const _31e35139 = () => interopDefault(import('..\\pages\\user\\faculty-head.vue' /* webpackChunkName: "pages_user_faculty-head" */))
-const _344fd2a2 = () => interopDefault(import('..\\pages\\user\\sub-admin.vue' /* webpackChunkName: "pages_user_sub-admin" */))
-const _7dc00f46 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
+const _1ece0175 = () => interopDefault(import('..\\pages\\addStaff.vue' /* webpackChunkName: "pages_addStaff" */))
+const _b3a9e318 = () => interopDefault(import('..\\pages\\calendar.vue' /* webpackChunkName: "pages_calendar" */))
+const _06b1888e = () => interopDefault(import('..\\pages\\chat.vue' /* webpackChunkName: "pages_chat" */))
+const _f9b21164 = () => interopDefault(import('..\\pages\\dashboard.vue' /* webpackChunkName: "pages_dashboard" */))
+const _1cf6990d = () => interopDefault(import('..\\pages\\exam\\index.vue' /* webpackChunkName: "pages_exam_index" */))
+const _6a40f22d = () => interopDefault(import('..\\pages\\exam2.vue' /* webpackChunkName: "pages_exam2" */))
+const _286a274a = () => interopDefault(import('..\\pages\\forum.vue' /* webpackChunkName: "pages_forum" */))
+const _397ee730 = () => interopDefault(import('..\\pages\\config\\class.vue' /* webpackChunkName: "pages_config_class" */))
+const _c27a2bda = () => interopDefault(import('..\\pages\\config\\course.vue' /* webpackChunkName: "pages_config_course" */))
+const _2bbb55c3 = () => interopDefault(import('..\\pages\\config\\user.vue' /* webpackChunkName: "pages_config_user" */))
+const _6fe15560 = () => interopDefault(import('..\\pages\\exam\\add-exam.vue' /* webpackChunkName: "pages_exam_add-exam" */))
+const _458064dc = () => interopDefault(import('..\\pages\\exam\\add-questions.vue' /* webpackChunkName: "pages_exam_add-questions" */))
+const _35de81f2 = () => interopDefault(import('..\\pages\\exam\\result.vue' /* webpackChunkName: "pages_exam_result" */))
+const _5d1bc29c = () => interopDefault(import('..\\pages\\exam\\rules.vue' /* webpackChunkName: "pages_exam_rules" */))
+const _49661af4 = () => interopDefault(import('..\\pages\\exam\\student-exam.vue' /* webpackChunkName: "pages_exam_student-exam" */))
+const _6ba74f47 = () => interopDefault(import('..\\pages\\exam\\student-exam-table.vue' /* webpackChunkName: "pages_exam_student-exam-table" */))
+const _50b6d682 = () => interopDefault(import('..\\pages\\exam\\teacher-exam.vue' /* webpackChunkName: "pages_exam_teacher-exam" */))
+const _0380a2c0 = () => interopDefault(import('..\\pages\\exam\\teacher-exam-table.vue' /* webpackChunkName: "pages_exam_teacher-exam-table" */))
+const _634bf5de = () => interopDefault(import('..\\pages\\user\\admin.vue' /* webpackChunkName: "pages_user_admin" */))
+const _6d7c686a = () => interopDefault(import('..\\pages\\user\\audit.vue' /* webpackChunkName: "pages_user_audit" */))
+const _25580e9a = () => interopDefault(import('..\\pages\\user\\faculty.vue' /* webpackChunkName: "pages_user_faculty" */))
+const _3fa6666a = () => interopDefault(import('..\\pages\\user\\faculty-head.vue' /* webpackChunkName: "pages_user_faculty-head" */))
+const _61833311 = () => interopDefault(import('..\\pages\\user\\sub-admin.vue' /* webpackChunkName: "pages_user_sub-admin" */))
+const _416d478c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 Vue.use(Router)
 
@@ -103,99 +103,99 @@ export function createRouter() {
 
     routes: [{
       path: "/addStaff",
-      component: _7a3c5304,
+      component: _1ece0175,
       name: "addStaff"
     }, {
       path: "/calendar",
-      component: _01996003,
+      component: _b3a9e318,
       name: "calendar"
     }, {
       path: "/chat",
-      component: _7e6cf99d,
+      component: _06b1888e,
       name: "chat"
     }, {
       path: "/dashboard",
-      component: _d4fa50c2,
+      component: _f9b21164,
       name: "dashboard"
     }, {
       path: "/exam",
-      component: _07dba91e,
+      component: _1cf6990d,
       name: "exam"
     }, {
       path: "/exam2",
-      component: _2c18ba04,
+      component: _6a40f22d,
       name: "exam2"
     }, {
       path: "/forum",
-      component: _6b7d9d2c,
+      component: _286a274a,
       name: "forum"
     }, {
-      path: "/config/centre",
-      component: _5b4ea222,
-      name: "config-centre"
+      path: "/config/class",
+      component: _397ee730,
+      name: "config-class"
     }, {
       path: "/config/course",
-      component: _d5e8d73c,
+      component: _c27a2bda,
       name: "config-course"
     }, {
       path: "/config/user",
-      component: _c50f705c,
+      component: _2bbb55c3,
       name: "config-user"
     }, {
       path: "/exam/add-exam",
-      component: _6629ffaf,
+      component: _6fe15560,
       name: "exam-add-exam"
     }, {
       path: "/exam/add-questions",
-      component: _ca3e5826,
+      component: _458064dc,
       name: "exam-add-questions"
     }, {
       path: "/exam/result",
-      component: _b0c917fe,
+      component: _35de81f2,
       name: "exam-result"
     }, {
       path: "/exam/rules",
-      component: _8751a27a,
+      component: _5d1bc29c,
       name: "exam-rules"
     }, {
       path: "/exam/student-exam",
-      component: _64ec4556,
+      component: _49661af4,
       name: "exam-student-exam"
     }, {
       path: "/exam/student-exam-table",
-      component: _0d92ba54,
+      component: _6ba74f47,
       name: "exam-student-exam-table"
     }, {
       path: "/exam/teacher-exam",
-      component: _6c3d00e4,
+      component: _50b6d682,
       name: "exam-teacher-exam"
     }, {
       path: "/exam/teacher-exam-table",
-      component: _dde01362,
+      component: _0380a2c0,
       name: "exam-teacher-exam-table"
     }, {
       path: "/user/admin",
-      component: _4e3105ef,
+      component: _634bf5de,
       name: "user-admin"
     }, {
       path: "/user/audit",
-      component: _5861787b,
+      component: _6d7c686a,
       name: "user-audit"
     }, {
       path: "/user/faculty",
-      component: _99956ef8,
+      component: _25580e9a,
       name: "user-faculty"
     }, {
       path: "/user/faculty-head",
-      component: _31e35139,
+      component: _3fa6666a,
       name: "user-faculty-head"
     }, {
       path: "/user/sub-admin",
-      component: _344fd2a2,
+      component: _61833311,
       name: "user-sub-admin"
     }, {
       path: "/",
-      component: _7dc00f46,
+      component: _416d478c,
       name: "index"
     }],
 

@@ -12,7 +12,7 @@
 						<v-tab-item v-for="n in 1" :key="n" >
 							<v-card flat>
 								<v-card-text>
-									<TableCentre />
+									<div><TableClass /></div>
 								</v-card-text>
 							</v-card>
 						</v-tab-item>
@@ -25,25 +25,33 @@
 </template>
 
 <script>
-import TableCentre from '@/components/CentreConfig/TableCentre'
+import TableClass from '@/components/CourseConfig/TableClass'
 
 export default {
-	layout: 'DashboardNavigationLayout',
 	middleware: 'auth',
+	layout: 'DashboardNavigationLayout',
 	components: {
-		TableCentre
+		TableClass
 	},
   	data: () => ({
 		active: '',
-		heading : ['Centres'],
-
+		heading : ['Class'],
+		authentication: '',
 		dialog: false,
 
 	}),
 	created() {
-		if(this.$auth.loggedIn==false && this.$auth.user.authentication!=5)
+		if(this.$auth.loggedIn==false)
 		{
 			this.$router.go('/')
+		}
+		else if(this.$auth.user.authentication==4)
+		{
+			this.authentication = this.$auth.user.authentication
+		}
+		else
+		{
+			this.$router.push('/dashboard')
 		}
 	}
 }

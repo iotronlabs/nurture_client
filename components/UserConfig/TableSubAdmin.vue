@@ -176,14 +176,59 @@
 						<h1>Assign Centre</h1>
 						<v-layout>
 							<v-flex xs12 sm12 md5>
+								<v-text-field
+									v-model="editedItem.sub_admin_centre_name"
+									label="Centre Name"
+								></v-text-field>
+							</v-flex>
+							<v-flex xs12 sm12 offset-md1 md5>
+								<v-text-field
+									v-model="editedItem.sub_admin_centre_id"
+									label="Centre id"
+								></v-text-field>
+							</v-flex>
+						</v-layout>
+						<v-flex xs12 sm12 md9>
+								<v-text-field
+									name="streetaddress"
+									type="text"
+									v-model="editedItem.sub_admin_centre_address"
+									label="Address"
+									placeholder="street address"
+									autocomplete="off"
+									:disabled="disabled"
+								></v-text-field>
+							</v-flex>
+						<v-layout row wrap>
+							<v-flex xs12 sm6 md3>
+								<v-text-field
+									v-model="editedItem.sub_admin_centre_address_city"
+									type="text"
+									placeholder="city"
+									:disabled="disabled"
+								></v-text-field>
+							</v-flex>
+							<v-flex xs12 sm6 md3>
+								<v-text-field
+									v-model="editedItem.sub_admin_centre_address_pin"
+									type="text"
+									placeholder="pin/zip code"
+									:disabled="disabled"
+								> </v-text-field>
+							</v-flex>
+							<v-flex xs12 sm6 md3>
 								<v-select
-									v-model="editedItem.sub_admin_centre"
-									:items="centres"
-									label="Centre"
+									v-model="editedItem.sub_admin_centre_address_state"
+									:items="states"
+									label="State"
 									solo
-									required
 									:disabled="disabled"
 								></v-select>
+							</v-flex>
+							<v-flex xs12 sm6 md3>
+								<v-checkbox v-model="checkbox" color="info"
+									@change="address"
+									label="Same as above"></v-checkbox>
 							</v-flex>
 						</v-layout>
 						<v-spacer></v-spacer><br>
@@ -244,7 +289,7 @@
 				<td class="text-xs-right">{{ props.item.sub_admin_dob }}</td>
 				<td class="text-xs-right">{{ props.item.sub_admin_email }}</td>
 				<td class="text-xs-right">{{ props.item.sub_admin_contact }}</td>
-				<td class="text-xs-right">{{ props.item.sub_admin_centre }}</td>
+				<td class="text-xs-right">{{ props.item.sub_admin_centre_name }}</td>
 				<td class="text-xs-right">{{ props.item.sub_admin_address_state }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
@@ -319,7 +364,7 @@ export default {
 			{ text: 'Date of birth ', value: 'sub_admin_dob', sortable: false },
 			{ text: 'Email', value: 'sub_admin_email', sortable: false },
 			{ text: 'Contact Number', value: 'sub_admin_contact', sortable: false },
-			{ text: 'Centre', value: 'sub_admin_centre', sortable: false },
+			{ text: 'Centre', value: 'sub_admin_centre_name', sortable: false },
 			{ text: 'State', value: 'sub_admin_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
@@ -356,7 +401,12 @@ export default {
 			sub_admin_address: '',
 			sub_admin_address_pin: '',
 			sub_admin_address_state: '',
-			sub_admin_centre: 'abc',
+			sub_admin_centre_name: '',
+			sub_admin_centre_id: '',
+			sub_admin_centre_address_city: '',
+			sub_admin_centre_address: '',
+			sub_admin_centre_address_pin: '',
+			sub_admin_centre_address_state: '',
 			image:null,
 			imageUrl:'',
 		},
@@ -372,7 +422,12 @@ export default {
 			sub_admin_address_city: '',
 			sub_admin_address_pin: '',
 			sub_admin_address_state: '',
-			sub_admin_centre: '',
+			sub_admin_centre_name: '',
+			sub_admin_centre_id: '',
+			sub_admin_centre_address_city: '',
+			sub_admin_centre_address: '',
+			sub_admin_centre_address_pin: '',
+			sub_admin_centre_address_state: '',
 			image:null,
 			imageUrl:'',
 		}
@@ -412,15 +467,25 @@ export default {
 			fileReader.readAsDataURL(files[0])
 			this.editedItem.image=files[0]
 		},
+		address() {
+			if(this.checkbox)
+			{
+				this.editedItem.sub_admin_centre_address = this.editedItem.sub_admin_address
+				this.editedItem.sub_admin_centre_address_city = this.editedItem.sub_admin_address_city
+				this.editedItem.sub_admin_centre_address_pin = this.editedItem.sub_admin_address_pin
+				this.editedItem.sub_admin_centre_address_state = this.editedItem.sub_admin_address_state
+			}
+			else
+			{
+				this.editedItem.sub_admin_centre_address = ''
+				this.editedItem.sub_admin_centre_address_city = ''
+				this.editedItem.sub_admin_centre_address_pin = ''
+				this.editedItem.sub_admin_centre_address_state = ''
+			}
+		},
 		async initialize () {
 			const sub_admin_response = await this.$axios.get('/api/subadmins')
 			this.user_details = sub_admin_response.data
-			const centres_data = await this.$axios.get('/api/centres')
-			this.centres = new Array()
-			for(var i in centres_data.data)
-			{
-				this.centres.push(centres_data.data[i].centre_name)
-			}
 		},
 		addItem() {
 			this.disabled=false
@@ -512,7 +577,12 @@ export default {
 					sub_admin_address_city: this.editedItem.sub_admin_address_city,
 					sub_admin_address_pin: this.editedItem.sub_admin_address_pin,
 					sub_admin_address_state: this.editedItem.sub_admin_address_state,
-					sub_admin_centre: this.editedItem.sub_admin_centre
+					sub_admin_centre_name: this.editedItem.sub_admin_centre_name,
+					sub_admin_centre_id: this.editedItem.sub_admin_centre_id,
+					sub_admin_centre_address_city: this.editedItem.sub_admin_centre_address_city,
+					sub_admin_centre_address: this.editedItem.sub_admin_centre_address,
+					sub_admin_centre_address_pin: this.editedItem.sub_admin_centre_address_pin,
+					sub_admin_centre_address_state: this.editedItem.sub_admin_centre_address_state
 					// sub_admin_profile_picture: this.imageUrl
 				})
 				if(response.data.success==true)
@@ -537,7 +607,12 @@ export default {
 					sub_admin_address_city: this.editedItem.sub_admin_address_city,
 					sub_admin_address_pin: this.editedItem.sub_admin_address_pin,
 					sub_admin_address_state: this.editedItem.sub_admin_address_state,
-					sub_admin_centre: this.editedItem.sub_admin_centre
+					sub_admin_centre_name: this.editedItem.sub_admin_centre_name,
+					sub_admin_centre_id: this.editedItem.sub_admin_centre_id,
+					sub_admin_centre_address_city: this.editedItem.sub_admin_centre_address_city,
+					sub_admin_centre_address: this.editedItem.sub_admin_centre_address,
+					sub_admin_centre_address_pin: this.editedItem.sub_admin_centre_address_pin,
+					sub_admin_centre_address_state: this.editedItem.sub_admin_centre_address_state
 					// s_profile_picture: this.imageUrl,
 				})
 				if(response.data.success==true)

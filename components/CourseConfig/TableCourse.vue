@@ -10,7 +10,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
-					<v-toolbar-title>Centre Form</v-toolbar-title>
+					<v-toolbar-title>Course Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>
@@ -18,15 +18,6 @@
 				</v-toolbar>
 				<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 					<v-container fluid>
-						<v-layout row wrap>
-							<v-flex xs12 sm12 md12>
-								<v-text-field
-									label="Enter course id"
-									v-model="editedItem.course_id"
-									:disabled="disabled"
-								></v-text-field>
-							</v-flex>
-						</v-layout>
 						<v-layout row wrap>
 							<v-flex xs12 sm12 md12>
 								<v-text-field
@@ -44,6 +35,16 @@
 									:disabled="disabled"
 									:items="course_durations"
 								></v-select>
+							</v-flex>
+						</v-layout>
+						<v-layout row wrap>
+							<v-flex xs12 md8 sm12>
+								<v-combobox
+									v-model="editedItem.subject"
+									:items="subjects"
+									label="Select a favorite activity or create a new one"
+									multiple
+								></v-combobox>
 							</v-flex>
 						</v-layout>
 						<v-spacer></v-spacer><br>
@@ -162,6 +163,7 @@ export default {
 			deleteMode: false,
 			disabled: false,
 			selected: [],
+			subjects: [],
 			course_durations: ['2 years','1 years'],
 
 			headers: [
@@ -181,12 +183,14 @@ export default {
 			editedItem: {
 				course_id: '',
 				course_name: '',
-				course_duration: ''
+				course_duration: '',
+				subject: []
 			},
 			defaultItem: {
 				course_id: '',
 				course_name: '',
-				course_duration: ''
+				course_duration: '',
+				subject: []
 			}
 		}
 	},
@@ -208,8 +212,13 @@ export default {
 			this.$refs.form.reset()
 		},
 		async initialize () {
-			const class_response = await this.$axios.get('/api/courses')
-			this.course_details = class_response.data
+			const course_response = await this.$axios.get('/api/courses')
+			this.course_details = course_response.data
+			const sub_response = await this.$axios.get('/api/subjects')
+			for(var i=0;i<sub_response.data.length;i++)
+			{
+				this.subjects.push(sub_response.data[i].sub_name)
+			}
 		},
 		addItem() {
 			this.disabled=false
@@ -290,7 +299,6 @@ export default {
 			if(this.editedIndex == -1)
 			{
 				response = await this.$axios.post(`/api/courses/register`,{
-					course_id: this.editedItem.course_id,
 					course_name: this.editedItem.course_name,
 					course_duration: this.editedItem.course_duration
 				})
@@ -306,7 +314,6 @@ export default {
 			{
 				var id= this.editedItem.course_id
 				response = await this.$axios.post(`/api/courses/${id}`,{
-					course_id: this.editedItem.course_id,
 					course_name: this.editedItem.course_name,
 					course_duration: this.editedItem.course_duration
 				})
