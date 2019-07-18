@@ -4,8 +4,8 @@
 	<v-toolbar flat color="lightgrey">
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
       	<v-spacer></v-spacer>
-		<!-- <v-btn v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on">Delete exam</v-btn> -->
-		<v-btn color="primary" to="add-exam" dark v-on="on">Add exam</v-btn>
+		<v-btn v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/>&nbsp;&nbsp;Delete exam</v-btn>
+		<v-btn color="primary" to="add-exam" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add exam</v-btn>
 		<!-- <v-dialog v-model="dialog" persistent max-width="600px">
 			<template v-slot:activator="{ on }">
 				<v-btn color="primary" :to="exam/add-exam" dark v-on="on">Add exam</v-btn>
@@ -83,10 +83,10 @@
 				<th>
 					<div v-if="deleteMode">
 					<v-layout>
-						<v-flex>
+						<v-flex >
 							{{selected.length}} rows selected
-							<v-btn color="error" @click="deleteItem">Confirm</v-btn>
-							<v-btn color="info" @click="deleteMode=false" class="btn-cancel">Cancel</v-btn>
+							<v-btn color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
+							<v-btn color="info" @click="deleteMode=false" class="btn-cancel"><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
 						</v-flex>
 					</v-layout>
 				</div>
