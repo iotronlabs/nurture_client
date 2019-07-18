@@ -1,15 +1,18 @@
 <template>
  	<div>
-		 <v-toolbar class="login-grad" >
-		<div class="text-xs-center">
-				<v-chip color="#f2c94c">
-					<v-avatar class="audit-color"> AU </v-avatar>
-					Audit Login
-					<v-spacer />
-				</v-chip>
-			</div>
-		 </v-toolbar>
-		<br>
+		 <v-toolbar  class="login-grad" >
+			<v-layout justify-center>
+			<v-flex sm5 xs5 md4 offset-sm1 offset-xs1 offset-md1 >
+				
+			<v-chip class="chip-alignment" color="#b63fbd"  text-color="white">
+				<v-avatar class="audit-color"> A </v-avatar>
+				Audit Login
+				
+			</v-chip>
+			</v-flex>
+			</v-layout>
+		  </v-toolbar>
+		 
 		<LoginForm id="audit" />
  	</div>
 </template>
@@ -28,9 +31,11 @@ import LoginForm from '@/components/LoginForm'
 .login-grad
 {
 	background-image: linear-gradient(to bottom,#434343 0%, black 100%);
-	border-radius: 15px 15px 15px 15px;
+	border-radius: 10px;
+
 }
-v-toolbar{
-	justify-content:center;
+
+.chip-alignment{
+	margin-left: -20%;	
 }
 </style>

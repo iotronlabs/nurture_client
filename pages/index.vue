@@ -1,14 +1,16 @@
 <template>
 	<div>
-		<v-toolbar class="login-grad" >
-			<div class="text-xs-center">
-			<center><v-chip color="#3cba92" text-color="white">
+		<v-toolbar  class="login-grad" >
+			<v-layout justify-center>
+			<v-flex sm5 xs5 md4 offset-sm1 offset-xs1 offset-md1 >
+				
+			<v-chip class="chip-alignment" color="#2f9e7b" text-color="white">
 				<v-avatar class="student-color"> S </v-avatar>
 				Student Login
 				
-			</v-chip></center>
-		</div>
-		<br><br>
+			</v-chip>
+			</v-flex>
+			</v-layout>
 		</v-toolbar>
 		
 
@@ -30,10 +32,12 @@ import LoginForm from '@/components/LoginForm'
 .login-grad
 {
 	background-image: linear-gradient(to bottom,#434343 0%, black 100%);
-	border-radius: 15px 15px 15px 15px;
+	border-radius: 10px;
+
 }
-v-toolbar{
-	justify-content:center;
+
+.chip-alignment{
+	margin-left: -20%;	
 }
 </style>
 

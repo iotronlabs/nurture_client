@@ -2,14 +2,14 @@
 	<v-app class="global-font">
 		<v-content>
 			<v-container fluid fill-height class="container-grad">
-				<v-layout align-center justify-left row wrap>
-					<v-flex justify-center align-center xs12 sm6 md5 offset-md2 offset-xs2>
-						<img class="logo" src="/nurture-logo.png">
+				<v-layout  justify-center row wrap>
+					<v-flex justify-center  xs12 sm12 md12  >
+						<center><img class="logo" src="/nurture-logo.png"></center>
 					</v-flex>
 
-					<v-flex xs12 sm6 md4 :class="this.$vuetify.breakpoint.smAndDown ? 'device-sm' : ''">
+					<v-flex xs12 sm6 md4 :class="this.$vuetify.breakpoint.smAndDown ">
 
-						<v-card class="elevation-12 card-design">
+						<v-card class="elevation-10 card-design">
 							<!-- <v-toolbar class="login-grad" >
 							</v-toolbar> -->
 								<v-card-text>
@@ -85,15 +85,16 @@ export default {
 .logo{
 	height: 200px;
 	width: 200px;
-	padding-left: 25px;
+	padding-left: 15px;
+	
 }
 .v-toolbar {
 	height: 60px;
 }
 
 .card-design {
-	border-radius: 15px;
-
+	border-radius: 10px;
+	
 
 }
 .toolbar-text {

@@ -12,8 +12,8 @@
 			<br>
 			<div>
 
-				<v-chip small color="#3cba92" text-color="white">
-              		<v-avatar class="student-color"> {{selectItems.avatar_1}}</v-avatar>
+				<v-chip small :color="selectItems.color" text-color="white">
+              		<v-avatar :class="selectItems.avatar_color"> {{selectItems.avatar_1}}</v-avatar>
               		{{selectItems.title_1}}
             	</v-chip>
 				<!-- <v-chip small outline color="#087a49" >
@@ -38,6 +38,10 @@ export default {
         ...mapState({
 			studentItems : state => state.dashboard.studentItems,
 			teacherItems : state => state.dashboard.teacherItems,
+			superAdminItems : state => state.dashboard.superAdminItems,
+			mentorItems : state => state.dashboard.mentorItems,
+			adminItems : state => state.dashboard.adminItems,
+			auditItems : state => state.dashboard.auditItems
 		}),
         selectItems() {
 			if(this.studentItems.active==true)
@@ -47,6 +51,22 @@ export default {
 			else if(this.teacherItems.active==true)
 			{
 				return this.teacherItems.chipdata
+			}
+			else if(this.mentorItems.active==true)
+			{
+				return this.mentorItems.chipdata
+			}
+			else if(this.superAdminItems.active==true)
+			{
+				return this.superAdminItems.chipdata
+			}
+			else if(this.adminItems.active==true)
+			{
+				return this.adminItems.chipdata
+			}
+			else if(this.auditItems.active==true)
+			{
+				return this.auditItems.chipdata
 			}
         }
     }

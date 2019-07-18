@@ -133,7 +133,8 @@
 				<v-list-tile
 				>
 					<v-list-tile-action><font-awesome-icon :icon="['fas', 'sign-out-alt']"/></v-list-tile-action>
-					<v-btn flat @click="userLogout"><v-list-tile-title >Logout</v-list-tile-title></v-btn>
+					<v-list-tile-title @click="" >Logout</v-list-tile-title>
+					<!-- <v-btn flat @click="userLogout"><v-list-tile-title >Logout</v-list-tile-title></v-btn> -->
 				</v-list-tile>
 				</v-list>
      		</v-menu>
@@ -179,7 +180,8 @@ export default {
 		...mapState({
 			studentItems : state => state.dashboard.studentItems,
 			teacherItems : state => state.dashboard.teacherItems,
-			staffItems : state => state.dashboard.staffItems,
+			superAdminItems : state => state.dashboard.superAdminItems,
+			mentorItems : state => state.dashboard.mentorItems,
 			adminItems : state => state.dashboard.adminItems,
 			auditItems : state => state.dashboard.auditItems
 		}),
@@ -188,17 +190,17 @@ export default {
 			{
 				return this.studentItems.items
 			}
-			else if(this.facultyItems.active==true)
+			else if(this.teacherItems.active==true)
 			{
-				return this.facultyItems.items
+				return this.teacherItems.items
 			}
-			else if(this.headFacultyItems.active==true)
+			else if(this.mentorItems.active==true)
 			{
-				return this.headFacultyItems.items
+				return this.mentorItems.items
 			}
-			else if(this.subAdminItems.active==true)
+			else if(this.superAdminItems.active==true)
 			{
-				return this.subAdminItems.items
+				return this.superAdminItems.items
 			}
 			else if(this.adminItems.active==true)
 			{

@@ -29,15 +29,18 @@
 		</v-text-field>
 		<v-layout row wrap>
 
-			<v-flex xs5 sm5 md5>
+			<v-flex xs6 sm5 md5>
+				
 				<v-checkbox
 					v-model="checkbox"
 					label="Remember Me"
+					height="1px"
 				></v-checkbox>
+				
 			</v-flex>
-			<v-flex xs4 sm4 md4 offset-xs3 offset-sm3 offset-md3>
+			<v-flex xs5 sm4 md4 offset-xs1 offset-sm3 offset-md3>
 				<br>
-				<nuxt-link to="/">forgot password?</nuxt-link>
+				<nuxt-link  class="login-font" to="/">forgot password?</nuxt-link>
 
 			</v-flex>
 		</v-layout>
@@ -51,7 +54,6 @@
 				form="login-form"
 				:class="disabled ? 'btn-login' : 'btn-login-color'"
 			>LogIn</v-btn>
-		{{message}}
 	</v-form>
 	<!-- snackbar -->
 	<v-snackbar
@@ -165,13 +167,20 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.login-font{
+	font-size: 13px; 
+	
+}
+.rm-padding{
+	padding-top: 2px;
+}
 .login-form {
 	padding-left: 20px;
 	padding-right: 20px;
 }
 .btn-login-color {
 	border-radius: 10px;
-	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);
+	background-image:  linear-gradient(to top,#10b687 0%, #44e6b8 100%);
 	color: aliceblue;
 }
 .btn-login {

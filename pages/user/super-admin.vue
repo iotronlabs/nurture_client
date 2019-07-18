@@ -1,19 +1,20 @@
 <template>
-  	<div>
-		   <v-toolbar  class="login-grad" >
+  <div>
+	  <v-toolbar  class="login-grad" >
 			<v-layout justify-center>
 			<v-flex sm5 xs5 md4 offset-sm1 offset-xs1 offset-md1 >
 				
-			<v-chip class="chip-alignment" color="#6E7FF3" text-color="white">
-				<v-avatar class="teacher-color"> M </v-avatar>
-				Mentor Login
+			<v-chip class="chip-alignment" color="#f06d5f" text-color="white">
+				<v-avatar class="super-admin-color"> SA </v-avatar>
+				Super-Admin Login
 				
 			</v-chip>
 			</v-flex>
 			</v-layout>
 		  </v-toolbar>
-		<LoginForm id="faculty-head" />
-  	</div>
+	  
+		<LoginForm id="super-admin" />
+	</div>
 </template>
 
 <script>
@@ -35,6 +36,6 @@ import LoginForm from '@/components/LoginForm'
 }
 
 .chip-alignment{
-	margin-left: -20%;	
+	margin-left: -35%;	
 }
 </style>
