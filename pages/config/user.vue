@@ -5,8 +5,6 @@
 				<v-flex xs12>
 					<div v-if="authentication==5"><Table /></div>
 					<div v-if="authentication==4"><Table2 /></div>
-					<Table />
-					<table2 />
 				</v-flex>
 			</v-layout>
 		</v-container>

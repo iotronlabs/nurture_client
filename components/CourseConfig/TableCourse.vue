@@ -42,8 +42,9 @@
 								<v-combobox
 									v-model="editedItem.subject"
 									:items="subjects"
-									label="Select a favorite activity or create a new one"
+									label="Assign Subjects for this course"
 									multiple
+									:disabled="disabled"
 								></v-combobox>
 							</v-flex>
 						</v-layout>
@@ -300,7 +301,8 @@ export default {
 			{
 				response = await this.$axios.post(`/api/courses/register`,{
 					course_name: this.editedItem.course_name,
-					course_duration: this.editedItem.course_duration
+					course_duration: this.editedItem.course_duration,
+					subject: this.editedItem.subject
 				})
 				if(response.data.success==true)
 				{
@@ -315,7 +317,8 @@ export default {
 				var id= this.editedItem.course_id
 				response = await this.$axios.post(`/api/courses/${id}`,{
 					course_name: this.editedItem.course_name,
-					course_duration: this.editedItem.course_duration
+					course_duration: this.editedItem.course_duration,
+					subject: this.editedItem.subject
 				})
 				if(response.data.success==true)
 				{

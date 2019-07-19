@@ -34,7 +34,6 @@
 					class="tile"
 					v-for="(item, i) in selectItems"
 					:key="i"
-					:to="item.to"
 					router
 					exact
 				>
@@ -60,9 +59,12 @@
 							<v-list-tile-content>
 
 								<v-list  class="menu-sublist">
-									<v-list-tile>
-										{{ subItem.title }}
-									</v-list-tile>
+
+									<nuxt-link :to="subItem.to">
+											<v-list-tile>
+											{{ subItem.title }}
+										</v-list-tile>
+									</nuxt-link>
 								</v-list>
 							</v-list-tile-content>
 
@@ -133,7 +135,7 @@
 				<v-list-tile
 				>
 					<v-list-tile-action><font-awesome-icon :icon="['fas', 'sign-out-alt']"/></v-list-tile-action>
-					<v-list-tile-title @click="" >Logout</v-list-tile-title>
+					<v-list-tile-title @click="userLogout" class="logout" >Logout</v-list-tile-title>
 					<!-- <v-btn flat @click="userLogout"><v-list-tile-title >Logout</v-list-tile-title></v-btn> -->
 				</v-list-tile>
 				</v-list>
@@ -237,6 +239,14 @@ export default {
 	},
 	created() {
 		this.primaryDrawer.model = false
+		if(this.$auth.user.authentication==5)
+		{
+			this.superAdminItems.active=true
+		}
+		else if(this.$auth.user.authentication==4)
+		{
+			this.adminItems.active=true
+		}
 	}
 }
 </script>
@@ -271,5 +281,9 @@ export default {
 }
 .badge-text {
 	font-size: 10px;
+}
+.logout
+{
+	cursor: pointer;
 }
 </style>

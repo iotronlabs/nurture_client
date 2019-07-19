@@ -300,18 +300,27 @@
 						<v-layout row wrap>
 							<v-flex xs12 sm12 md4>
 								<v-select
-									v-model="editedItem.centre"
+									v-if="authentication==5"
+									v-model="editedItem.s_centre"
 									:items="centres"
 									label="Assign Centre"
+									@change="oncentreChange(editedItem.s_centre)"
 									required
 									solo
 									:disabled="disabled"
 								></v-select>
+								<v-text-field
+									v-if="authentication==4"
+									v-model="editedItem.s_centre"
+									label="Assign centre"
+									disabled
+								></v-text-field>
 							</v-flex>
 							<v-flex xs12 sm12 md4>
 								<v-select
-									v-model="editedItem.course"
+									v-model="editedItem.s_course"
 									:items="courses"
+									@change="classList"
 									label="Assign Course"
 									required
 									solo
@@ -320,7 +329,7 @@
 							</v-flex>
 							<v-flex xs12 sm12 md4>
 								<v-select
-									v-model="editedItem.class"
+									v-model="editedItem.s_class"
 									:items="classes"
 									label="Assign Class"
 									required
@@ -482,6 +491,8 @@
 <script>
 export default {
     data: () => ({
+		authentication: '',
+
 		dialog: false,
 		search: '',
 		message: '',
@@ -535,6 +546,7 @@ export default {
 		],
 		centres:[],
 		courses: [],
+		allClasses: [],
 		classes:[],
 		fee_structures: [],
 		fee_periods: ['At a time','Quarterly','Monthly'],
@@ -566,9 +578,9 @@ export default {
 			guardian_city: '',
 			guardian_pin: '',
 			guardian_state: '',
-			centre: '',
-			course: '',
-			class: '',
+			s_centre: '',
+			s_course: '',
+			s_class: '',
 			fee_structure: '',
 			scholarship: '',
 			fee_period: '',
@@ -598,9 +610,9 @@ export default {
 			guardian_city: '',
 			guardian_pin: '',
 			guardian_state: '',
-			centre: '',
-			course: '',
-			class: '',
+			s_centre: '',
+			s_course: '',
+			s_class: '',
 			fee_structure: '',
 			scholarship: '',
 			fee_period: '',
@@ -622,14 +634,16 @@ export default {
 	async created () {
 		if(this.$auth.user.authentication==4)
 		{
-			this.editedItem.centre=this.$auth.user.sub_admin_centre
+			this.authentication=4
+			this.editedItem.s_centre=this.$auth.user.sub_admin_centre_name
 		}
 		else if(this.$auth.user.authentication==5)
 		{
-			const centre_response = await this.$axios.get('/api/centres')
+			this.authentication=5
+			const centre_response = await this.$axios.get('/api/subadmins')
 			for(var i=0; i<centre_response.data.length;i++)
 			{
-				this.centres.push(centre_response.data[i].centre_name)
+				this.centres.push(centre_response.data[i].sub_admin_centre_name)
 			}
 		}
 		this.initialize()
@@ -678,7 +692,30 @@ export default {
 			const courses_response = await this.$axios.get('/api/courses')
 			for(var i=0;i<courses_response.data.length;i++)
 			{
-				courses.push(courses_response.data[i].course_name)
+				this.courses.push(courses_response.data[i].course_name)
+			}
+			if(this.$auth.user.authentication==4)
+			{
+				const centre_name = this.$auth.user.sub_admin_centre_name
+				this.oncentreChange(centre_name)
+			}
+		},
+		async oncentreChange(centre_name) {
+			const classes_response = await this.$axios.get(`/api/classes/${centre_name}`)
+			for(var i=0;i<classes_response.data.data.length;i++)
+			{
+				this.allClasses.push(classes_response.data.data[i])
+			}
+			this.classList()
+		},
+		classList() {
+			for(var i=0;i<this.allClasses.length;i++)
+			{
+				console.log(this.allClasses[i])
+				if(this.allClasses[i].class_course==this.editedItem.s_course)
+				{
+					this.classes.push(this.allClasses[i].class_name)
+				}
 			}
 		},
 		addItem() {
@@ -777,9 +814,9 @@ export default {
 					// fee_structure: this.editedItem.fee_structure,
 					// scholarship: this.editedItem.scholarship,
 					// fee_period: this.editedItem.fee_period,
-					s_centre: 'asd',
-					s_course: 'asda',
-					s_class: 'asd',
+					s_centre: this.editedItem.s_centre,
+					s_course: this.editedItem.s_course,
+					s_class: this.editedItem.s_class,
 					fee_structure: 'adas',
 					scholarship: 'asd',
 					fee_period: 'dsa',

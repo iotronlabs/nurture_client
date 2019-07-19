@@ -1,5 +1,5 @@
 const studentItems = {
-	active:true,
+	active:false,
 	chipdata: {
 		avatar_1: "S",
 		avatar_2: "St",
@@ -16,7 +16,7 @@ const studentItems = {
 			},
 			title: 'Dashboard',
 			to: '/',
-			
+
 		}
 		// {
 		// 	icon: {
@@ -40,7 +40,7 @@ const studentItems = {
 
 		// {
 		// 	icon: {
-		// 		prefix:'far', 
+		// 		prefix:'far',
 		// 		name:'calendar-alt'
 		// 	},
 		// 	title: 'Calendar',
@@ -183,7 +183,7 @@ const teacherItems = {
 		// 		}
 		// 	]
 		// },
-		// {	
+		// {
 		// 	icon: {
 		// 		prefix: 'far',
 		// 		name: 'question-circle'
@@ -200,7 +200,7 @@ const mentorItems = {
 		avatar_1: "HF",
 		avatar_2: "Sb",
 		title_1: "Head Faculty",
-		title_2: "Subject", 
+		title_2: "Subject",
 		color: "#6E7FF3",
 		avatar_color: "teacher-color"
 	},
@@ -311,6 +311,24 @@ const superAdminItems = {
 			title: 'Dashboard',
 			to: '/',
 
+		},
+		{
+			icon: {
+				prefix: 'fas',
+				name: 'user-cog'
+			},
+			title: 'Configuration',
+			items: [
+				{
+					title: 'Academics',
+					to: '/config/course'
+				},
+				{
+					title: 'Users',
+					to: '/config/user'
+				}
+
+			]
 		}
 		// {
 		// 	icon: {
@@ -429,13 +447,14 @@ const adminItems = {
 				name: 'user-cog'
 			},
 			title: 'Configuration',
-			to: '/',
 			items: [
 				{
-					title: 'Academics'
+					title: 'Academics',
+					to: '/config/class'
 				},
 				{
-					title: 'Users'
+					title: 'Users',
+					to: '/config/user'
 				}
 
 			]
@@ -456,7 +475,7 @@ const adminItems = {
 		// 		}
 		// 	]
 		// },
-		
+
 		// {
 		// 	icon: {
 		// 		prefix: 'far',
