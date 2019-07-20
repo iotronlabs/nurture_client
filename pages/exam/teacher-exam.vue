@@ -1,13 +1,16 @@
 <template>
 <div>
   	<v-container fluid>
-    	<v-tabs dark color="cyan" show-arrows >
+    	<!-- <v-tabs dark color="cyan" show-arrows >
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 
 			<v-tab v-for="i in k.length" :key="i" :href="'#tab-' + i" >
 				Q {{ i }}
+			</v-tab> -->
+		<v-tabs fixed-tabs left class="tab-style" dark slider-color="yellow">
+			<v-tab v-for="i in k.length" :key="i" :href="'#tab-' + i" >
+				Q {{ i }}
 			</v-tab>
-
 			<!-- <v-tabs-items>
 				<v-tab-item v-for="contents in content" :key="i":value="'tab-' + i">
 				<v-card flat>
@@ -47,7 +50,7 @@
 										</v-icon>
 									</v-btn>
 								</v-flex>
-							</v-layout> 
+							</v-layout>
 							<br><br>
 							<!--<v-layout>
 								<v-btn to="result"> Submit</v-btn>

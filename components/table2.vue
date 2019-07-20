@@ -2,11 +2,14 @@
 <div>
   	<v-container fluid>
 
-    	<v-tabs v-model="active" color="cyan" dark slider-color="yellow">
+    	<!-- <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
 			<v-tab v-for="head in heading" :key="head" ripple>
 				{{ head}}
-			</v-tab>
-
+			</v-tab> -->
+		<v-tabs fixed-tabs slider-color="primary" v-model="active" >
+		<v-tab v-for="head in heading" :key="head" ripple>
+			{{ head}}
+		</v-tab>
 			<v-tab-item v-for="n in 3" :key="n" >
 				<v-card flat>
 					<v-card-text>

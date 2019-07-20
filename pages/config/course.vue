@@ -4,11 +4,14 @@
 		<v-container fluid>
 			<v-layout align-center justify-center>
 				<v-flex xs12>
-					<v-tabs v-model="active" color="cyan" dark slider-color="yellow">
+					<!-- <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
 						<v-tab v-for="head in heading" :key="head" ripple>
 							{{ head}}
-						</v-tab>
-
+						</v-tab> -->
+					<v-tabs fixed-tabs slider-color="primary" v-model="active">
+					<v-tab v-for="head in heading" :key="head" ripple>
+						{{ head}}
+					</v-tab>
 						<v-tab-item v-for="n in 2" :key="n" >
 							<v-card flat>
 								<v-card-text>

@@ -2,11 +2,11 @@
 <div>
   <v-container fluid>
 
-    <v-tabs class="tab-style" v-model="active" color="cyan" dark slider-color="yellow" >
-          <v-tab v-for="head in heading" :key="head" ripple >
-              {{head}}
 
-          </v-tab>
+	<v-tabs fixed-tabs left class="tab-style" dark slider-color="primary">
+		<v-tab v-for="head in heading" :key="head" ripple>
+			{{ head}}
+		</v-tab>
           <v-tab-item v-for="n in 2" :key="n" >
 
             <v-card class = "card-style">
@@ -19,7 +19,7 @@
                        </v-select>
                     </v-flex>
               </v-layout>
-              
+
               <v-subheader large > Question</v-subheader>
               <v-layout  wrap v-if = "n==1">
                   <v-flex xs12 sm6 md9 d-flex>
@@ -31,7 +31,7 @@
                   <v-text-field
                   v-model="a"
                     type="text"
-                  placeholder="Enter option or upload image"              
+                  placeholder="Enter option or upload image"
                   required
                   outline
                   solo
@@ -51,7 +51,7 @@
 								>
 							</v-flex>
 						</v-layout>
-       
+
 						<!-- <v-layout row>
 							<v-flex xs12 sm6>
 								<img :src="editedItem.imageUrl">
@@ -65,10 +65,10 @@
              <v-text-field
              v-model="a"
               type="text"
-             placeholder="Enter option or upload image"                  
+             placeholder="Enter option or upload image"
              required
              outline
-         
+
            >
            </v-text-field>
           </v-flex>
@@ -92,7 +92,7 @@
             <v-text-field
              v-model="a"
               type="text"
-             placeholder="Enter option or upload image"                 
+             placeholder="Enter option or upload image"
              required
              outline>
             </v-text-field>
@@ -117,10 +117,10 @@
              <v-text-field
              v-model="a"
               type="text"
-             placeholder="Enter option or upload image"         
+             placeholder="Enter option or upload image"
              required
              outline
-         
+
            >
            </v-text-field>
           </v-flex>
@@ -136,13 +136,13 @@
 								>
 							</v-flex>
 						</v-layout>
-            
+
            <v-flex xs12 sm6 md9>
                <br>
           <v-select :items="items" label="Select answer" solo outline  >
           </v-select>
-              
-        
+
+
         </v-flex>
 
         </v-layout>
@@ -156,7 +156,7 @@
                   <v-text-field
                   v-model="a"
                     type="text"
-                  placeholder="Enter option or upload image"              
+                  placeholder="Enter option or upload image"
                   required
                   outline
                   solo
@@ -174,7 +174,7 @@
 
               <v-btn > Submit</v-btn>
 
-             
+
           </v-card>
 
 

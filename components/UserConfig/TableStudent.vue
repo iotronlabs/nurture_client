@@ -434,21 +434,22 @@
 					></v-checkbox>
 				</td>
 				<td class="text-xs-center">{{ props.item.s_id }}</td>
-				<td class="text-xs-right">{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
-				<td class="text-xs-right">{{ props.item.s_email }}</td>
-				<td class="text-xs-right">{{ props.item.s_dob }}</td>
-				<td class="text-xs-right">{{ props.item.s_contact }}</td>
-				<td class="text-xs-right">{{ props.item.s_class }}</td>
-				<td class="text-xs-right">{{ props.item.s_course }}</td>
-				<td class="text-xs-right">{{ props.item.s_centre }}</td>
-				<td class="text-xs-right">{{ props.item.s_address_state }}</td>
-				<td class="text-xs-right">{{ props.item.status }}</td>
+				<td>{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
+
+				<td>{{ props.item.s_dob }}</td>
+				<td>{{ props.item.s_email }}</td>
+				<td>{{ props.item.s_contact }}</td>
+				<!-- <td>{{ props.item.s_class }}</td> -->
+				<td>{{ props.item.s_course }}</td>
+				<td>{{ props.item.s_centre }}</td>
+				<!-- <td>{{ props.item.s_address_state }}</td> -->
+				<td>{{ props.item.status }}</td>
 
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn dark	v-on="on">Actions</v-btn>
+								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile
@@ -459,7 +460,8 @@
 								<v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title>
 								</v-list-tile>
 							</v-list>
-							</v-menu>
+						</v-menu>
+
 					</span>
 				</td>
 			</tr>
@@ -520,10 +522,10 @@ export default {
 			{ text: 'Date of birth ', value: 's_dob', sortable: false },
 			{ text: 'Email', value: 's_email', sortable: false },
 			{ text: 'Contact Number', value: 's_contact', sortable: false },
-			{ text: 'Class', value: 's_class', sortable: false },
+			// { text: 'Class', value: 's_class', sortable: false },
 			{ text: 'Course', value: 's_course', sortable: true },
 			{ text: 'Centre', value: 's_centre', sortable: true },
-			{ text: 'State', value: 's_address_state', sortable: true },
+			// { text: 'State', value: 's_address_state', sortable: true },
 			{ text: 'Status', value: 'status', sortable: true }
 		],
 		date: new Date().toISOString().substr(0, 10),

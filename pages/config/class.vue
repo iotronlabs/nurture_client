@@ -4,7 +4,7 @@
 		<v-container fluid>
 			<v-layout align-center justify-center>
 				<v-flex xs12>
-					<v-tabs v-model="active" color="cyan" dark slider-color="yellow">
+					<v-tabs fixed-tabs left class="tab-style" dark slider-color="yellow">
 						<v-tab v-for="head in heading" :key="head" ripple>
 							{{ head}}
 						</v-tab>
