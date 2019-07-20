@@ -7,7 +7,7 @@
 			<v-tab v-for="i in k.length" :key="i" :href="'#tab-' + i" >
 				Q {{ i }}
 			</v-tab> -->
-			<v-tabs fixed-tabs left class="tab-style" dark slider-color="primary">
+			<v-tabs fixed-tabs left class="tab-style" dark slider-color="yellow">
 			<v-tab v-for="i in k.length" :key="i" :href="'#tab-' + i" >
 				Q {{ i }}
 			</v-tab>

@@ -38,22 +38,25 @@
 				></v-checkbox>
 				
 			</v-flex>
-			<v-flex xs5 sm4 md4 offset-xs1 offset-sm3 offset-md3>
+			<v-flex xs12 sm12 md12 lg 12>
+				<v-btn
+					:disabled="disabled"
+					block
+					color="primary"
+					type="submit"
+					form="login-form"
+					:class="disabled ? 'btn-login' : 'btn-login-color'"
+				>LogIn</v-btn>
+			</v-flex>
+			<v-flex >
 				<br>
-				<nuxt-link  class="login-font" to="/">forgot password?</nuxt-link>
+				<center><nuxt-link  class="login-font" to="/">forgot password?</nuxt-link></center>
 
 			</v-flex>
 		</v-layout>
 
 
-			<v-btn
-				:disabled="disabled"
-				block
-				color="primary"
-				type="submit"
-				form="login-form"
-				:class="disabled ? 'btn-login' : 'btn-login-color'"
-			>LogIn</v-btn>
+			
 	</v-form>
 	<!-- snackbar -->
 	<v-snackbar

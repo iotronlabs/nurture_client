@@ -2,11 +2,11 @@
   <div>
 	  <v-toolbar  class="login-grad" >
 			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm1 offset-xs1 offset-md1 >
+			<v-flex sm5 xs5 md4 offset-sm2 offset-xs3 offset-md2 >
 
 			<v-chip class="chip-alignment" color="#f06d5f" text-color="white">
 				<v-avatar class="super-admin-color"> SA </v-avatar>
-				Super-Admin Login
+				Super-Admin 
 
 			</v-chip>
 			</v-flex>

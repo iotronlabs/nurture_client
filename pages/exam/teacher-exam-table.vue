@@ -102,19 +102,19 @@
 						:input-value="props.selected"
 					></v-checkbox>
 				</td>
-				<td class="text-xs-right">{{ props.item.t_name }}</td>
-				<td class="text-xs-right">{{ props.item.t_cat }}</td>
-				<td class="text-xs-right">{{ props.item.t_sub }}</td>
-				<td class="text-xs-right" >{{ props.item.t_dead }}</td>
-				<td class="text-xs-right" >{{ props.item.t_id }}</td>
-                <td class="text-xs-right">{{ props.item.t_stat }}</td>
+				<td class="text-xs-left">{{ props.item.t_name }}</td>
+				<td class="text-xs-left">{{ props.item.t_cat }}</td>
+				<td class="text-xs-left">{{ props.item.t_sub }}</td>
+				<td class="text-xs-left" >{{ props.item.t_dead }}</td>
+				<td class="text-xs-left" >{{ props.item.t_id }}</td>
+                <td class="text-xs-left">{{ props.item.t_stat }}</td>
                 <!--<td >  <v-select :items="items" label="Solo field" solo></v-select></td>-->
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<!-- dropdown action menu -->
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn dark	v-on="on">Actions</v-btn>
+								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile

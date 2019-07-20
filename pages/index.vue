@@ -2,11 +2,11 @@
 	<div>
 		<v-toolbar  class="login-grad" >
 			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm1 offset-xs1 offset-md1 >
-				
+			<v-flex sm5 xs5 md4 offset-sm2 offset-xs2 offset-md2 >
+			&nbsp;	
 			<v-chip class="chip-alignment" color="#2f9e7b" text-color="white">
 				<v-avatar class="student-color"> S </v-avatar>
-				Student Login
+				Student 
 				
 			</v-chip>
 			</v-flex>

@@ -58,7 +58,7 @@
 
 							<v-list-tile-content>
 
-								<v-list  class="menu-sublist">
+								<v-list   >
 
 									<nuxt-link :to="subItem.to">
 											<v-list-tile>
@@ -261,17 +261,17 @@ export default {
 }
 
 .tile:hover {
-	background: $primary-gradient;
-	color: aliceblue;
+	// background: $primary-gradient;
+	color: #6067eb;
 }
 .tile:active {
-	background: $primary-gradient;
-	color: aliceblue;
+	// background: $primary-gradient;
+	color: #6067eb;
 }
-.subtile {
-	background-color: aliceblue;
-	color: blue;
-}
+// .subtile {
+// 	background-color: aliceblue;
+// 	color: blue;
+// }
 // .subtile:active {
 // 	background: aliceblue;
 // 	color: $primary-gradient;
