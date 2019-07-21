@@ -156,10 +156,10 @@
 					></v-checkbox>
 				</td>
 				<td class="text-xs-center">{{ props.item.class_id }}</td>
-				<td class="text-xs-right">{{ props.item.class_name }}</td>
-				<td class="text-xs-right">{{ props.item.class_course }}</td>
-				<td class="text-xs-right">{{ props.item.start_time }}</td>
-				<td class="text-xs-right">{{ props.item.end_time }}</td>
+				<td class="text-xs-center">{{ props.item.class_name }}</td>
+				<td class="text-xs-center">{{ props.item.class_course }}</td>
+				<td class="text-xs-center">{{ props.item.start_time }}</td>
+				<td class="text-xs-center">{{ props.item.end_time }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -280,7 +280,6 @@ export default {
 		}
 	},
 	created () {
-		this.editedItem.class_centre_name=this.$auth.user.sub_admin_centre_name
 		this.initialize()
 	},
     methods: {
@@ -292,6 +291,8 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		async initialize () {
+			this.editedItem.class_centre_name=this.$auth.user.sub_admin_centre_name
+			console.log(this.editedItem.class_centre_name)
 			const class_response = await this.$axios.get('/api/classes')
 			this.class_details = class_response.data
 			const course_response = await this.$axios.get('/api/courses')
