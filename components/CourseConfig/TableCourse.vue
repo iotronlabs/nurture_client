@@ -101,13 +101,13 @@
 					></v-checkbox>
 				</td>
 				<td class="text-xs-center">{{ props.item.course_id }}</td>
-				<td class="text-xs-right">{{ props.item.course_name }}</td>
-				<td class="text-xs-right">{{ props.item.course_duration }}</td>
+				<td class="text-xs-center">{{ props.item.course_name }}</td>
+				<td class="text-xs-center">{{ props.item.course_duration }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn dark	v-on="on">Actions</v-btn>
+								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile

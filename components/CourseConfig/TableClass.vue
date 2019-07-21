@@ -164,7 +164,7 @@
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn dark	v-on="on">Actions</v-btn>
+								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile

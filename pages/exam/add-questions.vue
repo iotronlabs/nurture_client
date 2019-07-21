@@ -128,7 +128,8 @@
             <v-layout>
 							<v-flex xs12 sm6 >
 								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
-								<input
+							
+                <input
 									type="file"
 									ref="fileInput"
 									accept="image/*"
