@@ -224,16 +224,28 @@ export default {
 		addItem() {
 			this.disabled=false
 		},
-		viewItem(item) {
+		async viewItem(item) {
 			this.editedIndex = this.course_details.indexOf(item)
 			this.editedItem = Object.assign({}, item)
 			this.disabled=true
+			const sub_response= await this.$axios.get(`/api/courses/showsub/${item.course_id}`)
+			this.editedItem.subject = new Array()
+			for(var i=0; i<sub_response.data.data.length;i++)
+			{
+				this.editedItem.subject.push(sub_response.data.data[i].sub_name)
+			}
 			this.dialog=true
 		},
-		editItem (item) {
+		async editItem (item) {
 			this.disabled=false
 			this.editedIndex = this.course_details.indexOf(item)
 			this.editedItem = Object.assign({}, item)
+			const sub_response= await this.$axios.get(`/api/courses/showsub/${item.course_id}`)
+			this.editedItem.subject = new Array()
+			for(var i=0; i<sub_response.data.data.length;i++)
+			{
+				this.editedItem.subject.push(sub_response.data.data[i].sub_name)
+			}
 			this.dialog = true
 		},
 		async deleteItem () {
@@ -323,7 +335,7 @@ export default {
 				if(response.data.success==true)
 				{
 					this.dialog=false
-					this.message="course successfully updated"
+					this.message="Course successfully updated"
 					this.snackbar=true
 				}
 			}

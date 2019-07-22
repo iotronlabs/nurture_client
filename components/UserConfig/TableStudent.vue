@@ -247,7 +247,16 @@
 								></v-text-field>
 							</v-flex>
 						</v-layout>
-								<!-- address   address pincode state-->
+
+						<v-layout row wrap>
+							<v-flex xs12 sm6 md3>
+								<h2>Address Details</h2><br>
+								<v-checkbox v-model="checkbox" color="info"
+									:disabled="disabled"
+									@change="address"
+									label="Same as above"></v-checkbox>
+							</v-flex>
+						</v-layout>
 						<v-layout row wrap>
 							<v-flex xs12 sm12 md9>
 								<v-text-field
@@ -287,11 +296,6 @@
 									:disabled="disabled"
 								></v-select>
 							</v-flex>
-							<v-flex xs12 sm6 md3>
-								<v-checkbox v-model="checkbox" color="info"
-									@change="address"
-									label="Same as above"></v-checkbox>
-							</v-flex>
 						</v-layout>
 						<v-layout row>
 
@@ -311,7 +315,7 @@
 								></v-select>
 								<v-text-field
 									v-if="authentication==4"
-									v-model="editedItem.s_centre"
+									v-model="centre"
 									label="Assign centre"
 									disabled
 								></v-text-field>
@@ -547,9 +551,11 @@ export default {
 			{label: 'Others',value: 'O'}
 		],
 		centres:[],
+		centre: '',
 		courses: [],
 		allClasses: [],
 		classes:[],
+
 		fee_structures: [],
 		fee_periods: ['At a time','Quarterly','Monthly'],
 		payment_modes: [],
@@ -633,21 +639,7 @@ export default {
 			val || this.close()
 		}
 	},
-	async created () {
-		if(this.$auth.user.authentication==4)
-		{
-			this.authentication=4
-			this.editedItem.s_centre=this.$auth.user.sub_admin_centre_name
-		}
-		else if(this.$auth.user.authentication==5)
-		{
-			this.authentication=5
-			const centre_response = await this.$axios.get('/api/subadmins')
-			for(var i=0; i<centre_response.data.length;i++)
-			{
-				this.centres.push(centre_response.data[i].sub_admin_centre_name)
-			}
-		}
+	created () {
 		this.initialize()
 	},
     methods: {
@@ -689,17 +681,31 @@ export default {
 			}
 		},
 		async initialize () {
-			const student_response = await this.$axios.get('/api/students')
-			this.user_details = student_response.data
+			let student_response
+			if(this.$auth.user.authentication==4)
+			{
+				this.authentication=4
+				student_response = await this.$axios.get(`/api/subadmins/showstudentsdetails/${this.$auth.user.sub_admin_centre_name}`)
+				this.user_details = student_response.data.data
+				this.centre=this.$auth.user.sub_admin_centre_name
+				const centre_name = this.$auth.user.sub_admin_centre_name
+				this.oncentreChange(centre_name)
+			}
+			else if(this.$auth.user.authentication==5)
+			{
+				this.authentication=5
+				const centre_response = await this.$axios.get('/api/subadmins')
+				for(var i=0; i<centre_response.data.length;i++)
+				{
+					this.centres.push(centre_response.data[i].sub_admin_centre_name)
+				}
+				student_response = await this.$axios.get('/api/students')
+				this.user_details = student_response.data
+			}
 			const courses_response = await this.$axios.get('/api/courses')
 			for(var i=0;i<courses_response.data.length;i++)
 			{
 				this.courses.push(courses_response.data[i].course_name)
-			}
-			if(this.$auth.user.authentication==4)
-			{
-				const centre_name = this.$auth.user.sub_admin_centre_name
-				this.oncentreChange(centre_name)
 			}
 		},
 		async oncentreChange(centre_name) {
@@ -788,6 +794,7 @@ export default {
 
 		async submitForm() {
 			let response
+			this.editedItem.s_centre = this.centre
 			if(this.editedIndex == -1)
 			{
 				response = await this.$axios.post(`/api/students/register`,{

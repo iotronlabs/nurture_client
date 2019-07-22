@@ -179,13 +179,24 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_name"
 									label="Centre Name"
+									:disabled="disabled"
 								></v-text-field>
 							</v-flex>
 							<v-flex xs12 sm12 offset-md1 md5>
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_id"
 									label="Centre id"
+									:disabled="disabled"
 								></v-text-field>
+							</v-flex>
+						</v-layout>
+						<v-layout row wrap>
+							<v-flex xs12 sm6 md3>
+								<h2>Centre Address Details</h2><br>
+								<v-checkbox v-model="checkbox" color="info"
+									:disabled="disabled"
+									@change="address"
+									label="Same as above"></v-checkbox>
 							</v-flex>
 						</v-layout>
 						<v-flex xs12 sm12 md9>
@@ -224,11 +235,6 @@
 									solo
 									:disabled="disabled"
 								></v-select>
-							</v-flex>
-							<v-flex xs12 sm6 md3>
-								<v-checkbox v-model="checkbox" color="info"
-									@change="address"
-									label="Same as above"></v-checkbox>
 							</v-flex>
 						</v-layout>
 						<v-spacer></v-spacer><br>
@@ -493,6 +499,7 @@ export default {
 		viewItem(item) {
 			this.editedIndex = this.user_details.indexOf(item)
 			this.editedItem = Object.assign({}, item)
+			this.editedItem.sub_admin_address_state = item.sub_admin_address_state
 			this.disabled=true
 			this.dialog=true
 		},
@@ -500,6 +507,7 @@ export default {
 			this.disabled=false
 			this.editedIndex = this.user_details.indexOf(item)
 			this.editedItem = Object.assign({}, item)
+			this.editedItem.sub_admin_address_state = item.sub_admin_address_state
 			this.dialog = true
 		},
 		async deleteItem () {

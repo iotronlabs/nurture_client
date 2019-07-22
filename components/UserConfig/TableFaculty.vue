@@ -175,8 +175,17 @@
 						</v-layout>
 						<v-layout>
 							<v-flex xs12 sm6 md3>
-								<v-select v-model="editedItem.faculty_centre" :items="centres" label="Choose Centre" solo :disabled="disabled">
+								<v-select
+									v-if="authentication==5"
+									v-model="editedItem.centre"
+									:items="centres" label="Choose Centre" solo :disabled="disabled">
 								</v-select>
+								<v-text-field
+									v-if="authentication==4"
+									v-model="centre"
+									label="Assign centre"
+									disabled
+								></v-text-field>
 							</v-flex>
 							<v-flex xs12 sm6 md3>
 								<v-select v-model="editedItem.faculty_sub" :items="subjects" label="Choose Subject" solo :disabled="disabled">
@@ -297,6 +306,8 @@ export default {
 		snackbar: false,
 		timeout: 3000,
 
+		authentication: '',
+
 		selectedAction: '',
 		config: ['View','Edit'],
 		viewMode: false,
@@ -306,7 +317,7 @@ export default {
 		selected: [],
 		settings :
 		[
-			{ title: 'Set as Inactive'},
+			{ title: 'View'},
 			{ title: 'Edit' },
 			{ title: 'Delete'}
 		],
@@ -339,6 +350,7 @@ export default {
 
 		subjects: [],
 		centres: [],
+		centre: '',
 
 		rules: {
 			required: v => !!v || 'Required.',
@@ -359,8 +371,8 @@ export default {
 			faculty_address: '',
 			faculty_address_pin: '',
 			faculty_address_state: '',
-			faculty_sub: 'abc',
-			faculty_centre: 'def',
+			faculty_sub: '',
+			faculty_centre: '',
 			image:null,
 			imageUrl:'',
 		},
@@ -376,8 +388,8 @@ export default {
 			faculty_address_city: '',
 			faculty_address_pin: '',
 			faculty_address_state: '',
-			faculty_sub: 'abc',
-			faculty_centre: 'def',
+			faculty_sub: '',
+			faculty_centre: '',
 			image:null,
 			imageUrl:'',
 		}
@@ -393,7 +405,6 @@ export default {
 		}
 	},
 	created () {
-		this.editedItem.faculty_centre = this.$auth.user.sub_admin_centre
 		this.initialize()
 	},
     methods: {
@@ -419,13 +430,30 @@ export default {
 			this.editedItem.image=files[0]
 		},
 		async initialize () {
-			const faculties_response = await this.$axios.get('/api/faculty')
-			this.user_details = faculties_response.data
+			let faculty_response
+			if(this.$auth.user.authentication==4)
+			{
+				this.authentication=4
+				faculty_response = await this.$axios.get(`/api/subadmins/showfacultydetails/${this.$auth.user.sub_admin_centre_name}`)
+				this.user_details = faculty_response.data.data
+				this.centre=this.$auth.user.sub_admin_centre_name
+			}
+			else if(this.$auth.user.authentication==5)
+			{
+				this.authentication=5
+				const centre_response = await this.$axios.get('/api/subadmins')
+				for(var i=0; i<centre_response.data.length;i++)
+				{
+					this.centres.push(centre_response.data[i].sub_admin_centre_name)
+				}
+				faculty_response = await this.$axios.get('/api/faculty')
+				this.user_details = faculty_response.data
+			}
 			const subjects_data = await this.$axios.get('/api/subjects')
 			this.subjects = new Array()
 			for(var i in subjects_data.data)
 			{
-				this.subjects.push(subjects_data.data[i].centre_name)
+				this.subjects.push(subjects_data.data[i].sub_name)
 			}
 			// const centres_data = await this.$axios.get('/api/centres')
 			// this.centres = new Array()
@@ -510,6 +538,7 @@ export default {
 
 		async submitForm() {
 			let response
+			this.editedItem.faculty_centre = this.centre
 			if(this.editedIndex == -1)
 			{
 				response = await this.$axios.post(`/api/faculty/register`,{

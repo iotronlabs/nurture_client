@@ -226,26 +226,24 @@ export default {
 		async viewItem(item) {
 			this.editedIndex = this.sub_details.indexOf(item)
 			this.editedItem = Object.assign({}, item)
-			const response = await this.$axios.get(`/api/subjects/stream/${item.stream_name}`)
-			let i
-			this.editedItem.subjects= new Array()
-			for(i=0;i<(response.data.length);i++)
-			{
-				this.editedItem.subjects.push(response.data[i].sub_name)
-			}
 			this.disabled=true
+			const topic_response= await this.$axios.get(`/api/topics/show_sub_topic/${item.id}`)
+			this.editedItem.topics = new Array()
+			for(var i=0; i<topic_response.data.data.length;i++)
+			{
+				this.editedItem.topics.push(topic_response.data.data[i].topic_name)
+			}
 			this.dialog=true
 		},
 		async editItem (item) {
 			this.disabled=false
 			this.editedIndex = this.sub_details.indexOf(item)
 			this.editedItem = Object.assign({}, item)
-			const response = await this.$axios.get(`/api/subjects/stream/${item.stream_name}`)
-			let i
-			this.editedItem.subjects= new Array()
-			for(i=0;i<(response.data.length);i++)
+			const topic_response= await this.$axios.get(`/api/topics/show_sub_topic/${item.id}`)
+			this.editedItem.topics = new Array()
+			for(var i=0; i<topic_response.data.data.length;i++)
 			{
-				this.editedItem.subjects.push(response.data[i].sub_name)
+				this.editedItem.topics.push(topic_response.data.data[i].topic_name)
 			}
 			this.dialog = true
 		},

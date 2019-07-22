@@ -128,7 +128,7 @@
 				<v-list>
 				<v-list-tile
 				>
-					<v-list-tile-action><v-switch v-model="dark" primary color="indigo" :label="switchLabel"></v-switch></v-list-tile-action>
+					<v-list-tile-action><v-switch @change="changeTheme" v-model="dark" primary color="indigo" :label="switchLabel"></v-switch></v-list-tile-action>
 
 
 				</v-list-tile>
@@ -154,7 +154,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState,mapActions} from 'vuex'
 import UserProfile from '@/components/UserProfile.vue'
 
 export default {
@@ -163,7 +163,6 @@ export default {
 		UserProfile
 	},
     data: () => ({
-		dark: true,
 		primaryDrawer: {
 			model: null,
 			type: 'default (no property)',
@@ -185,7 +184,8 @@ export default {
 			superAdminItems : state => state.dashboard.superAdminItems,
 			mentorItems : state => state.dashboard.mentorItems,
 			adminItems : state => state.dashboard.adminItems,
-			auditItems : state => state.dashboard.auditItems
+			auditItems : state => state.dashboard.auditItems,
+			dark: state => state.theme.dark
 		}),
 		selectItems() {
 			if(this.studentItems.active==true)
@@ -225,6 +225,7 @@ export default {
 		}
 	},
 	methods: {
+		...mapActions('theme',['changeTheme']),
 		closeDrawerModel() {
 			this.primaryDrawer.model = !this.primaryDrawer.model
 		},
@@ -234,18 +235,20 @@ export default {
 			.catch(e => {
 				this.$toast.error('Failed Logging Out. Please try again', {icon: "error_outline"});
 			});
-			console.log(this.$auth.loggedIn)
 		}
 	},
 	created() {
 		this.primaryDrawer.model = false
-		if(this.$auth.user.authentication==5)
+		if(this.$auth.loggedIn)
 		{
-			this.superAdminItems.active=true
-		}
-		else if(this.$auth.user.authentication==4)
-		{
-			this.adminItems.active=true
+			if(this.$auth.user.authentication==5)
+			{
+				this.superAdminItems.active=true
+			}
+			else if(this.$auth.user.authentication==4)
+			{
+				this.adminItems.active=true
+			}
 		}
 	}
 }
