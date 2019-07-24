@@ -218,15 +218,24 @@ export default {
         }
     },
 	created() {
-		this.initaialize()
+		// if(this.$router.params.edit == null)
+		// {
+		// 	this.$router.push('/exam/admin/table')
+		// }
+		// else
+		// {
+			this.initaialize()
+		// }
 	},
 	methods:{
 		reset () {
 			this.$refs.addexam.reset()
 		},
 		async initaialize() {
-			console.log(this.$route.params.edit)
+			console.log(this.$router.params.edit)
+
 			// console.log(this.item)
+
 			const sub_response = await this.$axios.get('/api/subjects')
 			for(var i=0;i<sub_response.data.length;i++)
 			{

@@ -138,7 +138,7 @@ export default {
             { page: true, title: 'Edit Exam', link: 'exam-admin-add-exam'},
             { page: true, title: 'View Questions', link:"/exam/admin/teacher-exam" },
             { page: true, title: 'Add questions ', link:"/exam/admin/add-questions" },
-            { page: false, title: 'Drop Exam', link:"/exam/add-exam" }
+            { page: false, title: 'Drop Exam', link:"exam-admin-add-exam" }
         ],
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
