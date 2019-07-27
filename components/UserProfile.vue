@@ -3,7 +3,7 @@
 		<v-list class="user-profile">
 			<v-list-tile>
 				<v-list-tile-avatar>
-					<img src="https://randomuser.me/api/portraits/men/85.jpg">
+					<img src="http://localhost:8000/profile_images/faculty/1564246011-profile.png">
 				</v-list-tile-avatar>
 				<v-list-tile-content>
 					<v-list-tile-title><h3>{{ user_name }}</h3></v-list-tile-title>

@@ -18,7 +18,7 @@
 				</v-toolbar>
 				<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 					<v-container fluid>
-						<!-- <v-layout>
+						<v-layout>
 							<v-flex xs12 sm6 >
 								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
 								<input
@@ -30,14 +30,7 @@
 							</v-flex>
 						</v-layout>
 
-						<v-layout row>
-							<v-flex xs12 sm6>
-								<img :src="editedItem.imageUrl">
-							</v-flex>
-						</v-layout> -->
-
 						<v-layout row wrap>
-
 							<v-flex xs12 sm6 md3 >
 								<v-text-field
 									v-model="editedItem.faculty_fname"
@@ -177,7 +170,7 @@
 							<v-flex xs12 sm6 md3>
 								<v-select
 									v-if="authentication==5"
-									v-model="editedItem.centre"
+									v-model="centre"
 									:items="centres" label="Choose Centre" solo :disabled="disabled">
 								</v-select>
 								<v-text-field
@@ -373,7 +366,7 @@ export default {
 			faculty_address_state: '',
 			faculty_sub: '',
 			faculty_centre: '',
-			image:null,
+			faculty_profile_picture:null,
 			imageUrl:'',
 		},
 		defaultItem: {
@@ -390,7 +383,7 @@ export default {
 			faculty_address_state: '',
 			faculty_sub: '',
 			faculty_centre: '',
-			image:null,
+			faculty_profile_picture:null,
 			imageUrl:'',
 		}
 	}),
@@ -415,19 +408,8 @@ export default {
 		{
 			this.$refs.fileInput.click()
 		},
-		onFilePicked(event){
-			const files=event.target.files
-			let filename=files[0].name;
-			if (filename.lastIndexOf('.')<=0)
-			{
-				return alert('please add a valid file')
-			}
-			const fileReader=new FileReader()
-			fileReader.addEventListener ('load',() => {
-				this.editedItem.imageUrl=fileReader.result
-			})
-			fileReader.readAsDataURL(files[0])
-			this.editedItem.image=files[0]
+		onFilePicked(event) {
+			this.editedItem.faculty_profile_picture=event.target.files[0]
 		},
 		async initialize () {
 			let faculty_response
@@ -455,12 +437,7 @@ export default {
 			{
 				this.subjects.push(subjects_data.data[i].sub_name)
 			}
-			// const centres_data = await this.$axios.get('/api/centres')
-			// this.centres = new Array()
-			// for(var i in centres_data.data)
-			// {
-			// 	this.subjects.push(centres_data.data[i].centre_name)
-			// }
+
 		},
 		addItem() {
 			this.disabled=false
@@ -539,25 +516,32 @@ export default {
 		async submitForm() {
 			let response
 			this.editedItem.faculty_centre = this.centre
+			const formData = new FormData()
+			formData.append('faculty_fname', this.editedItem.faculty_fname)
+			formData.append('faculty_surname', this.editedItem.faculty_surname)
+			formData.append('faculty_email', this.editedItem.faculty_email)
+			formData.append('faculty_gender', this.editedItem.faculty_gender)
+			formData.append('password', this.editedItem.faculty_contact)
+			formData.append('faculty_contact', this.editedItem.faculty_contact)
+			formData.append('faculty_dob', this.date)
+			formData.append('faculty_nationality', this.editedItem.faculty_nationality)
+			formData.append('faculty_address', this.editedItem.faculty_address)
+			formData.append('faculty_address_city', this.editedItem.faculty_address_city)
+			formData.append('faculty_address_pin', this.editedItem.faculty_address_pin)
+			formData.append('faculty_address_state', this.editedItem.faculty_address_state)
+			formData.append('faculty_sub', this.editedItem.faculty_sub)
+			formData.append('faculty_centre', this.editedItem.faculty_centre)
+			formData.append('faculty_profile_picture', this.editedItem.faculty_profile_picture)
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/faculty/register`,{
-					faculty_fname: this.editedItem.faculty_fname,
-					faculty_surname: this.editedItem.faculty_surname,
-					faculty_email: this.editedItem.faculty_email,
-					faculty_gender: this.editedItem.faculty_gender,
-					password: this.editedItem.faculty_contact,
-					faculty_contact: this.editedItem.faculty_contact,
-					faculty_dob: this.date,
-					faculty_nationality: this.editedItem.faculty_nationality,
-					faculty_address: this.editedItem.faculty_address,
-					faculty_address_city: this.editedItem.faculty_address_city,
-					faculty_address_pin: this.editedItem.faculty_address_pin,
-					faculty_address_state: this.editedItem.faculty_address_state,
-					faculty_sub: this.editedItem.faculty_sub,
-					faculty_centre: this.editedItem.faculty_centre
-					// faculty_profile_picture: this.imageUrl
-				})
+				response = await this.$axios.post(`/api/faculty/register`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
 				if(response.data.success==true)
 				{
 					// this.user_details.push(this.editedItem)

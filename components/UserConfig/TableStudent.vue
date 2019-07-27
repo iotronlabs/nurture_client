@@ -18,7 +18,7 @@
 				</v-toolbar>
 				<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 					<v-container fluid>
-						<!-- <v-layout>
+						<v-layout>
 							<v-flex xs12 sm6 >
 								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
 								<input
@@ -30,11 +30,6 @@
 							</v-flex>
 						</v-layout>
 
-						<v-layout row>
-							<v-flex xs12 sm6>
-								<img :src="editedItem.imageUrl">
-							</v-flex>
-						</v-layout> -->
 
 						<h2> Student Details</h2>
 						<v-layout row wrap>
@@ -625,7 +620,7 @@ export default {
 			scholarship: '',
 			fee_period: '',
 			payment_mode: '',
-			image:null,
+			s_profile_picture:null,
 			imageUrl:'',
 		}
 	}),
@@ -651,18 +646,7 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		onFilePicked(event){
-			const files=event.target.files
-			let filename=files[0].name;
-			if (filename.lastIndexOf('.')<=0)
-			{
-				return alert('please add a valid file')
-			}
-			const fileReader=new FileReader()
-			fileReader.addEventListener ('load',() => {
-				this.editedItem.imageUrl=fileReader.result
-			})
-			fileReader.readAsDataURL(files[0])
-			this.editedItem.image=files[0]
+			this.editedItem.s_profile_picture=event.target.files[0]
 		},
 		address() {
 			if(this.checkbox)
@@ -795,42 +779,46 @@ export default {
 		async submitForm() {
 			let response
 			this.editedItem.s_centre = this.centre
+			const formData = new FormData()
+			formData.append('s_fname', this.editedItem.s_fname)
+			formData.append('s_surname', this.editedItem.s_surname)
+			formData.append('s_email', this.editedItem.s_email)
+			formData.append('s_gender', this.editedItem.s_gender)
+			formData.append('password', this.editedItem.s_contact)
+			formData.append('s_contact', this.editedItem.s_contact)
+			formData.append('s_dob', this.date)
+			formData.append('s_address', this.editedItem.s_address)
+			formData.append('s_address_city', this.editedItem.s_address_city)
+			formData.append('s_address_pin', this.editedItem.s_address_pin)
+			formData.append('s_address_state', this.editedItem.s_address_state)
+			formData.append('guardian_fname', this.editedItem.guardian_fname)
+			formData.append('guardian_surname', this.editedItem.guardian_surname)
+			formData.append('guardian_email', this.editedItem.guardian_email)
+			formData.append('guardian_contact', this.editedItem.guardian_contact)
+			formData.append('guardian_address', this.editedItem.guardian_address)
+			formData.append('guardian_city', this.editedItem.guardian_city)
+			formData.append('guardian_pin', this.editedItem.guardian_pin)
+			formData.append('guardian_state', this.editedItem.guardian_state)
+
+			formData.append('s_centre', this.editedItem.s_centre)
+			formData.append('s_course', this.editedItem.s_course)
+			formData.append('s_class', this.editedItem.s_class)
+			formData.append('fee_structure', 'a')
+			formData.append('scholarship', 'd')
+			formData.append('fee_period', 'a')
+			formData.append('s_profile_picture', this.editedItem.s_profile_picture)
+
+
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/students/register`,{
-					s_fname: this.editedItem.s_fname,
-					s_surname: this.editedItem.s_surname,
-					s_email: this.editedItem.s_email,
-					s_gender: this.editedItem.s_gender,
-					password: this.editedItem.s_contact,
-					s_contact: this.editedItem.s_contact,
-					s_dob: this.date,
-					s_address: this.editedItem.s_address,
-					s_address_city: this.editedItem.s_address_city,
-					s_address_pin: this.editedItem.s_address_pin,
-					s_address_state: this.editedItem.s_address_state,
-					guardian_fname: this.editedItem.guardian_fname,
-					guardian_surname: this.editedItem.guardian_surname,
-					guardian_email: this.editedItem.guardian_email,
-					guardian_contact: this.editedItem.guardian_contact,
-					guardian_address: this.editedItem.guardian_address,
-					guardian_city: this.editedItem.guardian_city,
-					guardian_pin: this.editedItem.guardian_pin,
-					guardian_state: this.editedItem.guardian_state,
-					// s_centre: this.editedItem.s_centre,
-					// s_course: this.editedItem.s_course,
-					// s_clas: this.editedItem.s_clas,
-					// fee_structure: this.editedItem.fee_structure,
-					// scholarship: this.editedItem.scholarship,
-					// fee_period: this.editedItem.fee_period,
-					s_centre: this.editedItem.s_centre,
-					s_course: this.editedItem.s_course,
-					s_class: this.editedItem.s_class,
-					fee_structure: 'adas',
-					scholarship: 'asd',
-					fee_period: 'dsa',
-					// s_profile_picture: this.imageUrl
-				})
+				response = await this.$axios.post(`/api/students/register`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
 				if(response.data.success==true)
 				{
 					// this.user_details.push(this.editedItem)

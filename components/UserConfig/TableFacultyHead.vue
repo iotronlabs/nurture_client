@@ -18,7 +18,7 @@
 				</v-toolbar>
 				<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 					<v-container fluid>
-						<!-- <v-layout>
+						<v-layout>
 							<v-flex xs12 sm6 >
 								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
 								<input
@@ -29,12 +29,6 @@
 								>
 							</v-flex>
 						</v-layout>
-
-						<v-layout row>
-							<v-flex xs12 sm6>
-								<img :src="editedItem.imageUrl">
-							</v-flex>
-						</v-layout> -->
 
 						<v-layout row wrap>
 
@@ -344,7 +338,7 @@ export default {
 			faculty_head_address: '',
 			faculty_head_address_pin: '',
 			faculty_head_address_state: '',
-			image:null,
+			faculty_head_profile_picture:null,
 			imageUrl:'',
 		},
 		defaultItem: {
@@ -385,18 +379,7 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		onFilePicked(event){
-			const files=event.target.files
-			let filename=files[0].name;
-			if (filename.lastIndexOf('.')<=0)
-			{
-				return alert('please add a valid file')
-			}
-			const fileReader=new FileReader()
-			fileReader.addEventListener ('load',() => {
-				this.editedItem.imageUrl=fileReader.result
-			})
-			fileReader.readAsDataURL(files[0])
-			this.editedItem.image=files[0]
+			this.editedItem.faculty_head_profile_picture=event.target.files[0]
 		},
 		async initialize () {
 			const head_faculty_response = await this.$axios.get('/api/facultyheads')
@@ -478,23 +461,30 @@ export default {
 
 		async submitForm() {
 			let response
+			const formData = new FormData()
+			formData.append('faculty_head_fname',this.editedItem.faculty_head_fname)
+			formData.append('faculty_head_mname',this.editedItem.faculty_head_mname)
+			formData.append('faculty_head_surname',this.editedItem.faculty_head_surname)
+			formData.append('faculty_head_email',this.editedItem.faculty_head_email)
+			formData.append('faculty_head_gender',this.editedItem.faculty_head_gender)
+			formData.append('password',this.editedItem.faculty_head_contact)
+			formData.append('faculty_head_contact',this.editedItem.faculty_head_contact)
+			formData.append('faculty_head_dob',this.date)
+			formData.append('faculty_head_address',this.editedItem.faculty_head_address)
+			formData.append('faculty_head_address_city',this.editedItem.faculty_head_address_city)
+			formData.append('faculty_head_address_pin',this.editedItem.faculty_head_address_pin)
+			formData.append('faculty_head_address_state',this.editedItem.faculty_head_address_state)
+			formData.append('faculty_head_profile_picture',this.editedItem.faculty_head_profile_picture)
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/facultyheads/register`,{
-					faculty_head_fname: this.editedItem.faculty_head_fname,
-					faculty_head_mname: this.editedItem.faculty_head_mname,
-					faculty_head_surname: this.editedItem.faculty_head_surname,
-					faculty_head_email: this.editedItem.faculty_head_email,
-					faculty_head_gender: this.editedItem.faculty_head_gender,
-					password: this.editedItem.faculty_head_contact,
-					faculty_head_contact: this.editedItem.faculty_head_contact,
-					faculty_head_dob: this.date,
-					faculty_head_address: this.editedItem.faculty_head_address,
-					faculty_head_address_city: this.editedItem.faculty_head_address_city,
-					faculty_head_address_pin: this.editedItem.faculty_head_address_pin,
-					faculty_head_address_state: this.editedItem.faculty_head_address_state,
-					// faculty_head_profile_picture: this.imageUrl
-				})
+				response = await this.$axios.post(`/api/facultyheads/register`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
 				if(response.data.success==true)
 				{
 					// this.user_details.push(this.editedItem)

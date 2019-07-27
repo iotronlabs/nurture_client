@@ -18,7 +18,7 @@
 				</v-toolbar>
 				<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 					<v-container fluid>
-						<!-- <v-layout>
+						<v-layout>
 							<v-flex xs12 sm6 >
 								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
 								<input
@@ -34,7 +34,7 @@
 							<v-flex xs12 sm6>
 								<img :src="editedItem.imageUrl">
 							</v-flex>
-						</v-layout> -->
+						</v-layout>
 
 						<v-layout row wrap>
 
@@ -413,7 +413,7 @@ export default {
 			sub_admin_centre_address: '',
 			sub_admin_centre_address_pin: '',
 			sub_admin_centre_address_state: '',
-			image:null,
+			sub_admin_profile_picture:null,
 			imageUrl:'',
 		},
 		defaultItem: {
@@ -460,18 +460,7 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		onFilePicked(event){
-			const files=event.target.files
-			let filename=files[0].name;
-			if (filename.lastIndexOf('.')<=0)
-			{
-				return alert('please add a valid file')
-			}
-			const fileReader=new FileReader()
-			fileReader.addEventListener ('load',() => {
-				this.editedItem.imageUrl=fileReader.result
-			})
-			fileReader.readAsDataURL(files[0])
-			this.editedItem.image=files[0]
+			this.editedItem.sub_admin_profile_picture=event.target.files[0]
 		},
 		address() {
 			if(this.checkbox)
@@ -571,28 +560,35 @@ export default {
 
 		async submitForm() {
 			let response
+			const formData = new FormData()
+			formData.append('sub_admin_fname',this.editedItem.sub_admin_fname)
+			formData.append('sub_admin_surname',this.editedItem.sub_admin_surname)
+			formData.append('sub_admin_email',this.editedItem.sub_admin_email)
+			formData.append('sub_admin_gender',this.editedItem.sub_admin_gender)
+			formData.append('password',this.editedItem.sub_admin_contact)
+			formData.append('sub_admin_contact',this.editedItem.sub_admin_contact)
+			formData.append('sub_admin_dob',this.date)
+			formData.append('sub_admin_address',this.editedItem.sub_admin_address)
+			formData.append('sub_admin_address_pin',this.editedItem.sub_admin_address_pin)
+			formData.append('sub_admin_address_city',this.editedItem.sub_admin_address_city)
+			formData.append('sub_admin_address_state',this.editedItem.sub_admin_address_state)
+			formData.append('sub_admin_centre_name', this.editedItem.sub_admin_centre_name,)
+			formData.append('sub_admin_centre_id', this.editedItem.sub_admin_centre_id,)
+			formData.append('sub_admin_centre_address_city', this.editedItem.sub_admin_centre_address_city,)
+			formData.append('sub_admin_centre_address', this.editedItem.sub_admin_centre_address,)
+			formData.append('sub_admin_centre_address_pin', this.editedItem.sub_admin_centre_address_pin,)
+			formData.append('sub_admin_centre_address_state', this.editedItem.sub_admin_centre_address_state)
+			formData.append('sub_admin_profile_picture', this.editedItem.sub_admin_profile_picture)
 			if(this.editedIndex == -1)
 			{
-				response = await this.$axios.post(`/api/subadmins/register`,{
-					sub_admin_fname: this.editedItem.sub_admin_fname,
-					sub_admin_surname: this.editedItem.sub_admin_surname,
-					sub_admin_email: this.editedItem.sub_admin_email,
-					sub_admin_gender: this.editedItem.sub_admin_gender,
-					password: this.editedItem.sub_admin_contact,
-					sub_admin_contact: this.editedItem.sub_admin_contact,
-					sub_admin_dob: this.date,
-					sub_admin_address: this.editedItem.sub_admin_address,
-					sub_admin_address_city: this.editedItem.sub_admin_address_city,
-					sub_admin_address_pin: this.editedItem.sub_admin_address_pin,
-					sub_admin_address_state: this.editedItem.sub_admin_address_state,
-					sub_admin_centre_name: this.editedItem.sub_admin_centre_name,
-					sub_admin_centre_id: this.editedItem.sub_admin_centre_id,
-					sub_admin_centre_address_city: this.editedItem.sub_admin_centre_address_city,
-					sub_admin_centre_address: this.editedItem.sub_admin_centre_address,
-					sub_admin_centre_address_pin: this.editedItem.sub_admin_centre_address_pin,
-					sub_admin_centre_address_state: this.editedItem.sub_admin_centre_address_state
-					// sub_admin_profile_picture: this.imageUrl
-				})
+				response = await this.$axios.post(`/api/subadmins/register`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
 				if(response.data.success==true)
 				{
 					// this.user_details.push(this.editedItem)
@@ -604,25 +600,14 @@ export default {
 			else
 			{
 				var id= this.editedItem.sub_admin_id
-				response = await this.$axios.post(`/api/subadmins/${id}`,{
-					sub_admin_fname: this.editedItem.sub_admin_fname,
-					sub_admin_surname: this.editedItem.sub_admin_surname,
-					sub_admin_email: this.editedItem.sub_admin_email,
-					sub_admin_gender: this.editedItem.sub_admin_gender,
-					sub_admin_contact: this.editedItem.sub_admin_contact,
-					sub_admin_dob: this.date,
-					sub_admin_address: this.editedItem.sub_admin_address,
-					sub_admin_address_city: this.editedItem.sub_admin_address_city,
-					sub_admin_address_pin: this.editedItem.sub_admin_address_pin,
-					sub_admin_address_state: this.editedItem.sub_admin_address_state,
-					sub_admin_centre_name: this.editedItem.sub_admin_centre_name,
-					sub_admin_centre_id: this.editedItem.sub_admin_centre_id,
-					sub_admin_centre_address_city: this.editedItem.sub_admin_centre_address_city,
-					sub_admin_centre_address: this.editedItem.sub_admin_centre_address,
-					sub_admin_centre_address_pin: this.editedItem.sub_admin_centre_address_pin,
-					sub_admin_centre_address_state: this.editedItem.sub_admin_centre_address_state
-					// s_profile_picture: this.imageUrl,
-				})
+				response = await this.$axios.post(`/api/subadmins/${id}`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
 				if(response.data.success==true)
 				{
 					this.dialog=false

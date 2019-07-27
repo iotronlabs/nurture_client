@@ -293,8 +293,12 @@ export default {
 		async initialize () {
 			this.editedItem.class_centre_name=this.$auth.user.sub_admin_centre_name
 			console.log(this.editedItem.class_centre_name)
-			const class_response = await this.$axios.get('/api/classes')
-			this.class_details = class_response.data
+			const class_response = await this.$axios.get(`/api/classes/${this.$auth.user.sub_admin_centre_name}`)
+			for(var i=0;i<class_response.data.data.length;i++)
+			{
+				this.class_details.push(class_response.data.data[i])
+			}
+			// this.class_details = class_response.data
 			const course_response = await this.$axios.get('/api/courses')
 			for(var i=0;i<course_response.data.length;i++)
 			{
