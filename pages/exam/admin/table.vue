@@ -6,8 +6,10 @@
 				<v-toolbar flat color="lightgrey">
 					<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
 					<v-spacer></v-spacer>
-					<v-btn v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/>&nbsp;&nbsp;Delete exam</v-btn>
-					<nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add exam</v-btn></nuxt-link>
+					<v-btn fab small v-if="deleteMode==false && this.$vuetify.breakpoint.smAndDown==true" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/></v-btn>
+					<v-btn v-if="deleteMode==false && this.$vuetify.breakpoint.mdAndUp==true" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/>&nbsp;&nbsp;Delete Exam</v-btn>
+					<nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn fab small v-if="this.$vuetify.breakpoint.xs==true" color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn></nuxt-link>
+					<nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn v-if="this.$vuetify.breakpoint.smAndUp==true" color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add exam</v-btn></nuxt-link>
 				</v-toolbar>
 
 
@@ -37,8 +39,10 @@
 								<v-layout>
 									<v-flex >
 										{{selected.length}} rows selected
-										<v-btn color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
-										<v-btn color="info" @click="deleteMode=false" class="btn-cancel"><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
+										<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
+										<v-btn class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
+										<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
+										<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
 									</v-flex>
 								</v-layout>
 							</div>

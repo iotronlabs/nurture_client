@@ -778,7 +778,10 @@ export default {
 
 		async submitForm() {
 			let response
-			this.editedItem.s_centre = this.centre
+			if(this.$auth.user.authentication==4)
+			{
+				this.editedItem.s_centre = this.centre
+			}
 			const formData = new FormData()
 			formData.append('s_fname', this.editedItem.s_fname)
 			formData.append('s_surname', this.editedItem.s_surname)

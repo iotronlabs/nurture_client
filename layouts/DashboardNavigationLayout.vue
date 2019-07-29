@@ -84,7 +84,9 @@
 			<v-toolbar-side-icon
 				@click.stop="primaryDrawer.model = !primaryDrawer.model"
 			></v-toolbar-side-icon>
+			<img class="logo" src="/nurture-logo.png">
 			<v-toolbar-title>Nurture</v-toolbar-title>
+
 			<v-spacer />
 
 			<span class="toolbar-icons">
@@ -257,6 +259,13 @@ export default {
 
 <style lang="scss" scoped >
 @import '~/assets/scss/_variables.scss';
+
+.logo{
+	height: 40px;
+	width: 60px;
+	padding-left: 15px;
+
+}
 
 .menu-sublist
 {

@@ -58,7 +58,7 @@
 				</v-layout>
 				<h3>Exam Dates</h3>
 				<v-layout>
-					<v-flex xs12 sm6 md5>
+					<v-flex xs12 sm6 md4>
 						<v-menu
 							ref="menu1"
 							v-model="start_date"
@@ -88,7 +88,7 @@
 					</v-menu>
 					</v-flex>
 
-					<v-flex xs12 sm6 md5>
+					<v-flex xs12 sm6 md4 offset-md1>
 						<v-menu
 							ref="menu2"
 							v-model="end_date"
@@ -119,7 +119,7 @@
 					</v-flex>
 				</v-layout>
 			<v-layout>
-				<v-flex xs12 sm6 md9>
+				<v-flex xs12 sm3 md4>
 					<h3>Select Subject</h3><br>
 					<v-select
 						v-model="subject_name"
@@ -130,7 +130,7 @@
 					>
 					</v-select>
 				</v-flex>
-				<v-flex xs12 sm6 md9>
+				<v-flex xs12 sm3 md4 offset-md1>
 					<h3>Select Course</h3><br>
 					<v-select
 						v-model="course_name"
@@ -183,16 +183,16 @@
 <script>
 export default {
 	layout:"DashboardNavigationLayout",
-	// props: {
-	// 	edit: {
-	// 		type: Number,
-	// 		required: false
-	// 	},
-	// 	item: {
-	// 		type: Object,
-	// 		required: false
-	// 	}
-	// },
+	props: {
+		edit: {
+			type: Boolean,
+			required: false
+		},
+		item: {
+			type: Object,
+			required: false
+		}
+	},
     data(){
         return{
 			message: '',
@@ -232,9 +232,14 @@ export default {
 			this.$refs.addexam.reset()
 		},
 		async initaialize() {
-			console.log(this.$router.params.edit)
+			// console.log(this.$router.params.edit)
 
 			// console.log(this.item)
+			console.log(this.edit)
+			if(this.edit)
+			{
+				console.log(this.item)
+			}
 
 			const sub_response = await this.$axios.get('/api/subjects')
 			for(var i=0;i<sub_response.data.length;i++)

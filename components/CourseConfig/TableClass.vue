@@ -96,7 +96,7 @@
 							<v-layout row wrap>
 								<v-flex xs12 sm6 md5>
 									<v-text-field
-										v-model="editedItem.class_centre_name"
+										v-model="centre"
 										label="Centre Name"
 										disabled
 									></v-text-field>
@@ -205,6 +205,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     data: () => ({
 		dialog: false,
@@ -245,7 +246,6 @@ export default {
 		rules: {
 			required: v => !!v || 'Required.'
 		},
-
 		class_details: [],
 		editedIndex: -1,
 		editedItem: {
@@ -270,6 +270,9 @@ export default {
 		}
 	}),
 	computed: {
+		...mapState({
+			centre : state => state.user.centre
+		}),
 		formTitle () {
 			return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
 		}
@@ -291,8 +294,7 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		async initialize () {
-			this.editedItem.class_centre_name=this.$auth.user.sub_admin_centre_name
-			console.log(this.editedItem.class_centre_name)
+			// this.editedItem.class_centre_name=this.centre
 			const class_response = await this.$axios.get(`/api/classes/${this.$auth.user.sub_admin_centre_name}`)
 			for(var i=0;i<class_response.data.data.length;i++)
 			{
@@ -380,8 +382,6 @@ export default {
 		},
 
 		async submitForm() {
-			console.log(this.editedItem.start_time)
-			console.log(this.editedItem.end_time)
 			let response
 			// Send classteacher by splitting into fname,mname,surname
 			// let teacher = this.editedItem.class_teacher.split(" ")
@@ -402,7 +402,7 @@ export default {
 					// section: this.editedItem.section,
 					start_time: this.date1,
 					end_time: this.date2,
-					class_centre_name: this.editedItem.class_centre_name
+					class_centre_name: this.centre
 				})
 				if(response.data.success==true)
 				{
@@ -422,7 +422,7 @@ export default {
 					// section: this.editedItem.section,
 					start_time: this.date1,
 					end_time: this.date2,
-					class_centre_name: this.editedItem.class_centre_name
+					class_centre_name: this.centre
 				})
 				if(response.data.success==true)
 				{

@@ -20,6 +20,7 @@ export default {
 			else if(authentication == 4)
 			{
 				state.user_name = this.$auth.user.sub_admin_fname + this.$auth.user.sub_admin_surname
+				state.centre = this.$auth.user.sub_admin_centre_name
 			}
 			else if(authentication == 5)
 			{
