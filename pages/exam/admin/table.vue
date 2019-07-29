@@ -61,8 +61,8 @@
 							<td class="text-xs-left">{{ props.item.id }}</td>
 							<td class="text-xs-left">{{ props.item.exam_name }}</td>
 							<td class="text-xs-left">{{ props.item.course_name }}</td>
-							<td class="text-xs-left" >{{ props.item.subject_name }}</td>
-							<td class="text-xs-left" >{{ props.item.duration }}</td>
+							<td class="text-xs-left">{{ props.item.subject_name }}</td>
+							<td class="text-xs-left">{{ props.item.duration }}</td>
 							<td class="text-xs-left">{{ props.item.start_date }}</td>
 							<td class="text-xs-left">{{ props.item.end_date }}</td>
 							<td class="text-xs-left">{{ props.item.pass_mark }}</td>
@@ -82,7 +82,7 @@
 											>
 											<nuxt-link :to="{name: item.link , params: { edit: true, item: props.item}}">
 											<!-- <v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title> -->
-											<v-list-tile-content >{{ item.title }}</v-list-tile-content>
+											<v-list-tile-content ><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>{{ item.title }}</v-list-tile-content>
 											</nuxt-link>
 
 											</v-list-tile>
@@ -138,11 +138,11 @@ export default {
 		settings :
 		[
 			// page is a flag denoting whether action leads to new page
-			{ page: false, title: 'Make Inactive', link: 'exam-admin-add-exam'  },
-            { page: true, title: 'Edit Exam', link: 'exam-admin-add-exam'},
-            { page: true, title: 'View Questions', link:"/exam/admin/teacher-exam" },
-            { page: true, title: 'Add questions ', link:"/exam/admin/add-questions" },
-            { page: false, title: 'Drop Exam', link:"exam-admin-add-exam" }
+			{ page: false, title: 'Make Inactive', link: 'exam-admin-add-exam', icon: { prefix:'fas', name:'ban'}  },
+            { page: true, title: 'Edit Exam', link: 'exam-admin-add-exam', icon: { prefix:'fas', name:'pencil-alt'} },
+            { page: true, title: 'View Questions', link:"/exam/admin/teacher-exam" , icon: { prefix:'far', name:'eye'}},
+            { page: true, title: 'Add questions ', link:"/exam/admin/add-questions", icon: { prefix:'fas', name:'plus'} },
+            { page: false, title: 'Drop Exam', link:"exam-admin-add-exam", icon: { prefix:'fas', name:'trash-alt'} }
         ],
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
