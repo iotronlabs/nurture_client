@@ -17,7 +17,7 @@ const studentItems = {
 			title: 'Dashboard',
 			to: '/',
 
-		}
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -60,15 +60,15 @@ const studentItems = {
 		// 		}
 		// 	]
 		// },
-		// {
-		// 	icon: {
-		// 		prefix: 'far',
-		// 		name: 'clipboard'
-		// 	},
-		// 	title: 'Exams',
-		// 	to: '/',
-		// 	items:[]
-		// },
+		{
+			icon: {
+				prefix: 'far',
+				name: 'clipboard'
+			},
+			title: 'Exams',
+			to: '/',
+			items:[]
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -116,7 +116,7 @@ const teacherItems = {
 			title: 'Dashboard',
 			to: '/',
 
-		}
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -158,15 +158,15 @@ const teacherItems = {
 		// 		}
 		// 	]
 		// },
-		// {
-		// 	icon: {
-		// 		prefix: 'far',
-		// 		name: 'clipboard'
-		// 	},
-		// 	title: 'Exams',
-		// 	to: '/',
-		// 	items:[]
-		// },
+		{
+			icon: {
+				prefix: 'far',
+				name: 'clipboard'
+			},
+			title: 'Exams',
+			to: '/',
+			items:[]
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -213,7 +213,7 @@ const mentorItems = {
 			title: 'Dashboard',
 			to: '/',
 
-		}
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -255,15 +255,15 @@ const mentorItems = {
 		// 		}
 		// 	]
 		// },
-		// {
-		// 	icon: {
-		// 		prefix: 'far',
-		// 		name: 'clipboard'
-		// 	},
-		// 	title: 'Exams',
-		// 	to: '/',
-		// 	items: []
-		// },
+		{
+			icon: {
+				prefix: 'far',
+				name: 'clipboard'
+			},
+			title: 'Exams',
+			to: '/',
+			items: []
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -329,7 +329,7 @@ const superAdminItems = {
 				}
 
 			]
-		}
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',
@@ -384,15 +384,15 @@ const superAdminItems = {
 		// 		}
 		// 	]
 		// },
-		// {
-		// 	icon: {
-		// 		prefix: 'far',
-		// 		name: 'clipboard'
-		// 	},
-		// 	title:'exams',
-		// 	to:'/',
-		// 	items:[]
-		// },
+		{
+			icon: {
+				prefix: 'far',
+				name: 'clipboard'
+			},
+			title:'exams',
+			to:'/exam/admin/table',
+			items:[]
+		},
 		// {
 		// 	icon: {
 		// 		prefix: 'fas',

@@ -13,16 +13,18 @@
 				</v-toolbar>
 
 
-				<v-data-table :headers="headers" :items="exam_details" item-key="sub_code" v-model="selected" select-All class="elevation-1">
+				<v-data-table :headers="headers" :items="exam_details" v-model="selected" select-All class="elevation-1">
 					<template v-slot:headers="props">
 						<tr>
 							<th v-if="deleteMode==true">
 								<v-checkbox
+									color="primary"
 									:input-value="props.all"
 									:indeterminate="props.indeterminate"
-									primary
+
 									hide-details
 									@click.stop="toggleAll"
+
 								></v-checkbox>
 							</th>
 							<th
@@ -53,7 +55,7 @@
 						<tr :active="props.selected" @click="props.selected = !props.selected">
 							<td v-if="deleteMode">
 								<v-checkbox
-									primary
+									color="primary"
 									hide-details
 									:input-value="props.selected"
 								></v-checkbox>
@@ -80,10 +82,13 @@
 												v-for="(item, index) in settings"
 												:key="index"
 											>
-											<nuxt-link :to="{name: item.link , params: { edit: true, item: props.item}}">
-											<!-- <v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title> -->
-											<v-list-tile-content ><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>{{ item.title }}</v-list-tile-content>
-											</nuxt-link>
+
+											<!-- <span @click.native="item.title == 'Edit Exam' ? setExamId : ''"> -->
+												<nuxt-link @click.native="item.page ? setExamId(props.item.id) : ''" :to="{name: item.link }">
+												<!-- <v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title> -->
+												<v-list-tile-content><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>{{ item.title }}</v-list-tile-content>
+												</nuxt-link>
+											<!-- </span> -->
 
 											</v-list-tile>
 										</v-list>
@@ -119,6 +124,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 export default {
     layout: 'DashboardNavigationLayout',
     data: () => ({
@@ -138,11 +144,11 @@ export default {
 		settings :
 		[
 			// page is a flag denoting whether action leads to new page
-			{ page: false, title: 'Make Inactive', link: 'exam-admin-add-exam', icon: { prefix:'fas', name:'ban'}  },
+			{ page: false, title: 'Make Inactive', icon: { prefix:'fas', name:'ban'}  },
             { page: true, title: 'Edit Exam', link: 'exam-admin-add-exam', icon: { prefix:'fas', name:'pencil-alt'} },
             { page: true, title: 'View Questions', link:"/exam/admin/teacher-exam" , icon: { prefix:'far', name:'eye'}},
             { page: true, title: 'Add questions ', link:"/exam/admin/add-questions", icon: { prefix:'fas', name:'plus'} },
-            { page: false, title: 'Drop Exam', link:"exam-admin-add-exam", icon: { prefix:'fas', name:'trash-alt'} }
+            { page: false, title: 'Drop Exam', icon: { prefix:'fas', name:'trash-alt'} }
         ],
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
@@ -187,6 +193,9 @@ export default {
 		}
 	}),
 	computed: {
+		...mapState({
+			exam: state => state.exam.test
+		}),
 		formTitle () {
 			return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
 		}
@@ -200,14 +209,9 @@ export default {
 		this.initialize()
 	},
     methods: {
-		reset () {
-			this.$refs.form.reset()
-		},
-		onPickFile()
-		{
-			this.$refs.fileInput.click()
-		},
+		...mapActions('exam',['getId']),
 		async initialize () {
+			console.log(this.exam)
 			const exam_response = await this.$axios.get('/api/exams')
 			this.exam_details = exam_response.data
 			console.log(this.exam_details)
@@ -215,32 +219,7 @@ export default {
 		addItem() {
 			this.disabled=false
 		},
-		async viewItem(item) {
-			this.editedIndex = this.sub_details.indexOf(item)
-			this.editedItem = Object.assign({}, item)
-			const response = await this.$axios.get(`/api/subjects/stream/${item.stream_name}`)
-			let i
-			this.editedItem.subjects= new Array()
-			for(i=0;i<(response.data.length);i++)
-			{
-				this.editedItem.subjects.push(response.data[i].sub_name)
-			}
-			this.disabled=true
-			this.dialog=true
-		},
-		async editItem (item) {
-			this.disabled=false
-			this.editedIndex = this.sub_details.indexOf(item)
-			this.editedItem = Object.assign({}, item)
-			const response = await this.$axios.get(`/api/subjects/stream/${item.stream_name}`)
-			let i
-			this.editedItem.subjects= new Array()
-			for(i=0;i<(response.data.length);i++)
-			{
-				this.editedItem.subjects.push(response.data[i].sub_name)
-			}
-			this.dialog = true
-		},
+
 		async deleteItem () {
 			var i
 			let response
@@ -299,40 +278,8 @@ export default {
 			if (this.selected.length) this.selected = []
 			else this.selected = this.sub_details.slice()
 		},
-
-		async submitForm() {
-			console.log(this.editedItem.topics)
-			let response
-			if(this.editedIndex == -1)
-			{
-				response = await this.$axios.post(`/api/subjects/register`,{
-					sub_code: this.editedItem.sub_code,
-					sub_name: this.editedItem.sub_name,
-					topics: this.editedItem.topics
-				})
-				if(response.data.success==true)
-				{
-					// this.sub_details.push(this.editedItem)
-					this.dialog = false
-					this.message="New Subject added successfully"
-					this.snackbar=true
-				}
-			}
-			else
-			{
-				var sub_id= this.editedItem.id
-				response = await this.$axios.post(`/api/subjects/${sub_id}`,{
-					sub_code: this.editedItem.sub_code,
-					sub_name: this.editedItem.sub_name,
-					topics: this.editedItem.topics
-				})
-				if(response.data.success==true)
-				{
-					this.dialog=false
-					this.message="Subject successfully updated"
-					this.snackbar=true
-				}
-			}
+		setExamId(id) {
+			this.getId(id)
 		}
     }
 }

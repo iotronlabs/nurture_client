@@ -3,10 +3,12 @@
 	<v-toolbar flat color="lightgrey">
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
       	<v-spacer></v-spacer>
-		<v-btn v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on">Delete</v-btn>
+		<v-btn fab small class="hidden-md-and-up" v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/></v-btn>
+		<v-btn class="hidden-sm-and-down" v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/>&nbsp;&nbsp;Delete</v-btn>
 		<v-dialog v-model="dialog" persistent max-width="600px">
 			<template v-slot:activator="{ on }">
-				<v-btn color="primary" @click="addItem" dark v-on="on">Add New</v-btn>
+				<v-btn fab small class="hidden-md-and-up" color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn>
+				<v-btn class="hidden-sm-and-down" color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add New</v-btn>
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
@@ -62,9 +64,9 @@
 			<tr>
 				<th v-if="deleteMode==true">
 					<v-checkbox
+						color="primary"
 						:input-value="props.all"
 						:indeterminate="props.indeterminate"
-						primary
 						hide-details
 						@click.stop="toggleAll"
 					></v-checkbox>
@@ -83,8 +85,10 @@
 					<v-layout>
 						<v-flex>
 							{{selected.length}} rows selected
-							<v-btn color="error" @click="deleteItem">Confirm</v-btn>
-							<v-btn color="info" @click="deleteMode=false" class="btn-cancel">Cancel</v-btn>
+							<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
+							<v-btn  class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
+							<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
+							<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
 						</v-flex>
 					</v-layout>
 				</div>
@@ -95,7 +99,7 @@
 			<tr :active="props.selected" @click="props.selected = !props.selected">
 				<td v-if="deleteMode">
 					<v-checkbox
-						primary
+						color="primary"
 						hide-details
 						:input-value="props.selected"
 					></v-checkbox>
@@ -115,7 +119,7 @@
 									:key="index"
 									@click="changed(item.title)"
 								>
-								<v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title>
+								<v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)"><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>&nbsp;&nbsp;{{ item.title }}</v-list-tile-title>
 								</v-list-tile>
 							</v-list>
 							</v-menu>
@@ -176,8 +180,8 @@ export default {
 
 			settings :
 			[
-				{ title: 'View' },
-				{ title: 'Edit' }
+				{ title: 'View', icon: { prefix:'far', name:'eye'} },
+				{ title: 'Edit', icon: { prefix:'fas', name:'pencil-alt'} }
 			],
 			course_details: [],
 			editedIndex: -1,

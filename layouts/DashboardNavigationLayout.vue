@@ -11,22 +11,104 @@
 			app
 		>
 
+	<!-- new nav -->
+		<!-- <v-layout row>
+		<v-flex xs10 sm10 md10 lg10>
+			<UserProfile />
+		</v-flex>
+		<v-flex xs2 sm2 lg2 md2>
+							<v-list>
+								<v-list-tile-action>
+									<v-btn icon
+										@click.stop="closeDrawerModel">
+									<font-awesome-icon :icon="['fas', 'times']"/>
+									</v-btn>
+								</v-list-tile-action>
+							</v-list>
+						</v-flex>
+		</v-layout>
+		<hr>
+    <v-list>
+		<v-list-tile @click="">
+			<v-list-tile-action>
+			<v-icon>home</v-icon>
+			</v-list-tile-action>
+			<v-list-tile-title>Home</v-list-tile-title>
+		</v-list-tile>
+
+      <v-list-group
+        prepend-icon="account_circle"
+        value="true"
+      >
+        <template v-slot:activator>
+          <v-list-tile>
+            <v-list-tile-title>Users</v-list-tile-title>
+          </v-list-tile>
+        </template>
+        <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-title>Admin</v-list-tile-title>
+            </v-list-tile>
+          </template>
+
+          <v-list-tile
+            v-for="(admin, i) in admins"
+            :key="i"
+            @click=""
+          >
+            <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon v-text="admin[1]"></v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list-group>
+
+        <v-list-group
+          sub-group
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-title>Actions</v-list-tile-title>
+            </v-list-tile>
+          </template>
+          <v-list-tile
+            v-for="(crud, i) in cruds"
+            :key="i"
+            @click=""
+          >
+            <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon v-text="crud[1]"></v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list-group>
+      </v-list-group>
+    </v-list> -->
+
+
+		<!-- old nav -->
 			<v-list>
 				<div>
 					<v-layout row>
 						<v-flex xs10 sm10 md10 lg10>
 							<UserProfile />
 						</v-flex>
-						<!-- <v-flex xs2 sm2 lg2 md2>
+						<v-flex xs2 sm2 lg2 md2>
 							<v-list>
 								<v-list-tile-action>
 									<v-btn icon
 										@click.stop="closeDrawerModel">
-									<v-icon>chevron_left</v-icon>
+									<font-awesome-icon :icon="['fas', 'times']"/>
 									</v-btn>
 								</v-list-tile-action>
 							</v-list>
-						</v-flex> -->
+						</v-flex>
 					</v-layout>
 				</div>
 				<hr>
@@ -41,7 +123,7 @@
 					<template v-slot:activator >
 						<v-list-tile >
 							<v-list-tile-action>
-								<!-- <v-icon>{{ item.icon }}</v-icon> -->
+
 								<font-awesome-icon :icon="[item.icon.prefix, item.icon.name]"/>
 							</v-list-tile-action>
 							<v-list-tile-content>
@@ -72,13 +154,7 @@
 
 				</v-list-group>
 			</v-list>
-			<!-- <v-list align-end justify-start class="dark-switch">
-				<v-list-tile>
-					<v-flex>
-						<v-switch v-model="dark" primary color="indigo" :label="switchLabel"></v-switch>
-					</v-flex>
-				</v-list-tile>
-			</v-list> -->
+
 		</v-navigation-drawer>
 		<v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
 			<v-toolbar-side-icon

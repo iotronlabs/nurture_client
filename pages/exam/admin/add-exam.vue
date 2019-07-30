@@ -43,17 +43,17 @@
 				<v-flex xs12 sm6 md9 >
 					<h3>Passmark (%)</h3><br>
 					<v-text-field
-					v-model="pass_mark"
-					placeholder="Enter passmark"
+						v-model="pass_mark"
+						placeholder="Enter passmark"
 
-					type="number"
+						type="number"
 
-					outline
-					solo
-					required
+						outline
+						solo
+						required
 
-				>
-				</v-text-field>
+					>
+					</v-text-field>
 				</v-flex>
 				</v-layout>
 				<h3>Exam Dates</h3>
@@ -181,19 +181,10 @@
 </v-app>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
 	layout:"DashboardNavigationLayout",
-	props: {
-		edit: {
-			type: Boolean,
-			required: false
-		},
-		item: {
-			type: Object,
-			required: false
-		}
-	},
-    data(){
+    data() {
         return{
 			message: '',
 			snackbar: false,
@@ -227,18 +218,23 @@ export default {
 			this.initaialize()
 		// }
 	},
+	computed: {
+		...mapState({
+			edit: state => state.exam.edit,
+			id: state => state.exam.id
+		})
+	},
 	methods:{
 		reset () {
 			this.$refs.addexam.reset()
 		},
 		async initaialize() {
-			// console.log(this.$router.params.edit)
-
-			// console.log(this.item)
-			console.log(this.edit)
 			if(this.edit)
 			{
-				console.log(this.item)
+				// console.log(Object.values(this.id))
+				// console.log(typeof String(this.id))
+				// const exam_response = await this.$axios.get(`/api/exams/${JSON.stringify(this.id)}/edit`)
+				// console.log(exam_response.data)
 			}
 
 			const sub_response = await this.$axios.get('/api/subjects')
