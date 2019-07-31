@@ -21,10 +21,7 @@ const _6d7c686a = () => interopDefault(import('..\\pages\\user\\audit.vue' /* we
 const _25580e9a = () => interopDefault(import('..\\pages\\user\\faculty.vue' /* webpackChunkName: "pages_user_faculty" */))
 const _3fa6666a = () => interopDefault(import('..\\pages\\user\\faculty-head.vue' /* webpackChunkName: "pages_user_faculty-head" */))
 const _638db4cc = () => interopDefault(import('..\\pages\\user\\super-admin.vue' /* webpackChunkName: "pages_user_super-admin" */))
-const _0724db56 = () => interopDefault(import('..\\pages\\exam\\admin\\add-exam.vue' /* webpackChunkName: "pages_exam_admin_add-exam" */))
-const _95660df2 = () => interopDefault(import('..\\pages\\exam\\admin\\add-questions.vue' /* webpackChunkName: "pages_exam_admin_add-questions" */))
 const _31828598 = () => interopDefault(import('..\\pages\\exam\\admin\\table.vue' /* webpackChunkName: "pages_exam_admin_table" */))
-const _cda16198 = () => interopDefault(import('..\\pages\\exam\\admin\\teacher-exam.vue' /* webpackChunkName: "pages_exam_admin_teacher-exam" */))
 const _416d478c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 Vue.use(Router)
@@ -178,21 +175,9 @@ export function createRouter() {
       component: _638db4cc,
       name: "user-super-admin"
     }, {
-      path: "/exam/admin/add-exam",
-      component: _0724db56,
-      name: "exam-admin-add-exam"
-    }, {
-      path: "/exam/admin/add-questions",
-      component: _95660df2,
-      name: "exam-admin-add-questions"
-    }, {
       path: "/exam/admin/table",
       component: _31828598,
       name: "exam-admin-table"
-    }, {
-      path: "/exam/admin/teacher-exam",
-      component: _cda16198,
-      name: "exam-admin-teacher-exam"
     }, {
       path: "/",
       component: _416d478c,

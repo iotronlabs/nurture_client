@@ -8,8 +8,25 @@
 					<v-spacer></v-spacer>
 					<v-btn fab small v-if="deleteMode==false && this.$vuetify.breakpoint.smAndDown==true" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/></v-btn>
 					<v-btn v-if="deleteMode==false && this.$vuetify.breakpoint.mdAndUp==true" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/>&nbsp;&nbsp;Delete Exam</v-btn>
-					<nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn fab small v-if="this.$vuetify.breakpoint.xs==true" color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn></nuxt-link>
-					<nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn v-if="this.$vuetify.breakpoint.smAndUp==true" color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add exam</v-btn></nuxt-link>
+					<!-- <nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn fab small v-if="this.$vuetify.breakpoint.xs==true" color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn></nuxt-link>
+					<nuxt-link :to="{ name: 'exam-admin-add-exam', params: { edit: false }}"><v-btn v-if="this.$vuetify.breakpoint.smAndUp==true" color="primary" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add exam</v-btn></nuxt-link> -->
+
+					<v-dialog v-model="dialogExam" fullscreen hide-overlay transition="dialog-bottom-transition">
+						<template v-slot:activator="{ on }">
+							<v-btn fab small class="hidden-md-and-up" color="primary"  @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn>
+							<v-btn class="hidden-sm-and-down" color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add Exam</v-btn>
+						</template>
+						<v-card>
+							<v-toolbar dark color="primary">
+								<v-toolbar-title>Exam Form</v-toolbar-title>
+								<v-spacer></v-spacer>
+								<v-btn icon dark @click="dialogExam = false">
+									<v-icon>close</v-icon>
+								</v-btn>
+							</v-toolbar>
+							<AddExam :item="editedItem" :editMode="editMode" @success="success" />
+						</v-card>
+					</v-dialog>
 				</v-toolbar>
 
 
@@ -81,15 +98,12 @@
 											<v-list-tile
 												v-for="(item, index) in settings"
 												:key="index"
+												@click="setAction(item,props.item)"
 											>
 
-											<!-- <span @click.native="item.title == 'Edit Exam' ? setExamId : ''"> -->
-												<nuxt-link @click.native="item.page ? setExamId(props.item.id) : ''" :to="{name: item.link }">
-												<!-- <v-list-tile-title @click="item.title=='Edit' ? editItem(props.item) : viewItem(props.item)">{{ item.title }}</v-list-tile-title> -->
-												<v-list-tile-content><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>{{ item.title }}</v-list-tile-content>
-												</nuxt-link>
-											<!-- </span> -->
-
+												<v-list-tile-title >
+													<font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]" />
+													&nbsp;{{ item.title }}</v-list-tile-title>
 											</v-list-tile>
 										</v-list>
 										</v-menu>
@@ -120,23 +134,71 @@
 				</v-snackbar>
 			</div>
 		</v-container-fluid>
+
+		<v-dialog v-model="dialogAddQuestion" fullscreen hide-overlay transition="dialog-bottom-transition">
+			<v-toolbar dark color="primary">
+				<v-toolbar-title>Add Question Form</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-btn icon dark @click="dialogAddQuestion = false">
+					<v-icon>close</v-icon>
+				</v-btn>
+			</v-toolbar>
+			<AddQuestions :id="editedItem.id"/>
+		</v-dialog>
+
+		<v-dialog v-model="dialogViewQuestion" fullscreen hide-overlay transition="dialog-bottom-transition">
+			<v-toolbar dark color="primary">
+				<v-toolbar-title>Edit Questiion</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-btn icon dark @click="dialogViewQuestion = false">
+					<v-icon>close</v-icon>
+				</v-btn>
+			</v-toolbar>
+			<ViewQuestions />
+		</v-dialog>
+
+		<!-- snackbar -->
+		<v-snackbar
+			v-model="snackbar"
+			:timeout="timeout"
+			top
+			vertical
+		>
+			{{ message }}
+			<v-btn
+				color="pink"
+				flat
+				@click="snackbar = false"
+			>
+				Close
+			</v-btn>
+		</v-snackbar>
 	</v-content>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import AddExam from '@/components/Exam/AddExam'
+import AddQuestions from '@/components/Exam/AddQuestions'
+import ViewQuestions from '@/components/Exam/ViewQuestions'
 export default {
-    layout: 'DashboardNavigationLayout',
+	layout: 'DashboardNavigationLayout',
+	components: {
+		AddExam,
+		AddQuestions,
+		ViewQuestions
+	},
     data: () => ({
-		dialog: false,
+		dialogExam: false,
+		dialogAddQuestion: false,
+		dialogViewQuestion: false,
+
 		search: '',
 		message: '',
 		snackbar: false,
 		timeout: 3000,
 
 		selectedAction: '',
-		config: ['View','Edit'],
-		viewMode: false,
 		editMode: false,
 		deleteMode: false,
 		disabled: false,
@@ -145,10 +207,10 @@ export default {
 		[
 			// page is a flag denoting whether action leads to new page
 			{ page: false, title: 'Make Inactive', icon: { prefix:'fas', name:'ban'}  },
-            { page: true, title: 'Edit Exam', link: 'exam-admin-add-exam', icon: { prefix:'fas', name:'pencil-alt'} },
-            { page: true, title: 'View Questions', link:"/exam/admin/teacher-exam" , icon: { prefix:'far', name:'eye'}},
-            { page: true, title: 'Add questions ', link:"/exam/admin/add-questions", icon: { prefix:'fas', name:'plus'} },
-            { page: false, title: 'Drop Exam', icon: { prefix:'fas', name:'trash-alt'} }
+            { page: true, title: 'Edit Exam',  icon: { prefix:'fas', name:'pencil-alt'} },
+            { page: true, title: 'View Questions', icon: { prefix:'far', name:'eye'}},
+            { page: true, title: 'Add questions', icon: { prefix:'fas', name:'plus'} }
+            // { page: false, title: 'Drop Exam', icon: { prefix:'fas', name:'trash-alt'} }
         ],
         items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 
@@ -172,14 +234,14 @@ export default {
 
 		editedIndex: -1,
 		editedItem: {
-			id:'',
-			t_name: '',
-			t_cat: '',
-			t_sub :'',
-            t_dead: '',
-            t_id:'',
-            t_stat :'',
-            t_act : ''
+			id: '',
+			exam_name:'' ,
+            duration:'',
+            pass_mark:'',
+			start_date:'',
+			end_date: '',
+            description: '',
+			subject_name: '',
 		},
 		defaultItem: {
 			id:'',
@@ -193,9 +255,6 @@ export default {
 		}
 	}),
 	computed: {
-		...mapState({
-			exam: state => state.exam.test
-		}),
 		formTitle () {
 			return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
 		}
@@ -209,15 +268,15 @@ export default {
 		this.initialize()
 	},
     methods: {
-		...mapActions('exam',['getId']),
 		async initialize () {
-			console.log(this.exam)
 			const exam_response = await this.$axios.get('/api/exams')
 			this.exam_details = exam_response.data
-			console.log(this.exam_details)
 		},
 		addItem() {
 			this.disabled=false
+			this.editMode = false
+			this.editedItem=Object.assign({},{})
+			this.dialogExam = true
 		},
 
 		async deleteItem () {
@@ -227,8 +286,8 @@ export default {
 			let index
 			for(i=0;i<(this.selected.length);i++)
 			{
-				id=this.selected[i].sub_code
-				response = await this.$axios.delete(`/api/subjects/${id}`)
+				id=this.selected[i].id
+				response = await this.$axios.delete(`/api/exams/${id}/delete`)
 				if(response.data.success==true)
 				{
 					if(this.selected.length!=1)
@@ -241,8 +300,8 @@ export default {
 					}
 					this.snackbar=true
 				}
-				index=this.sub_details.map((e) => e.sub_code).indexOf(id)
-				this.sub_details.splice(index,1)
+				index=this.exam_details.map((e) => e.id).indexOf(id)
+				this.exam_details.splice(index,1)
 			}
 			this.deleteMode=false
 		},
@@ -261,25 +320,47 @@ export default {
 			}
 			this.close()
 		},
-		changed(value) {
-			this.selectedAction = value
-			if(value=='Edit')
-			{
-				this.editMode=true
-				this.viewMode=false
-			}
-			else if(value=='View')
-			{
-				this.viewMode=true
-				this.editMode=false
-			}
-		},
 		toggleAll () {
 			if (this.selected.length) this.selected = []
-			else this.selected = this.sub_details.slice()
+			else this.selected = this.exam_details.slice()
 		},
-		setExamId(id) {
-			this.getId(id)
+		async setAction(item,details) {
+			if(item.title == 'Make Inactive')
+			{
+				// console.log('make inactive')
+				const response = await this.$axios.post(`/api/exams/${details.id}/deactivate`,{
+					status: 'Inactive'
+				})
+				if(response.data.success)
+				{
+					this.message = "Exam Deactivated"
+					this.snackbar = true
+				}
+			}
+			else if(item.title == 'Edit Exam')
+			{
+				this.editMode = true
+				this.editedIndex = this.exam_details.indexOf(details)
+				this.editedItem = Object.assign({},details)
+				this.dialogExam = true
+			}
+			else if(item.title == 'View Questions')
+			{
+
+				this.dialogViewQuestion = true
+			}
+			else if(item.title == 'Add questions')
+			{
+				this.editMode = true
+				this.editedIndex = this.exam_details.indexOf(details)
+				this.editedItem = Object.assign({},details)
+				this.dialogAddQuestion = true
+			}
+		},
+		success(message) {
+			this.message = message
+			this.dialogExam = false
+			this.snackbar = true
 		}
     }
 }

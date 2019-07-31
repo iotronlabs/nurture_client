@@ -20,25 +20,21 @@ void (function updateModules() {
   store.modules = store.modules || {}
 
   resolveStoreModules(require('..\\store\\modules\\dashboard\\index.js'), 'modules/dashboard/index.js')
-  resolveStoreModules(require('..\\store\\modules\\user\\index.js'), 'modules/user/index.js')
-  resolveStoreModules(require('..\\store\\modules\\theme\\index.js'), 'modules/theme/index.js')
-  resolveStoreModules(require('..\\store\\modules\\exam\\index.js'), 'modules/exam/index.js')
   resolveStoreModules(require('..\\store\\modules\\forum\\index.js'), 'modules/forum/index.js')
-  resolveStoreModules(require('..\\store\\modules\\theme\\actions.js'), 'modules/theme/actions.js')
-  resolveStoreModules(require('..\\store\\modules\\exam\\actions.js'), 'modules/exam/actions.js')
-  resolveStoreModules(require('..\\store\\modules\\exam\\state.js'), 'modules/exam/state.js')
+  resolveStoreModules(require('..\\store\\modules\\theme\\index.js'), 'modules/theme/index.js')
+  resolveStoreModules(require('..\\store\\modules\\user\\index.js'), 'modules/user/index.js')
   resolveStoreModules(require('..\\store\\modules\\forum\\actions.js'), 'modules/forum/actions.js')
-  resolveStoreModules(require('..\\store\\modules\\dashboard\\actions.js'), 'modules/dashboard/actions.js')
+  resolveStoreModules(require('..\\store\\modules\\user\\state.js'), 'modules/user/state.js')
   resolveStoreModules(require('..\\store\\modules\\forum\\mutations.js'), 'modules/forum/mutations.js')
-  resolveStoreModules(require('..\\store\\modules\\forum\\state.js'), 'modules/forum/state.js')
-  resolveStoreModules(require('..\\store\\modules\\exam\\mutations.js'), 'modules/exam/mutations.js')
-  resolveStoreModules(require('..\\store\\modules\\dashboard\\state.js'), 'modules/dashboard/state.js')
+  resolveStoreModules(require('..\\store\\modules\\dashboard\\actions.js'), 'modules/dashboard/actions.js')
+  resolveStoreModules(require('..\\store\\modules\\theme\\actions.js'), 'modules/theme/actions.js')
+  resolveStoreModules(require('..\\store\\modules\\dashboard\\mutations.js'), 'modules/dashboard/mutations.js')
   resolveStoreModules(require('..\\store\\modules\\theme\\mutations.js'), 'modules/theme/mutations.js')
   resolveStoreModules(require('..\\store\\modules\\theme\\state.js'), 'modules/theme/state.js')
   resolveStoreModules(require('..\\store\\modules\\user\\actions.js'), 'modules/user/actions.js')
-  resolveStoreModules(require('..\\store\\modules\\dashboard\\mutations.js'), 'modules/dashboard/mutations.js')
+  resolveStoreModules(require('..\\store\\modules\\dashboard\\state.js'), 'modules/dashboard/state.js')
   resolveStoreModules(require('..\\store\\modules\\user\\mutations.js'), 'modules/user/mutations.js')
-  resolveStoreModules(require('..\\store\\modules\\user\\state.js'), 'modules/user/state.js')
+  resolveStoreModules(require('..\\store\\modules\\forum\\state.js'), 'modules/forum/state.js')
 
   // If the environment supports hot reloading...
 
@@ -47,25 +43,21 @@ void (function updateModules() {
     module.hot.accept([
       '..\\store\\index.js',
       '..\\store\\modules\\dashboard\\index.js',
-      '..\\store\\modules\\user\\index.js',
-      '..\\store\\modules\\theme\\index.js',
-      '..\\store\\modules\\exam\\index.js',
       '..\\store\\modules\\forum\\index.js',
-      '..\\store\\modules\\theme\\actions.js',
-      '..\\store\\modules\\exam\\actions.js',
-      '..\\store\\modules\\exam\\state.js',
+      '..\\store\\modules\\theme\\index.js',
+      '..\\store\\modules\\user\\index.js',
       '..\\store\\modules\\forum\\actions.js',
-      '..\\store\\modules\\dashboard\\actions.js',
+      '..\\store\\modules\\user\\state.js',
       '..\\store\\modules\\forum\\mutations.js',
-      '..\\store\\modules\\forum\\state.js',
-      '..\\store\\modules\\exam\\mutations.js',
-      '..\\store\\modules\\dashboard\\state.js',
+      '..\\store\\modules\\dashboard\\actions.js',
+      '..\\store\\modules\\theme\\actions.js',
+      '..\\store\\modules\\dashboard\\mutations.js',
       '..\\store\\modules\\theme\\mutations.js',
       '..\\store\\modules\\theme\\state.js',
       '..\\store\\modules\\user\\actions.js',
-      '..\\store\\modules\\dashboard\\mutations.js',
+      '..\\store\\modules\\dashboard\\state.js',
       '..\\store\\modules\\user\\mutations.js',
-      '..\\store\\modules\\user\\state.js',
+      '..\\store\\modules\\forum\\state.js',
     ], () => {
       // Update `root.modules` with the latest definitions.
       updateModules()
