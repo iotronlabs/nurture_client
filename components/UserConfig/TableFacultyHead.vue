@@ -24,7 +24,7 @@
 					<v-container fluid>
 						<v-layout>
 							<v-flex xs12 sm6 >
-								<v-btn raised class="primary" @click="onPickFile">add image</v-btn>
+								<h3>Add Image</h3><br>
 								<input
 									type="file"
 									ref="fileInput"
@@ -36,7 +36,7 @@
 
 						<v-layout row wrap>
 
-							<v-flex xs12 sm6 md3 >
+							<v-flex xs12 sm6 md6 >
 								<v-text-field
 									v-model="editedItem.faculty_head_fname"
 									:rules="[rules.required]"
@@ -45,22 +45,24 @@
 									placeholder="First"
 									required
 									:disabled="disabled"
+									outline
 								>
 								</v-text-field>
 							</v-flex>
 
-							<v-flex xs12 sm6 md3>
+							<v-flex xs12 sm6 md6>
 								<v-text-field
 									v-model="editedItem.faculty_head_surname"
 									type="text"
 									placeholder="Last"
 									:disabled="disabled"
+									outline
 								>
 								</v-text-field>
 							</v-flex>
 						</v-layout>
 						<v-layout  wrap>
-							<v-flex xs12 sm6 md3>
+							<v-flex xs12 sm6 md6>
 									<v-radio-group v-model="editedItem.faculty_head_gender" label="Gender">
 									<v-radio
 										v-for="gender in genders"
@@ -68,11 +70,12 @@
 										:label="gender.label"
 										:value="gender.value"
 										:disabled="disabled"
+										color="primary"
 									></v-radio>
 								</v-radio-group>
 							</v-flex>
 
-							<v-flex xs12 sm6 md3>
+							<v-flex xs12 sm6 md6>
 								<v-menu
 									ref="menu"
 									v-model="editedItem.faculty_head_dob"
@@ -85,6 +88,7 @@
 									full-width
 									min-width="290px"
 									:disabled="disabled"
+									outline
 								>
 									<template v-slot:activator="{ on }">
 										<v-text-field
@@ -93,6 +97,7 @@
 										placeholder="yyyy-mm-dd"
 										readonly
 										v-on="on"
+										outline
 										></v-text-field>
 									</template>
 									<v-date-picker v-model="date" no-title scrollable>
@@ -106,7 +111,7 @@
 
 						<!-- email -->
 						<v-layout row wrap >
-							<v-flex xs12 sm12 md3>
+							<v-flex xs12 sm12 md6>
 								<v-text-field
 									name="email"
 									type="email"
@@ -117,21 +122,23 @@
 									autocomplete="off"
 									required
 									:disabled="disabled"
+									outline
 								></v-text-field>
 							</v-flex>
 							<!-- contact  -->
-							<v-flex xs12 sm12 md3>
+							<v-flex xs12 sm12 md6>
 								<v-text-field
 									v-model="editedItem.faculty_head_contact"
 									type="tel"
 									label="Contact no"
 									:disabled="disabled"
+									outline
 								></v-text-field>
 							</v-flex>
 						</v-layout>
 
 						<!-- address   address pincode state-->
-							<v-flex xs12 sm12 md9>
+							<v-flex xs12 sm12 md12>
 								<v-text-field
 									name="streetaddress"
 									type="text"
@@ -140,33 +147,37 @@
 									placeholder="Street address"
 									autocomplete="off"
 									:disabled="disabled"
+									outline
 								></v-text-field>
 							</v-flex>
 						<br>
 						<v-layout row wrap>
-							<v-flex xs12 sm6 md3>
+							<v-flex xs12 sm6 md4>
 								<v-text-field
 									v-model="editedItem.faculty_head_address_city"
 									type="text"
 									placeholder="City"
 									:disabled="disabled"
+									outline
 								></v-text-field>
 							</v-flex>
-							<v-flex xs12 sm6 md3>
+							<v-flex xs12 sm6 md4>
 								<v-text-field
 									v-model="editedItem.faculty_head_address_pin"
 									type="text"
 									placeholder="Pin/zip code"
 									:disabled="disabled"
+									outline
 								> </v-text-field>
 							</v-flex>
-							<v-flex xs12 sm6 md3>
+							<v-flex xs12 sm6 md4>
 								<v-select
 									v-model="editedItem.faculty_head_address_state"
 									:items="states"
 									label="State"
 									solo
 									:disabled="disabled"
+									outline
 								></v-select>
 							</v-flex>
 						</v-layout>
@@ -227,11 +238,11 @@
 					></v-checkbox>
 				</td>
 				<td class="text-xs-center">{{ props.item.faculty_head_id }}</td>
-				<td>{{ props.item.faculty_head_fname + ' ' +  props.item.faculty_head_surname}}</td>
-				<td>{{ props.item.faculty_head_dob }}</td>
-				<td>{{ props.item.faculty_head_email }}</td>
-				<td>{{ props.item.faculty_head_contact }}</td>
-				<td>{{ props.item.faculty_head_address_state }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_head_fname + ' ' +  props.item.faculty_head_surname}}</td>
+				<td class="text-xs-center">{{ props.item.faculty_head_dob }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_head_email }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_head_contact }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_head_address_state }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>

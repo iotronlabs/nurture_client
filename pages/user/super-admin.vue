@@ -1,19 +1,22 @@
 <template>
   <div>
-	  <v-toolbar  class="login-grad" >
-			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm2 offset-xs3 offset-md2 >
+	  <v-container>
+		  <v-toolbar  class="login-grad" >
+			<v-layout justify-center align-center>
+			
 
-			<v-chip class="chip-alignment" color="#f06d5f" text-color="white">
+			<v-chip color="#f06d5f" text-color="white">
 				<v-avatar class="super-admin-color"> SA </v-avatar>
 				Super-Admin 
 
 			</v-chip>
-			</v-flex>
+			
 			</v-layout>
 		  </v-toolbar>
 
 		<LoginForm id="admin" />
+	  </v-container>
+	  
 	</div>
 </template>
 

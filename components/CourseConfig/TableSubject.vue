@@ -23,11 +23,21 @@
 					<v-form ref="form" method="post" id="form" enctype="multipart/form-data">
 						<v-container fluid>
 							<v-layout>
-								<v-flex xs12 sm6 md4>
-									<v-text-field :disabled="disabled" v-model="editedItem.sub_code" label="Code"></v-text-field>
+								<v-flex xs12 sm6 md6>
+									<v-text-field 
+									:disabled="disabled" 
+									v-model="editedItem.sub_code" 
+									label="Code"
+									outline>
+									</v-text-field>
 								</v-flex>
 								<v-flex xs12 sm6 md6>
-									<v-text-field :disabled="disabled" v-model="editedItem.sub_name" label="Subject Name"></v-text-field>
+									<v-text-field 
+									:disabled="disabled" 
+									v-model="editedItem.sub_name" 
+									label="Subject Name"
+									outline>
+									</v-text-field>
 								</v-flex>
 
 								<!-- <v-flex xs12 sm6 md4>
@@ -48,13 +58,14 @@
 										label="Enter the topics"
 										multiple
 										chips
+										outline
 									></v-combobox>
 
 								</v-flex>
 							</v-layout>
 						<v-spacer></v-spacer><br>
-						<v-btn round @click.prevent="submitForm" color="success" light type="submit" form="form" :disabled="disabled" >Submit</v-btn>
-						<v-btn  round color="primary" type="submit" form="form"  @click.prevent="reset" :disabled="disabled">Clear form</v-btn>
+						<v-btn @click.prevent="submitForm" color="success" light type="submit" form="form" :disabled="disabled" >Submit</v-btn>
+						<v-btn color="primary" type="submit" form="form"  @click.prevent="reset" :disabled="disabled">Clear form</v-btn>
 					</v-container>
 				</v-form>
 			</v-card>

@@ -26,6 +26,7 @@
 									label="Enter course name"
 									v-model="editedItem.course_name"
 									:disabled="disabled"
+									outline
 								></v-text-field>
 							</v-flex>
 						</v-layout>
@@ -36,23 +37,25 @@
 									v-model="editedItem.course_duration"
 									:disabled="disabled"
 									:items="course_durations"
+									outline
 								></v-select>
 							</v-flex>
 						</v-layout>
 						<v-layout row wrap>
-							<v-flex xs12 md8 sm12>
+							<v-flex xs12 md12 sm12>
 								<v-combobox
 									v-model="editedItem.subject"
 									:items="subjects"
 									label="Assign Subjects for this course"
 									multiple
 									:disabled="disabled"
+									outline
 								></v-combobox>
 							</v-flex>
 						</v-layout>
 						<v-spacer></v-spacer><br>
-						<v-btn round @click.prevent="submitForm" color="success" light type="submit" form="form" :disabled="disabled" >Submit</v-btn>
-						<v-btn  round color="primary" type="submit" form="form"  @click.prevent="reset" :disabled="disabled">Clear form</v-btn>
+						<v-btn @click.prevent="submitForm" color="success" light type="submit" form="form" :disabled="disabled" >Submit</v-btn>
+						<v-btn color="primary" type="submit" form="form"  @click.prevent="reset" :disabled="disabled">Clear form</v-btn>
 					</v-container>
 				</v-form>
 			</v-card>
