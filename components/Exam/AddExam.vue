@@ -150,8 +150,8 @@
 		</v-layout>
 
 			<v-spacer></v-spacer><br>
-			<v-btn round @click.prevent="submitForm" color="success" light type="submit" form="form" >Submit</v-btn>
-			<v-btn  round color="primary" type="submit" form="form"  @click.prevent="reset">Clear form</v-btn>
+			<v-btn @click.prevent="submitForm" color="success" light type="submit" form="form" >Submit</v-btn>
+			<v-btn  color="primary" type="submit" form="form"  @click.prevent="reset">Clear form</v-btn>
 
 		</v-container>
 	</v-form>
@@ -219,7 +219,7 @@ export default {
 					end_date: this.date2,
 					duration: this.item.duration,
 					pass_mark: this.item.pass_mark,
-					description: this.item.duration
+					description: this.item.description
 				})
 				if(response.data.success==true)
 				{
@@ -236,7 +236,7 @@ export default {
 					end_date: this.date2,
 					duration: this.item.duration,
 					pass_mark: this.item.pass_mark,
-					description: this.item.duration
+					description: this.item.description
 				})
 				if(response.data.success==true)
 				{

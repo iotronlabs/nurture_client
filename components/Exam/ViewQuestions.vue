@@ -1,6 +1,6 @@
 <template>
-<div>
-  	<v-container fluid>
+<v-card>
+  	<v-container>
     	<!-- <v-tabs dark color="cyan" show-arrows >
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 
@@ -8,7 +8,7 @@
 				Q {{ i }}
 			</v-tab> -->
 		<v-tabs fixed-tabs left class="tab-style" dark slider-color="yellow">
-			<v-tab v-for="i in k.length" :key="i" :href="'#tab-' + i" >
+			<v-tab v-for="i in questions.length" :key="i" :href="'#tab-' + i" >
 				Q {{ i }}
 			</v-tab>
 			<!-- <v-tabs-items>
@@ -21,23 +21,29 @@
 			</v-tabs>
 			<v-subheader>sdxcfgvbhjnkml,;.'</v-subheader> -->
 
-				<v-tabs-items>
-					<v-tab-item v-for="i in k.length" :key="i" :value="'tab-' + i">
+				<v-tabs-items touchless>
+					<v-tab-item v-for="i in questions.length" :key="i" :value="'tab-' + i">
 						<v-card flat class = "card-content">
-							<v-card-text>{{ content[i-1].text }}</v-card-text>
+							<v-card-text>{{ questions[i-1].question }}</v-card-text>
 
-								<v-radio-group v-model="column" column >
-							        <v-radio label="Option 1" value="radio-1"></v-radio>
-							        <v-radio label="Option 2" value="radio-2"></v-radio>
-							        <v-radio label="Option 3" value="radio-3"></v-radio>
-							        <v-radio label="Option 4" value="radio-4"></v-radio>
+								<v-radio-group v-model="answer[i]">
+									<v-radio color="primary" :label="questions[i-1].option_1" value="Option 1"></v-radio>
+									<span v-if="questions[i-1].option_5!='null'">{{questions[i-1].option_5}}</span>
+									<v-radio color="primary" :label="questions[i-1].option_3" value="Option 3"></v-radio>
+									<span v-if="questions[i-1].option_6!=null">{{questions[i-1].option_6}}</span>
+
+									<v-radio color="primary" :label="questions[i-1].option_2" value="Option 2"></v-radio>
+									<span v-if="questions[i-1].option_7!=null">{{questions[i-1].option_7}}</span>
+
+							        <v-radio color="primary" :label="questions[i-1].option_4" value="Option 4"></v-radio>
+									<span v-if="questions[i-1].option_8!=null">{{questions[i-1].option_8}}</span>
+
 						      	</v-radio-group>
 
 
-
-							 <v-layout>
+							 <v-layout row wrap>
 								<v-flex md1>
-									<v-btn color= "cyan">
+									<v-btn color= "cyan" @click="editQuestion(questions[i-1].question_id)">
 										<v-icon small >
 											edit
 										</v-icon>
@@ -45,7 +51,7 @@
 								</v-flex>
 								<v-flex>
 									<v-btn color = "red">
-										<v-icon small >
+										<v-icon small @click="deleteQuestion(questions[i-1].question_id)">
 											delete
 										</v-icon>
 									</v-btn>
@@ -56,38 +62,95 @@
 								<v-btn to="result"> Submit</v-btn>
 							</v-layout>-->
 						</v-card>
-
+						<v-dialog v-model="dialogAddQuestion" fullscreen hide-overlay transition="dialog-bottom-transition">
+							<v-toolbar dark color="primary">
+								<v-toolbar-title>Edit Question Form</v-toolbar-title>
+								<v-spacer></v-spacer>
+								<v-btn icon dark @click="dialogAddQuestion = false">
+									<v-icon>close</v-icon>
+								</v-btn>
+							</v-toolbar>
+							<AddQuestions @success="success()" :id="questions[i-1].exam_id" :questions="questions[i-1]" :editQuestionMode="editQuestionMode" />
+						</v-dialog>
 
         			</v-tab-item>
      			 </v-tabs-items>
     		</v-tabs>
 
+			<!-- snackbar -->
+			<v-snackbar
+				v-model="snackbar"
+				:timeout="timeout"
+				top
+				vertical
+			>
+				{{ message }}
+				<v-btn
+					color="pink"
+					flat
+					@click="snackbar = false"
+				>
+					Close
+				</v-btn>
+			</v-snackbar>
+
   </v-container>
-</div>
+</v-card>
 </template>
 
 
 
 <script>
+import AddQuestions from '@/components/Exam/AddQuestions'
 export default {
-  data: () => ({
-		content: [
-			{text: '1. aabbaabb'},
-			{text: '2. ccddccdd'},
-			{text: '3. eeffeeff'},
-			{text: '4. gghhgghh'}
-		],
+	components: {
+		AddQuestions
+	},
+	props: {
+		questions: {
+			type: Array,
+			required: true
+		}
+	},
+	data: () => ({
+		message: '',
+		snackbar: false,
+		timeout: 3000,
+		editQuestionMode: false,
+		dialogAddQuestion: false,
+		answer: [],
+			content: [
+				{text: '1. aabbaabb'},
+				{text: '2. ccddccdd'},
+				{text: '3. eeffeeff'},
+				{text: '4. gghhgghh'}
+			],
 
-		k: ['a','b','c','d']
+			// questions: []
 	}),
-
+	methods: {
+		async deleteQuestion(id) {
+			const response = await this.$axios.delete(`/api/exams/question/${id}`)
+			if(response.data.success==true)
+			{
+				this.questions.splice(this.questions.indexOf(id),1)
+			}
+		},
+		editQuestion(id) {
+			this.editQuestionMode = true
+			this.dialogAddQuestion = true
+		},
+		success(message) {
+			this.message=message
+			this.dialogAddQuestion=false
+			this.snackbar=true
+		}
+	}
 }
 </script>
 
 
-</script>
-
-  <style scoped>
+<style scoped>
 .card-content{
 	padding : 10px 20px 10px 20px;
 

@@ -143,7 +143,7 @@
 					<v-icon>close</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<AddQuestions :id="editedItem.id"/>
+			<AddQuestions :id="editedItem.id" :editQuestionMode=false :questions="question_list" @success="success" />
 		</v-dialog>
 
 		<v-dialog v-model="dialogViewQuestion" fullscreen hide-overlay transition="dialog-bottom-transition">
@@ -154,7 +154,7 @@
 					<v-icon>close</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<ViewQuestions />
+			<ViewQuestions :questions="questions"/>
 		</v-dialog>
 
 		<!-- snackbar -->
@@ -231,6 +231,7 @@ export default {
 		},
 
 		exam_details: [],
+		questions: [],
 
 		editedIndex: -1,
 		editedItem: {
@@ -252,6 +253,23 @@ export default {
             t_id:'',
             t_stat :'',
             t_act : ''
+		},
+		question_list: {
+			question_id: '',
+            exam_id: '',
+            type: '',
+            question: '',
+            option_1: '',
+            option_2: '',
+            option_3: '',
+            option_4: '',
+            option_5: null,
+            option_6: null,
+            option_7: null,
+            option_8: null,
+            answer: '',
+            topics: '',
+            question_image: null,
 		}
 	}),
 	computed: {
@@ -346,6 +364,15 @@ export default {
 			}
 			else if(item.title == 'View Questions')
 			{
+				this.editMode = true
+				this.editedIndex = this.exam_details.indexOf(details)
+				this.editedItem = Object.assign({},details)
+				const ques_response = await this.$axios.get(`/api/exams/${this.editedItem.id}/question`)
+				this.questions = new Array()
+				for(var i=0;i<ques_response.data.data.length;i++)
+				{
+					this.questions.push(ques_response.data.data[i])
+				}
 
 				this.dialogViewQuestion = true
 			}
@@ -360,6 +387,7 @@ export default {
 		success(message) {
 			this.message = message
 			this.dialogExam = false
+			this.dialogAddQuestion = false
 			this.snackbar = true
 		}
     }
