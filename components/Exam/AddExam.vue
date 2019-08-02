@@ -150,8 +150,8 @@
 		</v-layout>
 
 			<v-spacer></v-spacer><br>
-			<v-btn @click.prevent="submitForm" color="success" light type="submit" form="form" >Submit</v-btn>
-			<v-btn  color="primary" type="submit" form="form"  @click.prevent="reset">Clear form</v-btn>
+			<v-btn @click.prevent="submitForm" color="primary" light type="submit" form="form" >Submit</v-btn>
+			<v-btn  color="secondary" type="submit" form="form"  @click.prevent="reset">Clear form</v-btn>
 
 		</v-container>
 	</v-form>

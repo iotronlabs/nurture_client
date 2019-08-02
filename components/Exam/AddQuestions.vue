@@ -125,7 +125,7 @@
 							</v-flex>
 						</v-layout>
 
-						<v-btn type="submit" form="form" @click.prevent="submitForm(head)" > Submit</v-btn>
+						<v-btn color="primary" type="submit" form="form" @click.prevent="submitForm(head)" > Submit</v-btn>
 						</v-form>
 
 

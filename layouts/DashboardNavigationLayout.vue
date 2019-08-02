@@ -9,6 +9,7 @@
 			absolute
 			overflow
 			app
+				
 		>
 
 	<!-- new nav -->
@@ -156,12 +157,12 @@
 			</v-list>
 
 		</v-navigation-drawer>
-		<v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
-			<v-toolbar-side-icon
+		<v-toolbar color="primary" :clipped-left="primaryDrawer.clipped" app absolute>
+			<v-toolbar-side-icon 
 				@click.stop="primaryDrawer.model = !primaryDrawer.model"
 			></v-toolbar-side-icon>
 			<img class="logo" src="/nurture-logo.png">
-			<v-toolbar-title>Nurture</v-toolbar-title>
+			<v-toolbar-title class="white--text">Nurture</v-toolbar-title>
 
 			<v-spacer />
 
@@ -175,7 +176,7 @@
 				<template v-slot:badge>
 					<span class="badge-text">2</span>
 				</template>
-				<font-awesome-icon v-on="on" :icon="['far', 'bell']" size="2x"/>
+				<font-awesome-icon v-on="on" :icon="['far', 'bell']" size="2x" color="white"/>
 			</v-badge>
 
 			</template>
@@ -199,7 +200,7 @@
 			<v-menu offset-y>
 				<template v-slot:activator="{ on }">
 				<v-toolbar-title v-on="on">
-					<span class="toolbar-icons"><v-btn icon><font-awesome-icon :icon="['fas', 'cog']" size="2x"/></v-btn></span>
+					<span class="toolbar-icons"><v-btn icon><font-awesome-icon :icon="['fas', 'cog']" size="2x" color="white"/></v-btn></span>
 				</v-toolbar-title>
 				</template>
 

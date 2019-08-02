@@ -105,8 +105,8 @@
 								</v-flex>
 							</v-layout>
 						<v-spacer></v-spacer><br>
-						<v-btn round @click.prevent="submitForm" color="success" light type="submit" form="form" :disabled="disabled" >Submit</v-btn>
-						<v-btn  round color="primary" type="submit" form="form"  @click.prevent="reset" :disabled="disabled">Clear form</v-btn>
+						<v-btn  @click.prevent="submitForm" color="primary" light type="submit" form="form" :disabled="disabled" >Submit</v-btn>
+						<v-btn  color="secondary" type="submit" form="form"  @click.prevent="reset" :disabled="disabled">Clear form</v-btn>
 					</v-container>
 				</v-form>
 			</v-card>

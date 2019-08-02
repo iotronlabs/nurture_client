@@ -84,7 +84,7 @@ toast: {
 },
 axios: {
   baseURL: 'https://api.rollingjoints.co.in/public',
-	// baseURL: 'http://localhost:8000',
+  // baseURL: 'http://localhost:8000',
 	proxyHeaders: false,
 	credentials: false,
 	proxy: false,
