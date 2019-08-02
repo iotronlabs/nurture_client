@@ -40,9 +40,9 @@
 								<v-text-field
 									v-model="editedItem.faculty_fname"
 									:rules="[rules.required]"
-									label="Name"
+									label="First Name"
 									type="text"
-									placeholder="First"
+									
 									required
 									:disabled="disabled"
 									outline
@@ -54,9 +54,9 @@
 							<v-flex xs12 sm6 md6>
 								<v-text-field
 									v-model="editedItem.faculty_surname"
-									label="Name"
+									label="Last Name"
 									type="text"
-									placeholder="Last"
+									
 									:disabled="disabled"
 									outline
 								>
@@ -118,8 +118,8 @@
 									type="email"
 									v-model="editedItem.faculty_email"
 									:rules="[rules.required,rules.emailValid]"
-									label=" Email id"
-									placeholder="Enter Email id"
+									label=" Email ID"
+									
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -145,7 +145,7 @@
 									type="text"
 									v-model="editedItem.faculty_address"
 									label=" Address"
-									placeholder="Street address"
+									
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -157,7 +157,7 @@
 								<v-text-field
 									v-model="editedItem.faculty_address_city"
 									type="text"
-									placeholder="City"
+									label="City"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -166,7 +166,7 @@
 								<v-text-field
 									v-model="editedItem.faculty_address_pin"
 									type="text"
-									placeholder="Pin/Zip code"
+									label="Pincode"
 									:disabled="disabled"
 									outline
 								> </v-text-field>
@@ -187,7 +187,10 @@
 								<v-select
 									v-if="authentication==5"
 									v-model="centre"
-									:items="centres" label="Choose Centre" solo :disabled="disabled"
+									:items="centres" 
+									label="Choose Centre" 
+									solo 
+									:disabled="disabled"
 									outline>
 								</v-select>
 								<v-text-field

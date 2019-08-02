@@ -40,9 +40,9 @@
 								<v-text-field
 									v-model="editedItem.faculty_head_fname"
 									:rules="[rules.required]"
-									label="Name"
+									label="First Name"
 									type="text"
-									placeholder="First"
+									
 									required
 									:disabled="disabled"
 									outline
@@ -54,7 +54,8 @@
 								<v-text-field
 									v-model="editedItem.faculty_head_surname"
 									type="text"
-									placeholder="Last"
+									label="Last Name"
+									
 									:disabled="disabled"
 									outline
 								>
@@ -117,8 +118,8 @@
 									type="email"
 									v-model="editedItem.faculty_head_email"
 									:rules="[rules.required,rules.emailValid]"
-									label=" Email id"
-									placeholder="Enter Email id"
+									label=" Email ID"
+									
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -144,7 +145,7 @@
 									type="text"
 									v-model="editedItem.faculty_head_address"
 									label=" Address"
-									placeholder="Street address"
+									
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -156,7 +157,7 @@
 								<v-text-field
 									v-model="editedItem.faculty_head_address_city"
 									type="text"
-									placeholder="City"
+									label="City"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -165,7 +166,7 @@
 								<v-text-field
 									v-model="editedItem.faculty_head_address_pin"
 									type="text"
-									placeholder="Pin/zip code"
+									label="Pincode"
 									:disabled="disabled"
 									outline
 								> </v-text-field>

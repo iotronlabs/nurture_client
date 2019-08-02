@@ -42,9 +42,9 @@
 								<v-text-field
 									v-model="editedItem.s_fname"
 									:rules="[rules.required]"
-									label="Name"
+									label="First Name"
 									type="text"
-									placeholder="First"
+									
 									required
 									:disabled="disabled"
 									outline
@@ -57,7 +57,7 @@
 								<v-text-field
 									v-model="editedItem.s_surname"
 									type="text"
-									placeholder="Last"
+									label="Last Name"
 									:disabled="disabled"
 									outline
 								>
@@ -122,8 +122,8 @@
 									type="email"
 									v-model="editedItem.s_email"
 									:rules="[rules.required,rules.emailValid]"
-									label=" Email id"
-									placeholder="Enter Email id"
+									label=" Email ID"
+									
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -148,7 +148,7 @@
 									type="text"
 									v-model="editedItem.s_address"
 									label=" Address"
-									placeholder="Street address"
+									
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -160,7 +160,7 @@
 								<v-text-field
 									v-model="editedItem.s_address_city"
 									type="text"
-									placeholder="City"
+									label="City"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -169,7 +169,7 @@
 								<v-text-field
 									v-model="editedItem.s_address_pin"
 									type="text"
-									placeholder="Pin/zip code"
+									label="Pincode"
 									:disabled="disabled"
 									outline
 								> </v-text-field>
@@ -198,9 +198,9 @@
 								<v-text-field
 								v-model="editedItem.guardian_fname"
 								:rules="[rules.required]"
-								label="Guardian Name"
+								
 								type="text"
-								placeholder="First"
+								label="First Name"
 								required
 								:disabled="disabled"
 								outline
@@ -213,7 +213,7 @@
 								<v-text-field
 									v-model="editedItem.guardian_surname"
 									type="text"
-									placeholder="Last"
+									label="Last Name"
 									:disabled="disabled"
 									outline
 								>
@@ -242,8 +242,8 @@
 									type="email"
 									v-model="editedItem.guardian_email"
 									:rules="[rules.required,rules.emailValid]"
-									label=" Email id"
-									placeholder="enter email id"
+									label=" Email ID"
+									
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -267,7 +267,7 @@
 						<v-layout row wrap>
 							<v-flex xs12 sm6 md4>
 								<h2>Address Details</h2><br>
-								<v-checkbox v-model="checkbox" color="info"
+								<v-checkbox v-model="checkbox" color="primary"
 									:disabled="disabled"
 									@change="address"
 									label="Same as above"
@@ -282,7 +282,7 @@
 									type="text"
 									v-model="editedItem.guardian_address"
 									label="Address"
-									placeholder="street address"
+									
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -294,7 +294,7 @@
 								<v-text-field
 									v-model="editedItem.guardian_city"
 									type="text"
-									placeholder="city"
+									label="City"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -303,7 +303,7 @@
 								<v-text-field
 									v-model="editedItem.guardian_pin"
 									type="text"
-									placeholder="pin/zip code"
+									label="Pincode"
 									:disabled="disabled"
 									outline
 								> </v-text-field>
@@ -385,7 +385,7 @@
 								<v-text-field
 									v-model="editedItem.scholarship"
 									label="Scholarship Discount"
-									placeholder=""
+									
 									required
 									:disabled="disabled"
 									outline

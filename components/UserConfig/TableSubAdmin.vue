@@ -47,9 +47,9 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_fname"
 									:rules="[rules.required]"
-									label="Name"
+									label="First Name"
 									type="text"
-									placeholder="First"
+									
 									required
 									:disabled="disabled"
 									outline
@@ -61,7 +61,7 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_surname"
 									type="text"
-									placeholder="Last"
+									label="Last Name"
 									:disabled="disabled"
 									outline
 								>
@@ -78,6 +78,7 @@
 										:value="gender.value"
 										:disabled="disabled"
 										outline
+										color="primary"
 									></v-radio>
 								</v-radio-group>
 							</v-flex>
@@ -125,8 +126,8 @@
 									type="email"
 									v-model="editedItem.sub_admin_email"
 									:rules="[rules.required,rules.emailValid]"
-									label=" Email id"
-									placeholder="Enter Email id"
+									label=" Email ID"
+									
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -152,7 +153,7 @@
 									type="text"
 									v-model="editedItem.sub_admin_address"
 									label=" Address"
-									placeholder="Street address"
+									
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -164,7 +165,8 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_address_city"
 									type="text"
-									placeholder="City"
+									label="City"
+									
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -173,7 +175,8 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_address_pin"
 									type="text"
-									placeholder="Pin/zip code"
+									label="Pincode"
+									
 									:disabled="disabled"
 									outline
 								> </v-text-field>
@@ -195,6 +198,7 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_name"
 									label="Centre Name"
+									
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -202,7 +206,8 @@
 							<v-flex xs12 sm12 md6>
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_id"
-									label="Centre id"
+									label="Centre ID"
+									
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -211,7 +216,7 @@
 						<v-layout row wrap>
 							<v-flex xs12 sm6 md3>
 								<h2>Centre Address Details</h2><br>
-								<v-checkbox v-model="checkbox" color="info"
+								<v-checkbox v-model="checkbox" color="primary"
 									:disabled="disabled"
 									@change="address"
 									label="Same as above"
@@ -224,7 +229,7 @@
 									type="text"
 									v-model="editedItem.sub_admin_centre_address"
 									label="Address"
-									placeholder="street address"
+									
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -235,7 +240,7 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_address_city"
 									type="text"
-									placeholder="city"
+									label="City"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -244,7 +249,7 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_address_pin"
 									type="text"
-									placeholder="pin/zip code"
+									label="Pincode"
 									:disabled="disabled"
 									outline
 								> </v-text-field>
