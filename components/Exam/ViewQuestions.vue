@@ -25,18 +25,26 @@
 					<v-tab-item v-for="i in questions.length" :key="i" :value="'tab-' + i">
 						<v-card flat class = "card-content">
 							<v-card-text>{{ questions[i-1].question }}</v-card-text>
-
+								<v-img :src="`${baseUrl}/exams/question/${questions[i-1].question_image}`"></v-img>
 								<v-radio-group v-model="answer[i]">
 									<v-radio color="primary" :label="questions[i-1].option_1" value="Option 1"></v-radio>
-									<span v-if="questions[i-1].option_5!='null'">{{questions[i-1].option_5}}</span>
+									<span v-if="questions[i-1].option_5!='null'">
+										<v-img :src="`${baseUrl}/exams/question/${questions[i-1].option_5}`"></v-img>
+									</span>
 									<v-radio color="primary" :label="questions[i-1].option_3" value="Option 3"></v-radio>
-									<span v-if="questions[i-1].option_6!=null">{{questions[i-1].option_6}}</span>
+									<span v-if="questions[i-1].option_6!='null'">
+										<v-img :src="`${baseUrl}/exams/question/${questions[i-1].option_6}`"></v-img>
+									</span>
 
 									<v-radio color="primary" :label="questions[i-1].option_2" value="Option 2"></v-radio>
-									<span v-if="questions[i-1].option_7!=null">{{questions[i-1].option_7}}</span>
+									<span v-if="questions[i-1].option_7!='null'">
+										<v-img :src="`${baseUrl}/exams/question/${questions[i-1].option_7}`"></v-img>
+									</span>
 
 							        <v-radio color="primary" :label="questions[i-1].option_4" value="Option 4"></v-radio>
-									<span v-if="questions[i-1].option_8!=null">{{questions[i-1].option_8}}</span>
+									<span v-if="questions[i-1].option_8!='null'">
+										<v-img :src="`${baseUrl}/exams/question/${questions[i-1].option_8}`"></v-img>
+									</span>
 
 						      	</v-radio-group>
 
@@ -50,8 +58,8 @@
 									</v-btn>
 								</v-flex>
 								<v-flex>
-									<v-btn color = "red">
-										<v-icon small @click="deleteQuestion(questions[i-1].question_id)">
+									<v-btn color = "red" @click="deleteQuestion(questions[i-1].question_id)">
+										<v-icon small >
 											delete
 										</v-icon>
 									</v-btn>
@@ -70,7 +78,7 @@
 									<v-icon>close</v-icon>
 								</v-btn>
 							</v-toolbar>
-							<AddQuestions @success="success()" :id="questions[i-1].exam_id" :questions="questions[i-1]" :editQuestionMode="editQuestionMode" />
+							<AddQuestions @success="success" :id="questions[i-1].exam_id" :questions="questions[i-1]" :editQuestionMode="editQuestionMode" />
 						</v-dialog>
 
         			</v-tab-item>
@@ -102,6 +110,7 @@
 
 <script>
 import AddQuestions from '@/components/Exam/AddQuestions'
+import { mapState } from 'vuex'
 export default {
 	components: {
 		AddQuestions
@@ -119,15 +128,13 @@ export default {
 		editQuestionMode: false,
 		dialogAddQuestion: false,
 		answer: [],
-			content: [
-				{text: '1. aabbaabb'},
-				{text: '2. ccddccdd'},
-				{text: '3. eeffeeff'},
-				{text: '4. gghhgghh'}
-			],
-
 			// questions: []
 	}),
+	computed: {
+		...mapState({
+			baseUrl: state => state.config.baseUrl
+		})
+	},
 	methods: {
 		async deleteQuestion(id) {
 			const response = await this.$axios.delete(`/api/exams/question/${id}`)

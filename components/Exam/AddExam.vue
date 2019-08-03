@@ -20,7 +20,7 @@
 			>
 			</v-text-field>
 			</v-flex>
-			<v-flex xs12 sm6 md9 >
+			<!-- <v-flex xs12 sm6 md9 >
 				<h3>Exam Duration (Minutes)</h3><br>
 				<v-text-field
 				v-model="item.duration"
@@ -49,7 +49,7 @@
 
 				>
 				</v-text-field>
-			</v-flex>
+			</v-flex> -->
 			</v-layout>
 			<h3>Exam Dates</h3>
 			<v-layout>
@@ -234,8 +234,8 @@ export default {
 					subject_name: this.item.subject_name,
 					start_date: this.date1,
 					end_date: this.date2,
-					duration: this.item.duration,
-					pass_mark: this.item.pass_mark,
+					// duration: this.item.duration,
+					// pass_mark: this.item.pass_mark,
 					description: this.item.description
 				})
 				if(response.data.success==true)

@@ -38,31 +38,14 @@
 </template>
 
 <script>
+import preventInspect from '@/assets/js/main'
 export default {
 	created() {
 		if(this.$auth.loggedIn)
 		{
 			this.$router.push('/dashboard')
 		}
-		document.addEventListener('keydown', function() {
-		if (event.keyCode == 123) {
-			return false;
-		}  if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
-			return false;
-		}  if (event.ctrlKey && event.keyCode == 85) {
-			return false;
-		}
-		}, false);
-
-		if (document.addEventListener) {
-		document.addEventListener('contextmenu', function(e) {
-			e.preventDefault();
-		}, false);
-		} else {
-		document.attachEvent('oncontextmenu', function() {
-			window.event.returnValue = false;
-		});
-		}
+		preventInspect
 	}
 }
 </script>
@@ -74,7 +57,7 @@ export default {
 }
 .container-grad
 {
-	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	
+	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);
 	/* background-image: linear-gradient(to top,#10cf99 0%, #5effd1 100%); */
 }
 .login-grad
@@ -86,7 +69,7 @@ export default {
 	height: 200px;
 	width: 200px;
 	padding-left: 15px;
-	
+
 }
 .v-toolbar {
 	height: 60px;
@@ -94,7 +77,7 @@ export default {
 
 .card-design {
 	border-radius: 10px;
-	
+
 
 }
 .toolbar-text {
@@ -109,7 +92,7 @@ img
 }
 .footer
 {
-	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);	
+	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);
 	text-align: center;
 	color: white;
 

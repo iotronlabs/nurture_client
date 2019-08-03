@@ -3,6 +3,7 @@ import dashboard from './modules/dashboard'
 import forum from './modules/forum'
 import theme from './modules/theme'
 import user from './modules/user'
+import config from './modules/config'
 
 const createStore = () => {
 	return new vuex.Store({
@@ -11,7 +12,8 @@ const createStore = () => {
 			dashboard,
 			forum,
 			theme,
-			user
+			user,
+			config
 		}
 	})
 }

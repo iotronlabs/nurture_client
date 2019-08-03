@@ -81,10 +81,10 @@
 							<td class="text-xs-left">{{ props.item.exam_name }}</td>
 							<td class="text-xs-left">{{ props.item.course_name }}</td>
 							<td class="text-xs-left">{{ props.item.subject_name }}</td>
-							<td class="text-xs-left">{{ props.item.duration }}</td>
+							<!-- <td class="text-xs-left">{{ props.item.duration }}</td> -->
 							<td class="text-xs-left">{{ props.item.start_date }}</td>
 							<td class="text-xs-left">{{ props.item.end_date }}</td>
-							<td class="text-xs-left">{{ props.item.pass_mark }}</td>
+							<!-- <td class="text-xs-left">{{ props.item.pass_mark }}</td> -->
 							<td class="text-xs-left">{{ props.item.status }}</td>
 							<!--<td >  <v-select :items="items" label="Solo field" solo></v-select></td>-->
 							<td class="justify-center layout px-0">
@@ -116,22 +116,7 @@
 					</template>
 				</v-data-table>
 
-				<!-- snackbar -->
-				<v-snackbar
-					v-model="snackbar"
-					:timeout="timeout"
-					top
-					vertical
-				>
-					{{ message }}
-					<v-btn
-						color="pink"
-						flat
-						@click="snackbar = false"
-					>
-						Close
-					</v-btn>
-				</v-snackbar>
+
 			</div>
 		</v-container-fluid>
 
@@ -143,12 +128,12 @@
 					<v-icon>close</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<AddQuestions :id="editedItem.id" :editQuestionMode=false :questions="question_list" @success="success" />
+			<AddQuestions :id="editedItem.id" :editQuestionMode="false" :questions="question_list" @success="success" />
 		</v-dialog>
 
 		<v-dialog v-model="dialogViewQuestion" fullscreen hide-overlay transition="dialog-bottom-transition">
 			<v-toolbar dark color="primary">
-				<v-toolbar-title>Edit Questiion</v-toolbar-title>
+				<v-toolbar-title>Edit Question</v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-btn icon dark @click="dialogViewQuestion = false">
 					<v-icon>close</v-icon>
@@ -220,10 +205,10 @@ export default {
 			{ text: 'Name ', value: 'exam_name', sortable: false },
 			{ text: 'Course', value: 'course_name' ,sortable: false},
 			{ text: 'Subject', value: 'subject_name', sortable: false },
-			{ text: 'Duration', value: 'duration', sortable: false },
+			// { text: 'Duration', value: 'duration', sortable: false },
 			{ text: 'Start Date', value: 'start_date', sortable: false },
 			{ text: 'End Date', value: 'end_date', sortable: false },
-            { text: 'Passmark', value: 'pass_mark', sortable: false },
+            // { text: 'Passmark', value: 'pass_mark', sortable: false },
             { text: 'Status', value: 'status', sortable: false }
 		],
 		rules: {

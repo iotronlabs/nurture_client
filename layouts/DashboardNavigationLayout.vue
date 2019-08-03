@@ -9,7 +9,7 @@
 			absolute
 			overflow
 			app
-				
+
 		>
 
 	<!-- new nav -->
@@ -158,7 +158,8 @@
 
 		</v-navigation-drawer>
 		<v-toolbar color="primary" :clipped-left="primaryDrawer.clipped" app absolute>
-			<v-toolbar-side-icon 
+			<v-toolbar-side-icon
+				class="white--text"
 				@click.stop="primaryDrawer.model = !primaryDrawer.model"
 			></v-toolbar-side-icon>
 			<img class="logo" src="/nurture-logo.png">
@@ -207,7 +208,7 @@
 				<v-list>
 				<v-list-tile
 				>
-					<v-list-tile-action><v-switch @change="changeTheme" v-model="dark" primary color="indigo" :label="switchLabel"></v-switch></v-list-tile-action>
+					<v-list-tile-action><v-switch @change="changeTheme" v-model="dark" primary color="primary" :label="switchLabel"></v-switch></v-list-tile-action>
 
 
 				</v-list-tile>
@@ -320,7 +321,11 @@ export default {
 		this.primaryDrawer.model = false
 		if(this.$auth.loggedIn)
 		{
-			if(this.$auth.user.authentication==5)
+			if(this.$auth.user.authentication==1)
+			{
+				this.studentItems.active=true
+			}
+			else if(this.$auth.user.authentication==5)
 			{
 				this.superAdminItems.active=true
 			}
@@ -328,6 +333,10 @@ export default {
 			{
 				this.adminItems.active=true
 			}
+		}
+		else
+		{
+			this.$router.push('/')
 		}
 	}
 }

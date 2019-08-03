@@ -152,6 +152,10 @@ props: {
 	questions: {
 		type: Object,
 		required: false
+	},
+	questionid: {
+		type: Number,
+		required: false
 	}
 },
 data: () => ({
@@ -168,12 +172,6 @@ data: () => ({
 		topic: '',
 		topics: [],
 		image: '',
-		file: null,
-		optionfile1: null,
-		optionfile2: null,
-		optionfile3: null,
-		optionfile4: null,
-		questionfile: null,
 		items: ['Option 1','Option 2' ,'Option 3','Option 4'],
 	}),
 	updated() {
@@ -227,17 +225,15 @@ data: () => ({
 			formData.append('question', this.questions.question)
 			formData.append('question_image', this.questions.question_image)
 			formData.append('option_1',this.questions.option_1)
-			formData.append('option_5',this.questions.optionfile1)
+			formData.append('option_5',this.questions.option_5)
 			formData.append('option_2',this.questions.option_2)
-			formData.append('option_6',this.questions.optionfile2)
+			formData.append('option_6',this.questions.option_6)
 			formData.append('option_3',this.questions.option_3)
-			formData.append('option_7',this.questions.optionfile3)
+			formData.append('option_7',this.questions.option_7)
 			formData.append('option_4',this.questions.option_4)
-			formData.append('option_8',this.questions.optionfile4)
+			formData.append('option_8',this.questions.option_8)
 			formData.append('answer',this.questions.answer)
 			formData.append('topics','abc')
-
-			formData.append('image',this.file)
 			if(this.editQuestionMode==false)
 			{
 				const response = await this.$axios.post(`/api/exams/${this.id}/addquestions`,
@@ -255,18 +251,18 @@ data: () => ({
 			}
 			else
 			{
-				// const response = this.$axios.post(`/api/exams`,
-				// 	formData,
-				// 	{
-				// 		headers: {
-				// 			'Content-Type': 'multipart/form-data'
-				// 		}
-				// 	}
-				// )
-				// if(response.data.success==true)
-				// {
-				// 	this.$emit('success','Question updated')
-				// }
+				const response = await this.$axios.post(`/api/exams/update/question/${this.questions.question_id}`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
+				if(response.data.success==true)
+				{
+					this.$emit('success','Question updated')
+				}
 			}
 
 		}
