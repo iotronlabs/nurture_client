@@ -2,7 +2,7 @@
 	<v-app :dark="dark" class="global-font">
 		<v-navigation-drawer
 			v-model="primaryDrawer.model"
-			:permanent="primaryDrawer.type === 'permanent'"
+			:temporary="primaryDrawer.type === 'temporary'"
 			:clipped="primaryDrawer.clipped"
 			:floating="primaryDrawer.floating"
 			:mini-variant="primaryDrawer.mini"
@@ -243,7 +243,7 @@ export default {
     data: () => ({
 		primaryDrawer: {
 			model: null,
-			type: 'default (no property)',
+			type: 'temporary',
 			clipped: false,
 			floating: true,
 			mini: false
@@ -356,14 +356,6 @@ export default {
 	margin-left: 20%;
 }
 
-.tile:hover {
-	// background: $primary-gradient;
-	color: #6067eb;
-}
-.tile:active {
-	// background: $primary-gradient;
-	color: #6067eb;
-}
 // .subtile {
 // 	background-color: aliceblue;
 // 	color: blue;
