@@ -85,8 +85,7 @@
 						@click.stop="toggleAll"
 					></v-checkbox>
 				</th>
-				<th
-					v-if="deleteMode==false"
+				<th v-if="deleteMode==false"
 					v-for="header in props.headers"
 					:key="header.text" class="text-xs-left"
 				>
