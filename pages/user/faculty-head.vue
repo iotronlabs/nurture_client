@@ -1,5 +1,5 @@
 <template>
-  	<div> <v-container>
+  	<div> <v-container fluid>
 		   <v-toolbar  class="login-grad" >
 			<v-layout justify-center>
 			

@@ -3,7 +3,7 @@
 		<v-content>
 			<v-container fluid fill-height class="container-grad">
 				<v-layout  justify-center row wrap>
-					<v-flex justify-center  xs12 sm12 md12  >
+					<v-flex xs12 sm12 md12>
 						<center><img class="logo" src="/nurture-logo.png"></center>
 					</v-flex>
 
@@ -68,8 +68,6 @@ export default {
 .logo{
 	height: 200px;
 	width: 200px;
-	padding-left: 15px;
-
 }
 .v-toolbar {
 	height: 60px;

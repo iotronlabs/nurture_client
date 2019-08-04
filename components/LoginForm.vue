@@ -29,20 +29,21 @@
 		</v-text-field>
 		<v-layout row wrap>
 
-			<v-flex xs6 sm5 md5>
+			<v-flex xs8 sm8 md8>
 				
 				<v-checkbox
 					v-model="checkbox"
 					label="Remember Me"
-					height="1px"
+					
 				></v-checkbox>
 				
 			</v-flex>
-			<v-flex xs12 sm12 md12 lg 12>
+			<v-flex xs12 sm12 md12 lg12>
 				<v-btn
 					:disabled="disabled"
 					block
 					color="primary"
+					
 					type="submit"
 					form="login-form"
 					:class="disabled ? 'btn-login' : 'btn-login-color'"
