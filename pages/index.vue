@@ -1,20 +1,23 @@
 <template>
 	<div>
-		<v-toolbar  class="login-grad" >
-			<v-layout justify-center align-center>
-			<v-flex>
+		<v-container>
+			<v-toolbar class="login-grad">
+				<v-layout justify-center>
+				
 			
-			<v-chip color="#2f9e7b" text-color="white">
-				<v-avatar class="student-color"> S </v-avatar>
+					<v-chip color="#2f9e7b" text-color="white">
+						<v-avatar class="student-color"> S </v-avatar>
 				Student 
 				
-			</v-chip>
-			</v-flex>
-			</v-layout>
-		</v-toolbar>
+					</v-chip>
+				
+				</v-layout>
+			</v-toolbar>
+
 		
 
-		<LoginForm id="student" />
+			<LoginForm id="student" />
+		</v-container>
 	</div>
 </template>
 

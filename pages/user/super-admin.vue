@@ -2,7 +2,7 @@
   <div>
 	  <v-container>
 		  <v-toolbar  class="login-grad" >
-			<v-layout justify-center align-center>
+			<v-layout justify-center>
 			
 
 			<v-chip color="#f06d5f" text-color="white">

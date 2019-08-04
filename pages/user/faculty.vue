@@ -1,19 +1,20 @@
 <template>
   	<div>
+		  <v-container>
 		  <v-toolbar  class="login-grad">
 			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm2 offset-xs2 offset-md2 >
-				&nbsp;
-			<v-chip class="chip-alignment" color="#6E7FF3" text-color="white">
+
+			<v-chip color="#6E7FF3" text-color="white">
 				<v-avatar class="teacher-color"> T </v-avatar>
 				Teacher
 				
 			</v-chip>
-			</v-flex>
+			
 			</v-layout>
 		  </v-toolbar>
 		  
 		<LoginForm id="faculty" />
+		  </v-container>
   	</div>
 </template>
 

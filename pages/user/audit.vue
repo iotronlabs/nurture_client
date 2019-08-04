@@ -1,19 +1,21 @@
 <template>
  	<div>
+		 <v-container>
 		 <v-toolbar  class="login-grad" >
 			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm2 offset-xs2 offset-md2 >
-				&nbsp;&nbsp;
-			<v-chip class="chip-alignment" color="#b63fbd"  text-color="white">
+			
+			<v-chip color="#b63fbd"  text-color="white">
 				<v-avatar class="audit-color"> A </v-avatar>
 				Audit
 				
 			</v-chip>
-			</v-flex>
+		
 			</v-layout>
 		  </v-toolbar>
 		 
 		<LoginForm id="audit" />
+		
+		</v-container>
  	</div>
 </template>
 
