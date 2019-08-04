@@ -35,7 +35,7 @@ import LoginForm from '@/components/LoginForm'
 .login-grad
 {
 	background-image: linear-gradient(to bottom,#434343 0%, black 100%);
-	border-radius: 10px;
+	border-radius: 20px;
 
 }
 
