@@ -8,9 +8,7 @@
 			:mini-variant="primaryDrawer.mini"
 			absolute
 			overflow
-			app
-
-		>
+			app>
 
 	<!-- new nav -->
 		<!-- <v-layout row>

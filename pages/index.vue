@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<v-toolbar  class="login-grad" >
-			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm2 offset-xs2 offset-md2 >
-			&nbsp;	
-			<v-chip class="chip-alignment" color="#2f9e7b" text-color="white">
+			<v-layout justify-center align-center>
+			<v-flex>
+			
+			<v-chip color="#2f9e7b" text-color="white">
 				<v-avatar class="student-color"> S </v-avatar>
 				Student 
 				
@@ -36,8 +36,6 @@ import LoginForm from '@/components/LoginForm'
 
 }
 
-.chip-alignment{
-	margin-left: -20%;	
-}
+
 </style>
 
