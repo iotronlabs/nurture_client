@@ -8,6 +8,8 @@
 			placeholder=" "
 			name="email"
 			type="email"
+			maxlength="40"
+			counter="40"
 			v-model="email"
 			:rules="[rules.required,rules.emailValid]"
 			autocomplete="off"
@@ -22,8 +24,10 @@
 			name="password"
 			label="Password"
 			placeholder=" "
+			maxlength="30"
+			counter="30"
 			hint="At least 8 characters"
-			counter
+			
 			autocomplete="off"
 			@click:append="show = !show">
 		</v-text-field>

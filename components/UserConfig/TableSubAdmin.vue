@@ -49,7 +49,8 @@
 									:rules="[rules.required]"
 									label="First Name"
 									type="text"
-									
+									counter="30"
+									maxlength="30"
 									required
 									:disabled="disabled"
 									outline
@@ -62,6 +63,10 @@
 									v-model="editedItem.sub_admin_surname"
 									type="text"
 									label="Last Name"
+									counter="30"
+									maxlength="30"
+									required
+									:rules="[rules.required]"
 									:disabled="disabled"
 									outline
 								>
@@ -127,7 +132,8 @@
 									v-model="editedItem.sub_admin_email"
 									:rules="[rules.required,rules.emailValid]"
 									label=" Email ID"
-									
+									counter="40"
+									maxlength="40"
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -138,8 +144,10 @@
 							<v-flex xs12 sm12 md6>
 								<v-text-field
 									v-model="editedItem.sub_admin_contact"
-									type="tel"
+									type="text"
 									label="Contact no"
+									counter="10"
+									maxlength="10"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -153,7 +161,8 @@
 									type="text"
 									v-model="editedItem.sub_admin_address"
 									label=" Address"
-									
+									counter="50"
+									maxlength="50"
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -166,7 +175,8 @@
 									v-model="editedItem.sub_admin_address_city"
 									type="text"
 									label="City"
-									
+									counter="30"
+									maxlength="30"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -176,6 +186,8 @@
 									v-model="editedItem.sub_admin_address_pin"
 									type="text"
 									label="Pincode"
+									maxlength="6"
+									counter="6"
 									
 									:disabled="disabled"
 									outline
@@ -198,7 +210,8 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_name"
 									label="Centre Name"
-									
+									counter="30"
+									maxlength="30"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -207,7 +220,8 @@
 								<v-text-field
 									v-model="editedItem.sub_admin_centre_id"
 									label="Centre ID"
-									
+									counter="10"
+									maxlength="10"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -218,6 +232,7 @@
 								<h2>Centre Address Details</h2><br>
 								<v-checkbox v-model="checkbox" color="primary"
 									:disabled="disabled"
+									
 									@change="address"
 									label="Same as above"
 									></v-checkbox>
@@ -229,7 +244,8 @@
 									type="text"
 									v-model="editedItem.sub_admin_centre_address"
 									label="Address"
-									
+									counter="50"
+									maxlength="50"
 									autocomplete="off"
 									:disabled="disabled"
 									outline
@@ -241,6 +257,8 @@
 									v-model="editedItem.sub_admin_centre_address_city"
 									type="text"
 									label="City"
+									counter="30"
+									maxlength="30"
 									:disabled="disabled"
 									outline
 								></v-text-field>
@@ -250,6 +268,8 @@
 									v-model="editedItem.sub_admin_centre_address_pin"
 									type="text"
 									label="Pincode"
+									counter="6"
+									maxlength="6"
 									:disabled="disabled"
 									outline
 								> </v-text-field>
