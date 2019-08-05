@@ -66,7 +66,7 @@ export default {
 }
 
 .card-design {
-	border-radius: 40px ;
+	border-radius: 20px ;
 
 
 }
