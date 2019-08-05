@@ -14,7 +14,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
-					<v-toolbar-title>Head Faculty Form</v-toolbar-title>
+					<v-toolbar-title>Subject Mentor Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>

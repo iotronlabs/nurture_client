@@ -31,7 +31,7 @@ export default {
 .login-grad
 {
 	background-image: linear-gradient(to bottom,#434343 0%, black 100%);
-	border-radius: 20px;
+	border-radius: 10px;
 
 }
 

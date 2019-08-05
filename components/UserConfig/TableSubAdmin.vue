@@ -14,7 +14,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
-					<v-toolbar-title>Sub-admin Form</v-toolbar-title>
+					<v-toolbar-title>Center Admin Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>
@@ -63,10 +63,6 @@
 									v-model="editedItem.sub_admin_surname"
 									type="text"
 									label="Last Name"
-									counter="30"
-									maxlength="30"
-									required
-									:rules="[rules.required]"
 									:disabled="disabled"
 									outline
 								>

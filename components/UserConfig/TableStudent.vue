@@ -14,7 +14,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
-					<v-toolbar-title>Student Form</v-toolbar-title>
+					<v-toolbar-title>Student Admission Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>
@@ -44,7 +44,8 @@
 									:rules="[rules.required]"
 									label="First Name"
 									type="text"
-									
+									counter="30"
+									maxlength="30"
 									required
 									:disabled="disabled"
 									outline
@@ -123,7 +124,8 @@
 									v-model="editedItem.s_email"
 									:rules="[rules.required,rules.emailValid]"
 									label=" Email ID"
-									
+									counter="40"
+									maxlength="40"
 									autocomplete="off"
 									required
 									:disabled="disabled"
@@ -138,6 +140,10 @@
 									label="Contact no"
 									:disabled="disabled"
 									outline
+									counter="10"
+									maxlength="10"
+									:rules="[rules.required]"
+									required
 								></v-text-field>
 							</v-flex>
 						</v-layout>
