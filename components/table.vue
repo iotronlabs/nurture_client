@@ -43,7 +43,7 @@ export default {
 	},
   	data: () => ({
 		active: '',
-		heading : ['Sub-admin' , 'Faculty Heads','Faculty','Student'],
+		heading : ['Admin' , 'Mentor','Teacher','Student'],
 
 		dialog: false,
 

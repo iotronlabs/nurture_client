@@ -13,7 +13,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="primary">
-					<v-toolbar-title>Faculty Form</v-toolbar-title>
+					<v-toolbar-title>Subject Teacher Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>
@@ -101,7 +101,7 @@
 										outline
 										></v-text-field>
 									</template>
-									<v-date-picker v-model="date" no-title scrollable>
+									<v-date-picker v-model="date" no-title scrollable color="primary">
 										<v-spacer></v-spacer>
 										<v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
 										<v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>

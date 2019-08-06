@@ -3,15 +3,14 @@
 		<v-content>
 			<v-container fluid fill-height class="container-grad">
 				<v-layout  justify-center row wrap>
-					<v-flex justify-center  xs12 sm12 md12  >
+					<v-flex xs12 sm12 md12>
 						<center><img class="logo" src="/nurture-logo.png"></center>
 					</v-flex>
 
 					<v-flex xs12 sm6 md4 :class="this.$vuetify.breakpoint.smAndDown ">
 
 						<v-card class="elevation-10 card-design">
-							<!-- <v-toolbar class="login-grad" >
-							</v-toolbar> -->
+							
 								<v-card-text>
 
 
@@ -60,23 +59,14 @@ export default {
 	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);
 	/* background-image: linear-gradient(to top,#10cf99 0%, #5effd1 100%); */
 }
-.login-grad
-{
-	background-image: linear-gradient(to right,#434343 0%, black 100%);
-	border-radius: 0px 0px 15px 15px;
-}
+
 .logo{
 	height: 200px;
 	width: 200px;
-	padding-left: 15px;
-
-}
-.v-toolbar {
-	height: 60px;
 }
 
 .card-design {
-	border-radius: 10px;
+	border-radius: 20px ;
 
 
 }
@@ -84,12 +74,7 @@ export default {
 	font-size: 1.5em;
 	color: white;
 }
-img
-{
-	height: 30px;
-	width: 25%;
-	min-width: 100px;
-}
+
 .footer
 {
 	background-image: linear-gradient(to top,#4e54c8 0%, #8f94fb 100%);

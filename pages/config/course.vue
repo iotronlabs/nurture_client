@@ -10,7 +10,7 @@
 						</v-tab> -->
 					<v-tabs fixed-tabs slider-color="primary" v-model="active">
 					<v-tab v-for="head in heading" :key="head" ripple>
-						{{ head}}
+						{{ head }}
 					</v-tab>
 					<v-tabs-items touchless>
 						<v-tab-item v-for="n in 2" :key="n" >

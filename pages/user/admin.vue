@@ -1,17 +1,18 @@
 <template>
   	<div>
+		  <v-container fluid>
 		  <v-toolbar  class="login-grad" >
 			<v-layout justify-center>
-			<v-flex sm5 xs5 md4 offset-sm2 offset-xs2 offset-md2 >
-			&nbsp;
-			<v-chip class="chip-alignment" color="#f06d5f"  text-color="white">
+			
+			<v-chip color="#f06d5f"  text-color="white">
 				<v-avatar class="admin-color"> A </v-avatar>
 				Admin
 			</v-chip>
-			</v-flex>
+
 			</v-layout>
 		  </v-toolbar>
 		<LoginForm id="sub-admin" />
+		</v-container>
 	</div>
 </template>
 
@@ -34,7 +35,4 @@ export default {
 
 }
 
-.chip-alignment{
-	margin-left: -20%;
-}
 </style>

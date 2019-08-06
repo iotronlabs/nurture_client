@@ -1,8 +1,8 @@
 <template>
   <div>
-	  <v-container>
+	  <v-container fluid>
 		  <v-toolbar  class="login-grad" >
-			<v-layout justify-center align-center>
+			<v-layout justify-center>
 			
 
 			<v-chip color="#f06d5f" text-color="white">
@@ -38,7 +38,5 @@ import LoginForm from '@/components/LoginForm'
 
 }
 
-.chip-alignment{
-	margin-left: -35%;
-}
+
 </style>
