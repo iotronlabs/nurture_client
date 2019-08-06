@@ -246,6 +246,13 @@ data: () => ({
 				)
 				if(response.data.success==true)
 				{
+					this.questions.question=''
+					this.questions.option_1=''
+					this.questions.option_2=''
+					this.questions.option_3=''
+					this.questions.option_4=''
+					this.questions.answer=''
+
 					this.$emit('success','New Question Added')
 				}
 			}

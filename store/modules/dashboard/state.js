@@ -67,7 +67,13 @@ const studentItems = {
 			},
 			title: 'Exams',
 			to: '/',
-			items:[]
+			items: [
+				{
+					title: 'Exam table',
+					to: '/exam/student/table'
+				}
+
+			]
 		},
 		// {
 		// 	icon: {
@@ -389,9 +395,16 @@ const superAdminItems = {
 				prefix: 'far',
 				name: 'clipboard'
 			},
-			title:'exams',
-			to:'/exam/admin/table',
-			items:[]
+			title:'Exams',
+			to:'/',
+			items: [
+				{
+					title: 'Exam table',
+					to: '/exam/admin/table'
+				}
+
+			]
+
 		},
 		// {
 		// 	icon: {

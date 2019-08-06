@@ -268,7 +268,17 @@ export default {
 		}
 	},
 	created () {
-		this.initialize()
+		if(this.$auth.loggedIn)
+		{
+			if(this.$auth.user.authentication==5)
+			{
+				this.initialize()
+			}
+			else
+			{
+				this.$router.push('/dashboard')
+			}
+		}
 	},
     methods: {
 		async initialize () {

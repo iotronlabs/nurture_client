@@ -131,6 +131,7 @@
 					<v-divider></v-divider>
 					<v-card-text> You are good to go</v-card-text>
 					<v-btn color="primary"
+						@click.prevent="startexam"
 						:to="`/exam/student/take-assessment/${this.$route.params.id}`"
 						nuxt
 					>Take Assessment</v-btn>
@@ -181,6 +182,9 @@ export default {
 		async initialize() {
 			const response = await this.$axios.get(`/api/students/show_exam_rule/${this.$route.params.id}`)
 			this.details=Object.assign({},response.data.data)
+		},
+		async startexam() {
+			// await this.$axios.post(`/api/results/${this.$route.params.id}/create`)
 		}
 	}
 }
