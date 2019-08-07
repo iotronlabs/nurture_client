@@ -23,6 +23,7 @@ const _31e35139 = () => interopDefault(import('..\\pages\\user\\faculty-head.vue
 const _949e97c6 = () => interopDefault(import('..\\pages\\user\\super-admin.vue' /* webpackChunkName: "pages_user_super-admin" */))
 const _4d08affa = () => interopDefault(import('..\\pages\\exam\\admin\\table.vue' /* webpackChunkName: "pages_exam_admin_table" */))
 const _23b65a97 = () => interopDefault(import('..\\pages\\exam\\student\\table.vue' /* webpackChunkName: "pages_exam_student_table" */))
+const _3d4edec6 = () => interopDefault(import('..\\pages\\exam\\student\\result\\_id.vue' /* webpackChunkName: "pages_exam_student_result__id" */))
 const _6121ec2a = () => interopDefault(import('..\\pages\\exam\\student\\rules\\_id.vue' /* webpackChunkName: "pages_exam_student_rules__id" */))
 const _5df16db9 = () => interopDefault(import('..\\pages\\exam\\student\\take-assessment\\_id.vue' /* webpackChunkName: "pages_exam_student_take-assessment__id" */))
 const _7dc00f46 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
@@ -185,6 +186,10 @@ export function createRouter() {
       path: "/exam/student/table",
       component: _23b65a97,
       name: "exam-student-table"
+    }, {
+      path: "/exam/student/result/:id?",
+      component: _3d4edec6,
+      name: "exam-student-result-id"
     }, {
       path: "/exam/student/rules/:id?",
       component: _6121ec2a,

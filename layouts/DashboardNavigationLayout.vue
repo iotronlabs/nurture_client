@@ -122,7 +122,8 @@
 					<template v-slot:activator >
 						<v-list-tile >
 							<v-list-tile-action>
-
+								<!-- <v-icon>fas fa-search</v-icon> -->
+								<!-- <v-icon>{{item.icon.prefix}} {{item.icon.name}}</v-icon> -->
 								<font-awesome-icon :icon="[item.icon.prefix, item.icon.name]"/>
 							</v-list-tile-action>
 							<v-list-tile-content>
@@ -141,11 +142,11 @@
 
 								<v-list   >
 
-									<nuxt-link :to="subItem.to">
-											<v-list-tile>
+									
+											<v-list-tile :to="subItem.to">
 											{{ subItem.title }}
 										</v-list-tile>
-									</nuxt-link>
+									
 								</v-list>
 							</v-list-tile-content>
 
