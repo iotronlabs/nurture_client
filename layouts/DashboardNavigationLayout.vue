@@ -92,11 +92,15 @@
 
 
 		<!-- old nav -->
-			<v-list>
+		<!-- <v-hover v-slot:default="{ hover }"> -->
+			<v-list >
+				
 				<div>
 					<v-layout row>
 						<v-flex xs10 sm10 md10 lg10>
+							
 							<UserProfile />
+						
 						</v-flex>
 						<v-flex xs2 sm2 lg2 md2>
 							<v-list>
@@ -104,56 +108,53 @@
 									<v-btn icon
 										@click.stop="closeDrawerModel">
 									<font-awesome-icon :icon="['fas', 'times']"/>
+									
 									</v-btn>
+									
 								</v-list-tile-action>
 							</v-list>
 						</v-flex>
 					</v-layout>
 				</div>
 				<hr>
+		
+				
 				<v-list-group
-					class="tile"
+					
 					v-for="(item, i) in selectItems"
 					:key="i"
 					router
 					exact
+					
 				>
 
 					<template v-slot:activator >
-						<v-list-tile >
-							<v-list-tile-action>
-								<!-- <v-icon>fas fa-search</v-icon> -->
-								<!-- <v-icon>{{item.icon.prefix}} {{item.icon.name}}</v-icon> -->
+						
+						<v-list-tile class="tile" >
+							<v-list-tile-action >
+								
 								<font-awesome-icon :icon="[item.icon.prefix, item.icon.name]"/>
 							</v-list-tile-action>
 							<v-list-tile-content>
-								<v-list-tile-title>{{ item.title }}</v-list-tile-title>
+								
+								<v-list-tile-title >{{ item.title }}</v-list-tile-title>
 							</v-list-tile-content>
 						</v-list-tile>
+						
 					</template>
 
 						<v-list-tile
-
+							:to="subItem.to"
 							v-for="subItem in item.items"
 							:key="subItem.title"
 						>
-
-							<v-list-tile-content>
-
-								<v-list   >
-
-									
-											<v-list-tile :to="subItem.to">
-											{{ subItem.title }}
-										</v-list-tile>
-									
-								</v-list>
-							</v-list-tile-content>
-
+							{{ subItem.title }}
 						</v-list-tile>
 
 				</v-list-group>
+					
 			</v-list>
+		<!-- </v-hover> -->
 
 		</v-navigation-drawer>
 		<v-toolbar color="primary" :clipped-left="primaryDrawer.clipped" app absolute>
@@ -351,6 +352,15 @@ export default {
 	padding-left: 15px;
 
 }
+
+
+  .tile:hover {
+	color: #10b687;
+	
+  }
+  .tile:active {
+    color:#10b687;
+  }
 
 .menu-sublist
 {
