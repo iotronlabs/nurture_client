@@ -13,7 +13,7 @@
 				<v-btn class="hidden-sm-and-down" color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add New</v-btn>
 			</template>
 			<v-card>
-				<v-toolbar dark color="primary">
+				<v-toolbar dark color="secondary">
 					<v-toolbar-title>Center Admin Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
@@ -140,10 +140,11 @@
 							<v-flex xs12 sm12 md6>
 								<v-text-field
 									v-model="editedItem.sub_admin_contact"
-									type="text"
+									type="number"
 									label="Contact no"
 									counter="10"
 									maxlength="10"
+									min="0"
 									:disabled="disabled"
 									outline
 								></v-text-field>

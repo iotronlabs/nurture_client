@@ -12,7 +12,7 @@
 				<v-btn class="hidden-sm-and-down" color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add New</v-btn>
 			</template>
 			<v-card>
-				<v-toolbar dark color="primary">
+				<v-toolbar dark color="secondary">
 					<v-toolbar-title>Subject Teacher Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">

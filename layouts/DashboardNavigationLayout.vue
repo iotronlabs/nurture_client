@@ -2,7 +2,7 @@
 	<v-app :dark="dark" class="global-font">
 		<v-navigation-drawer
 			v-model="primaryDrawer.model"
-			:temporary="primaryDrawer.type === 'temporary'"
+			:temporary="primaryDrawer.type === 'default'"
 			:clipped="primaryDrawer.clipped"
 			:floating="primaryDrawer.floating"
 			:mini-variant="primaryDrawer.mini"
@@ -245,9 +245,9 @@ export default {
     data: () => ({
 		primaryDrawer: {
 			model: null,
-			type: 'temporary',
+			type: 'default',
 			clipped: false,
-			floating: true,
+			floating: false,
 			mini: false
 		},
 		footer: {
