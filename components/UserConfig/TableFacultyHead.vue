@@ -314,10 +314,10 @@ export default {
 		headers: [
 		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'faculty_head_id'},
 			{ text: 'Name', sortable: false},
-			{ text: 'Date of birth ', value: 'faculty_head_dob', sortable: false },
+			{ text: 'Subject ', value: 'faculty_head_dob', sortable: false },
 			{ text: 'Email', value: 'faculty_head_email', sortable: false },
 			{ text: 'Contact Number', value: 'faculty_head_contact', sortable: false },
-			{ text: 'State', value: 'faculty_head_address_state', sortable: false }
+			{ text: 'Status', value: 'faculty_head_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,

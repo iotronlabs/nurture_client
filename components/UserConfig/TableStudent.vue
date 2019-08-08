@@ -480,13 +480,12 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.s_id }}</td>
 				<td class="text-xs-center">{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
-
-				<td class="text-xs-center">{{ props.item.s_dob }}</td>
+				<td class="text-xs-center">{{ props.item.s_course }}</td>
+				<td class="text-xs-center">{{ props.item.s_centre }}</td>
 				<td class="text-xs-center">{{ props.item.s_email }}</td>
 				<td class="text-xs-center">{{ props.item.s_contact }}</td>
 				<!-- <td>{{ props.item.s_class }}</td> -->
-				<td class="text-xs-center">{{ props.item.s_course }}</td>
-				<td class="text-xs-center">{{ props.item.s_centre }}</td>
+				
 				<!-- <td>{{ props.item.s_address_state }}</td> -->
 				<td class="text-xs-center">{{ props.item.status }}</td>
 
@@ -562,14 +561,15 @@ export default {
 		],
 
 		headers: [
-		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 's_id'},
+		  	{ text: 'Sl_No', sortable: true,	value: 's_id'},
 			{ text: 'Name', sortable: false},
-			{ text: 'Date of birth ', value: 's_dob', sortable: false },
+			{ text: 'Course', value: 's_course', sortable: true },
+			{ text: 'Centre', value: 's_centre', sortable: true },
+			
 			{ text: 'Email', value: 's_email', sortable: false },
 			{ text: 'Contact Number', value: 's_contact', sortable: false },
 			// { text: 'Class', value: 's_class', sortable: false },
-			{ text: 'Course', value: 's_course', sortable: true },
-			{ text: 'Centre', value: 's_centre', sortable: true },
+			
 			// { text: 'State', value: 's_address_state', sortable: true },
 			{ text: 'Status', value: 'status', sortable: true }
 		],

@@ -269,16 +269,17 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.faculty_id }}</td>
 				<td class="text-xs-center">{{ props.item.faculty_fname + ' ' +  props.item.faculty_surname}}</td>
+				<td class="text-xs-center">{{ props.item.faculty_sub }}</td>
 				<td class="text-xs-center">{{ props.item.faculty_email }}</td>
 				<td class="text-xs-center">{{ props.item.faculty_contact }}</td>
-				<td class="text-xs-center">{{ props.item.faculty_sub }}</td>
+				
 				<td class="text-xs-center">{{ props.item.faculty_centre }}</td>
 				<td class="text-xs-center">{{ props.item.faculty_address_state }}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn dark	v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile
@@ -346,12 +347,12 @@ export default {
 		headers: [
 		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'faculty_id'},
 			{ text: 'Name', sortable: false},
-			
+			{ text: 'Subject', value: 'faculty_sub', sortable: false },
 			{ text: 'Email', value: 'faculty_email', sortable: false },
 			{ text: 'Contact Number', value: 'faculty_contact', sortable: false },
-			{ text: 'Subject', value: 'faculty_sub', sortable: false },
+			
 			{ text: 'Centre', value: 'faculty_centre', sortable: false },
-			{ text: 'State', value: 'faculty_address_state', sortable: false }
+			{ text: 'Status', value: 'faculty_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,

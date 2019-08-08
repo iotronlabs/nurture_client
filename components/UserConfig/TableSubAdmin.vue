@@ -14,7 +14,7 @@
 			</template>
 			<v-card>
 				<v-toolbar dark color="secondary">
-					<v-toolbar-title>Center Admin Form</v-toolbar-title>
+					<v-toolbar-title text-center>Center Admin Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
 						<v-icon>close</v-icon>
@@ -340,7 +340,7 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_fname + ' ' + props.item.sub_admin_surname}}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_dob }}</td>
+				
 				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
@@ -418,11 +418,11 @@ export default {
 		headers: [
 		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'sub_admin_id'},
 			{ text: 'Name', sortable: false},
-			{ text: 'Date of birth ', value: 'sub_admin_dob', sortable: false },
+			
 			{ text: 'Email', value: 'sub_admin_email', sortable: false },
 			{ text: 'Contact Number', value: 'sub_admin_contact', sortable: false },
 			{ text: 'Centre', value: 'sub_admin_centre_name', sortable: false },
-			{ text: 'State', value: 'sub_admin_address_state', sortable: false }
+			{ text: 'Status', value: 'sub_admin_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,

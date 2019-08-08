@@ -2,10 +2,10 @@
 	<v-app :dark="dark" class="global-font">
 		<v-navigation-drawer
 			v-model="primaryDrawer.model"
-			:temporary="primaryDrawer.type === 'default'"
-			:clipped="primaryDrawer.clipped"
+			
+			
 			:floating="primaryDrawer.floating"
-			:mini-variant="primaryDrawer.mini"
+			
 			absolute
 			overflow
 			app>
@@ -247,11 +247,11 @@ export default {
 			model: null,
 			type: 'default',
 			clipped: false,
-			floating: false,
-			mini: false
+			floating: true,
+			
 		},
 		footer: {
-			inset: false
+			inset: true
 		},
 		right: true,
 		rightDrawer: false,
@@ -367,14 +367,6 @@ export default {
 	margin-left: 20%;
 }
 
-// .subtile {
-// 	background-color: aliceblue;
-// 	color: blue;
-// }
-// .subtile:active {
-// 	background: aliceblue;
-// 	color: $primary-gradient;
-// }
 .toolbar-icons {
 	margin: 5px;
 }

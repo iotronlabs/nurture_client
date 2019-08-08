@@ -109,7 +109,7 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.course_id }}</td>
 				<td class="text-xs-center">{{ props.item.course_name }}</td>
-				<td class="text-xs-center">{{ props.item.course_duration }}</td>
+				<td class="text-xs-center">{{ props.item.subject}}</td>
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
 						<v-menu offset-y>
@@ -178,7 +178,7 @@ export default {
 				// { text: 'Sl_No', align: 'left', sortable: true,	value: 'sub_code'},
 				{ text:'Course Id', value: 'course_id'},
 				{ text: 'Course Name ', value: 'course_name', sortable: false },
-				{ text: 'Course Length ', value: 'course_duration', sortable: false },
+				{ text: 'Subjects', value: 'subject', sortable: false },
 			],
 
 			settings :
