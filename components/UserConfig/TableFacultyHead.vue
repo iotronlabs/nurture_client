@@ -39,7 +39,7 @@
 								<img :src="editedItem.imageUrl" width="100%" height="100%">
 							</v-flex>
 						</v-layout>
-						
+
 						<v-layout row wrap>
 
 							<v-flex xs12 sm6 md6 >
@@ -323,7 +323,7 @@ export default {
 			{ text: 'Date of birth ', value: 'faculty_head_dob', sortable: false },
 			{ text: 'Email', value: 'faculty_head_email', sortable: false },
 			{ text: 'Contact Number', value: 'faculty_head_contact', sortable: false },
-			{ text: 'State', value: 'faculty_head_address_state', sortable: false }
+			{ text: 'Status', value: 'faculty_head_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,

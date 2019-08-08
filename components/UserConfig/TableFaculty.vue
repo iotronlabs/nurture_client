@@ -357,7 +357,7 @@ export default {
 			{ text: 'Contact Number', value: 'faculty_contact', sortable: false },
 			{ text: 'Subject', value: 'faculty_sub', sortable: false },
 			{ text: 'Centre', value: 'faculty_centre', sortable: false },
-			{ text: 'State', value: 'faculty_address_state', sortable: false }
+			{ text: 'Status', value: 'faculty_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,
