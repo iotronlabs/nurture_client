@@ -35,9 +35,9 @@
 							</v-flex>
 						</v-layout>
 
-						<v-layout row>
+						<v-layout row v-if="editedItem.imageUrl!=''">
 							<v-flex xs12 sm6>
-								<img :src="editedItem.imageUrl">
+								<img :src="editedItem.imageUrl" width="100%" height="100%">
 							</v-flex>
 						</v-layout>
 
@@ -317,12 +317,12 @@
 				<th>
 					<div v-if="deleteMode">
 					<v-layout>
-						<v-flex>
-							{{selected.length}} rows selected
+						<v-flex justify-start>
 							<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
 							<v-btn class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
 							<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
 							<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
+							{{selected.length}} rows selected
 						</v-flex>
 					</v-layout>
 				</div>
@@ -332,24 +332,20 @@
 		<template v-slot:items="props">
 			<tr :active="props.selected" @click="props.selected = !props.selected">
 				<td v-if="deleteMode">
-					<v-checkbox
-						color="primary"
-						hide-details
-						:input-value="props.selected"
-					></v-checkbox>
+							<v-checkbox
+								color="primary"
+								hide-details
+								:input-value="props.selected"
+							></v-checkbox>
 				</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_fname + ' ' + props.item.sub_admin_surname}}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_dob }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td>
 				<td class="justify-center layout px-0">
-					<span v-if="deleteMode==false">
+					
+					
+						
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn  fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile
@@ -361,8 +357,16 @@
 								</v-list-tile>
 							</v-list>
 							</v-menu>
-					</span>
+					
 				</td>
+				<td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
+				<td class="text-xs-center">{{ props.item.sub_admin_fname + ' ' + props.item.sub_admin_surname}}</td>
+				
+				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
+				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
+				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
+				<td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td>
+				
 			</tr>
       	</template>
 		<template v-slot:no-data>
@@ -416,20 +420,21 @@ export default {
 		],
 
 		headers: [
+			{text:" "},
 		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'sub_admin_id'},
 			{ text: 'Name', sortable: false},
-			{ text: 'Date of birth ', value: 'sub_admin_dob', sortable: false },
+			
 			{ text: 'Email', value: 'sub_admin_email', sortable: false },
 			{ text: 'Contact Number', value: 'sub_admin_contact', sortable: false },
 			{ text: 'Centre', value: 'sub_admin_centre_name', sortable: false },
-			{ text: 'State', value: 'sub_admin_address_state', sortable: false }
+			{ text: 'Status', value: 'sub_admin_address_state', sortable: false }
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,
 		image:null,
 		states:[
 			'Arunachal Pradesh','Assam', 'Bihar', 'Chhattisgarh' ,'Goa', 'Gujarat', 'Haryana' ,
-			'Himachal Pradesh', 'Jammu and Kashmir',
+			'Himachal Pradesh', 'Kashmir','Ladakh',
 			'Jharkhand' ,'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra' ,'Manipur', 'Meghalaya ',
 			'Mizoram', 'Nagaland', 'Odisha', 'Punjab','Rajasthan',
 			'Sikkim', 'TamilNadu' ,'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand',' West Bengal'
@@ -511,6 +516,17 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		onFilePicked(event){
+			const files=event.target.files
+			let filename=files[0].name;
+			if (filename.lastIndexOf('.')<=0)
+			{
+				return alert('please add a valid file')
+			}
+			const fileReader=new FileReader()
+			fileReader.addEventListener ('load',() => {
+				this.editedItem.imageUrl=fileReader.result
+			})
+			fileReader.readAsDataURL(files[0])
 			this.editedItem.sub_admin_profile_picture=event.target.files[0]
 		},
 		address() {

@@ -33,7 +33,13 @@
 								>
 							</v-flex>
 						</v-layout>
-
+						
+						<v-layout row v-if="editedItem.imageUrl!=''">
+							<v-flex xs12 sm6>
+								<img :src="editedItem.imageUrl" width="100%" height="100%">
+							</v-flex>
+						</v-layout>
+						
 						<v-layout row wrap>
 
 							<v-flex xs12 sm6 md6 >
@@ -397,6 +403,17 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		onFilePicked(event){
+			const files=event.target.files
+			let filename=files[0].name;
+			if (filename.lastIndexOf('.')<=0)
+			{
+				return alert('please add a valid file')
+			}
+			const fileReader=new FileReader()
+			fileReader.addEventListener ('load',() => {
+				this.editedItem.imageUrl=fileReader.result
+			})
+			fileReader.readAsDataURL(files[0])
 			this.editedItem.faculty_head_profile_picture=event.target.files[0]
 		},
 		async initialize () {

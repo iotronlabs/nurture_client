@@ -1,9 +1,7 @@
 const breadcrumbs = {
-	forum: {
-		active: true
-	},
+	
 	stream: {
-		active: false
+		active: true
 	},
 	subject: {
 		active: false
