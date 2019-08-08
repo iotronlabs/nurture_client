@@ -34,6 +34,12 @@
 							</v-flex>
 						</v-layout>
 
+						<v-layout row v-if="editedItem.imageUrl!=''">
+							<v-flex xs12 sm6>
+								<img :src="editedItem.imageUrl" width="100%" height="100%">
+							</v-flex>
+						</v-layout>
+
 
 						<h2> Student Details</h2>
 						<v-layout row wrap>
@@ -482,6 +488,8 @@
 				<td class="text-xs-center">{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
 				<td class="text-xs-center">{{ props.item.s_course }}</td>
 				<td class="text-xs-center">{{ props.item.s_centre }}</td>
+
+				
 				<td class="text-xs-center">{{ props.item.s_email }}</td>
 				<td class="text-xs-center">{{ props.item.s_contact }}</td>
 				<!-- <td>{{ props.item.s_class }}</td> -->
@@ -563,9 +571,7 @@ export default {
 		headers: [
 		  	{ text: 'Sl_No', sortable: true,	value: 's_id'},
 			{ text: 'Name', sortable: false},
-			{ text: 'Course', value: 's_course', sortable: true },
-			{ text: 'Centre', value: 's_centre', sortable: true },
-			
+			// { text: 'Date of birth ', value: 's_dob', sortable: false },
 			{ text: 'Email', value: 's_email', sortable: false },
 			{ text: 'Contact Number', value: 's_contact', sortable: false },
 			// { text: 'Class', value: 's_class', sortable: false },
@@ -692,6 +698,17 @@ export default {
 			this.$refs.fileInput.click()
 		},
 		onFilePicked(event){
+			const files=event.target.files
+			let filename=files[0].name;
+			if (filename.lastIndexOf('.')<=0)
+			{
+				return alert('please add a valid file')
+			}
+			const fileReader=new FileReader()
+			fileReader.addEventListener ('load',() => {
+				this.editedItem.imageUrl=fileReader.result
+			})
+			fileReader.readAsDataURL(files[0])
 			this.editedItem.s_profile_picture=event.target.files[0]
 		},
 		address() {

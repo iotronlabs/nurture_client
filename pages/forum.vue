@@ -18,7 +18,7 @@
 						<v-subheader class="forum-heading">
 							<span v-if="breadcrumbs.subject.active">Analog Electronics</span>
 							<span v-else-if="breadcrumbs.stream.active">Electronics and Telecommunication</span>
-							<span v-else-if="breadcrumbs.forum.active">School of Electronics Engineering</span>
+							<!-- <span v-else-if="breadcrumbs.forum.active">School of Electronics Engineering</span> -->
 							<v-spacer />
 							<v-btn>Subscribe</v-btn>
 						</v-subheader>
@@ -27,7 +27,7 @@
 						<v-flex xs10 sm10 md8 lg8>
 								<div v-if="breadcrumbs.subject.active"><Forum3 /></div>
 								<div v-else-if="breadcrumbs.stream.active"><Forum2 /></div>
-								<div v-else-if="breadcrumbs.forum.active"><Forum1 /></div>
+								<!-- <div v-else-if="breadcrumbs.forum.active"><Forum1 /></div> -->
 						</v-flex>
 						<v-flex xs10 sm10 md4 lg4>
 							<v-card  class ="forum-right-container">
