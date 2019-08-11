@@ -338,13 +338,7 @@
 								:input-value="props.selected"
 							></v-checkbox>
 				</td>
-				<!-- <td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_fname + ' ' + props.item.sub_admin_surname}}</td>
-				
-				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td> -->
+			
 				<td class="justify-center layout px-0">					
 						
 						<v-menu offset-y>
@@ -353,6 +347,13 @@
 								<v-btn outline fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
+								<v-list-tile
+									v-for="(item, index) in actions"
+									:key="index"
+									@click="changed(item.title)"
+								>
+								<v-list-tile-title @click="isActive()"><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>&nbsp;&nbsp;{{ item.title }}</v-list-tile-title>
+								</v-list-tile>
 								<v-list-tile
 									v-for="(item, index) in settings"
 									:key="index"
@@ -369,9 +370,9 @@
 				
 				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
+				<td class="text-xs-center" >{{ props.item.sub_admin_centre_name }}</td>
 				<!-- <td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td> -->
-				<td class="text-xs-center">Active</td>
+				<td :class=" status=='Active' ? 'green--text text-xs-center': 'red--text text-xs-center'" >{{status}}</td>
 
 			</tr>
       	</template>
@@ -408,6 +409,8 @@ export default {
 		snackbar: false,
 		timeout: 3000,
 
+		status:"Active",
+
 		selectedAction: '',
 		config: ['View','Edit'],
 		viewMode: false,
@@ -416,13 +419,14 @@ export default {
 		disabled: false,
 		selected: [],
 		settings :
-		[
-
-
-			{ title: 'Set as Inactive', icon: { prefix:'fas', name:'ban'} },
+		[			
 			{ title: 'View', icon: { prefix:'far', name:'eye'} },
 			{ title: 'Edit', icon: { prefix:'fas', name:'pencil-alt'} }
-
+		],
+		actions :
+		[
+			{ title: 'Set as Inactive', icon: { prefix:'fas', name:'ban'} },
+			{ title: 'Set as Active', icon: { prefix:'fas', name:'check-circle'} }
 		],
 
 		headers: [
@@ -514,6 +518,16 @@ export default {
 		this.initialize()
 	},
     methods: {
+		isActive(){
+			if(this.status=="Active")
+			{
+				this.status="Inactive"
+			}
+			else
+			{
+				this.status="Active"
+			}
+		},
 		reset () {
 			this.$refs.form.reset()
 		},
@@ -694,6 +708,12 @@ export default {
 </script>
 
 <style scoped>
+.active-color{
+	color: green;
+}
+.inactive-color{
+	color: red;
+}
 .select-action
 {
 	width: 100%;

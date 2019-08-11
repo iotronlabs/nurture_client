@@ -253,11 +253,12 @@
 					<div v-if="deleteMode">
 					<v-layout>
 						<v-flex>
-							{{selected.length}} rows selected
+							
 							<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
 							<v-btn class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
 							<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
 							<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
+							{{selected.length}} rows selected
 						</v-flex>
 					</v-layout>
 				</div>
@@ -273,21 +274,21 @@
 						:input-value="props.selected"
 					></v-checkbox>
 				</td>
-				<td class="text-xs-center">{{ props.item.faculty_id }}</td>
-				<td class="text-xs-center">{{ props.item.faculty_fname + ' ' +  props.item.faculty_surname}}</td>
-				<td class="text-xs-center">{{ props.item.faculty_sub }}</td>
-				<td class="text-xs-center">{{ props.item.faculty_email }}</td>
-				<td class="text-xs-center">{{ props.item.faculty_contact }}</td>
-				
-				<td class="text-xs-center">{{ props.item.faculty_centre }}</td>
-				<td class="text-xs-center">{{ props.item.faculty_address_state }}</td>
 				<td class="justify-center layout px-0">
-					<span v-if="deleteMode==false">
+					
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn outline class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn outline fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
+								<v-list-tile
+									v-for="(item, index) in actions"
+									:key="index"
+									@click="changed(item.title)"
+								>
+								<v-list-tile-title @click="isActive()"><font-awesome-icon :icon="[ item.icon.prefix, item.icon.name]"/>&nbsp;&nbsp;{{ item.title }}</v-list-tile-title>
+								</v-list-tile>
 								<v-list-tile
 									v-for="(item, index) in settings"
 									:key="index"
@@ -297,8 +298,17 @@
 								</v-list-tile>
 							</v-list>
 							</v-menu>
-					</span>
+					
 				</td>
+				<td class="text-xs-center">{{ props.item.faculty_id }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_fname + ' ' +  props.item.faculty_surname}}</td>
+				<td class="text-xs-center">{{ props.item.faculty_sub }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_email }}</td>
+				<td class="text-xs-center">{{ props.item.faculty_contact }}</td>
+				
+				<td class="text-xs-center">{{ props.item.faculty_centre }}</td>
+				<td :class=" status=='Active' ? 'green--text text-xs-center': 'red--text text-xs-center'" >{{status}}</td>
+				
 			</tr>
       	</template>
 		<template v-slot:no-data>
@@ -334,6 +344,8 @@ export default {
 		snackbar: false,
 		timeout: 3000,
 
+		status:"Active",
+
 		authentication: '',
 
 		selectedAction: '',
@@ -349,8 +361,15 @@ export default {
 			{ title: 'Edit', icon: { prefix:'fas', name:'pencil-alt'} },
 			{ title: 'Delete', icon: { prefix:'fas', name:'trash-alt'} }
 		],
+		actions :
+		[
+			{ title: 'Set as Inactive', icon: { prefix:'fas', name:'ban'} },
+			{ title: 'Set as Active', icon: { prefix:'fas', name:'check-circle'} }
+		],
+
 
 		headers: [
+			{text:""},
 		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'faculty_id'},
 			{ text: 'Name', sortable: false},
 			{ text: 'Subject', value: 'faculty_sub', sortable: false },
@@ -436,6 +455,16 @@ export default {
 		this.initialize()
 	},
     methods: {
+		isActive(){
+			if(this.status=="Active")
+			{
+				this.status="Inactive"
+			}
+			else
+			{
+				this.status="Active"
+			}
+		},
 		reset () {
 			this.$refs.form.reset()
 		},
