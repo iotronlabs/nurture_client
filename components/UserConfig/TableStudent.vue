@@ -486,16 +486,14 @@
 				</td>
 				<td class="text-xs-center">{{ props.item.s_id }}</td>
 				<td class="text-xs-center">{{ props.item.s_fname + ' ' + props.item.s_surname}}</td>
-				<td class="text-xs-center">{{ props.item.s_course }}</td>
-				<td class="text-xs-center">{{ props.item.s_centre }}</td>
-
-				
-				<td class="text-xs-center">{{ props.item.s_email }}</td>
+				<td class="text-xs-center">{{ props.item.s_email }}</td>				
 				<td class="text-xs-center">{{ props.item.s_contact }}</td>
 				<!-- <td>{{ props.item.s_class }}</td> -->
 				
 				<!-- <td>{{ props.item.s_address_state }}</td> -->
 				<td class="text-xs-center">{{ props.item.status }}</td>
+				<td class="text-xs-center">{{ props.item.s_course }}</td>
+				<td class="text-xs-center">{{ props.item.s_centre }}</td>
 
 				<td class="justify-center layout px-0">
 					<span v-if="deleteMode==false">
@@ -577,7 +575,10 @@ export default {
 			// { text: 'Class', value: 's_class', sortable: false },
 			
 			// { text: 'State', value: 's_address_state', sortable: true },
-			{ text: 'Status', value: 'status', sortable: true }
+			{ text: 'Status', value: 'status', sortable: true },
+			{ text: 'Course', value: 'course', sortable: true },
+			{ text: 'Centre', value: 'centre', sortable: true }
+
 		],
 		date: new Date().toISOString().substr(0, 10),
 		menu: false,

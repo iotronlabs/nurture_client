@@ -338,21 +338,19 @@
 								:input-value="props.selected"
 							></v-checkbox>
 				</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
+				<!-- <td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_fname + ' ' + props.item.sub_admin_surname}}</td>
 				
 				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td>
-				<td class="justify-center layout px-0">
-					
-					
+				<td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td> -->
+				<td class="justify-center layout px-0">					
 						
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
-								<v-btn  fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn outline class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn outline fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
 								<v-list-tile
@@ -372,8 +370,9 @@
 				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_centre_name }}</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td>
-				
+				<!-- <td class="text-xs-center">{{ props.item.sub_admin_address_state }}</td> -->
+				<td class="text-xs-center">Active</td>
+
 			</tr>
       	</template>
 		<template v-slot:no-data>
