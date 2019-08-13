@@ -2,18 +2,35 @@
 <div>
 	<v-toolbar flat color="lightgrey">
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
-      	<v-spacer></v-spacer>
+      	<!-- <span v-if="deleteMode">{{selected.length}} rows selected</span> -->
+		<v-spacer></v-spacer>
 
 		<v-btn fab small class="hidden-md-and-up" v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/></v-btn>
 		<v-btn class="hidden-sm-and-down" v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/>&nbsp;&nbsp;Delete</v-btn>
+		<v-speed-dial v-if="deleteMode" v-model="fab" transition="slide-x-reverse-transition" direction="left" >
+			<template v-slot:activator>
+				<v-btn v-model="fab" fab small color="error">
+					<!-- <font-awesome-icon :icon="['fas', 'trash-alt']"/> -->
+					<v-icon>delete</v-icon>
+          			<v-icon>close</v-icon>
+				</v-btn>
+			</template>
+			<!-- <v-btn fab dark small> -->
+				<!-- <v-icon>edit</v-icon> -->
+				<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
+				<v-btn class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
+				<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
+				<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
 
+			<!-- </v-btn> -->
+		</v-speed-dial>
 		<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 			<template v-slot:activator="{ on }">
-				<v-btn fab small class="hidden-md-and-up" color="primary"  @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn>
-				<v-btn class="hidden-sm-and-down" color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add New</v-btn>
+				<v-btn fab small :class="deleteMode ? 'hide-btn-add' : ''" class="hidden-md-and-up" color="primary"  @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/></v-btn>
+				<v-btn :class="deleteMode ? 'hide-btn-add' : ''" class="hidden-sm-and-down"  color="primary" @click="addItem" dark v-on="on"><font-awesome-icon :icon="['fas', 'plus']"/>&nbsp;&nbsp;Add New</v-btn>
 			</template>
 			<v-card>
-				<v-toolbar dark color="secondary">
+				<v-toolbar dark color="primary">
 					<v-toolbar-title text-center>Center Admin Form</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn icon dark @click="dialog = false">
@@ -25,7 +42,7 @@
 						<v-layout>
 							<v-flex xs12 sm6 >
 								<h3>Add Image</h3><br>
-								
+
 								<input
 									type="file"
 									ref="fileInput"
@@ -105,7 +122,7 @@
 										label="Date of Birth"
 										placeholder="yyyy-mm-dd"
 										readonly
-										v-on="on" 
+										v-on="on"
 										outline
 										></v-text-field>
 									</template>
@@ -185,7 +202,7 @@
 									label="Pincode"
 									maxlength="6"
 									counter="6"
-									
+
 									:disabled="disabled"
 									outline
 								> </v-text-field>
@@ -229,7 +246,7 @@
 								<h2>Centre Address Details</h2><br>
 								<v-checkbox v-model="checkbox" color="primary"
 									:disabled="disabled"
-									
+
 									@change="address"
 									label="Same as above"
 									></v-checkbox>
@@ -305,42 +322,27 @@
 						@click.stop="toggleAll"
 					></v-checkbox>
 				</th>
+
 				<th
-					v-if="deleteMode==false"
 					v-for="header in props.headers"
 					:key="header.text"
 				>
-
 					{{ header.text }}
-				</th>
-
-				<th>
-					<div v-if="deleteMode">
-					<v-layout>
-						<v-flex justify-start>
-							<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
-							<v-btn class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
-							<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
-							<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
-							{{selected.length}} rows selected
-						</v-flex>
-					</v-layout>
-				</div>
 				</th>
 			</tr>
 	 	</template>
 		<template v-slot:items="props">
 			<tr :active="props.selected" @click="props.selected = !props.selected">
 				<td v-if="deleteMode">
-							<v-checkbox
-								color="primary"
-								hide-details
-								:input-value="props.selected"
-							></v-checkbox>
+					<v-checkbox
+						color="primary"
+						hide-details
+						:input-value="props.selected"
+					></v-checkbox>
 				</td>
-			
-				<td class="justify-center layout px-0">					
-						
+
+				<td class="justify-center layout px-0" v-if="deleteMode==false">
+
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
 								<v-btn outline class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
@@ -363,11 +365,11 @@
 								</v-list-tile>
 							</v-list>
 							</v-menu>
-					
+
 				</td>
-				<td class="text-xs-center">{{ props.item.sub_admin_id }}</td>
+				<td class="text-xs-center px-0">{{ props.item.sub_admin_id }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_fname + ' ' + props.item.sub_admin_surname}}</td>
-				
+
 				<td class="text-xs-center">{{ props.item.sub_admin_email }}</td>
 				<td class="text-xs-center">{{ props.item.sub_admin_contact }}</td>
 				<td class="text-xs-center" >{{ props.item.sub_admin_centre_name }}</td>
@@ -403,6 +405,7 @@
 <script>
 export default {
     data: () => ({
+		fab: false,
 		dialog: false,
 		search: '',
 		message: '',
@@ -419,7 +422,7 @@ export default {
 		disabled: false,
 		selected: [],
 		settings :
-		[			
+		[
 			{ title: 'View', icon: { prefix:'far', name:'eye'} },
 			{ title: 'Edit', icon: { prefix:'fas', name:'pencil-alt'} }
 		],
@@ -433,7 +436,7 @@ export default {
 			{text:" "},
 		  	{ text: 'Sl_No', align: 'left', sortable: true,	value: 'sub_admin_id'},
 			{ text: 'Name', sortable: false},
-			
+
 			{ text: 'Email', value: 'sub_admin_email', sortable: false },
 			{ text: 'Contact Number', value: 'sub_admin_contact', sortable: false },
 			{ text: 'Centre', value: 'sub_admin_centre_name', sortable: false },
@@ -719,6 +722,10 @@ export default {
 	width: 100%;
 	padding-left: 20%;
 	padding-right: 20%;
+}
+.hide-btn-add
+{
+	display: none;
 }
 </style>
 
