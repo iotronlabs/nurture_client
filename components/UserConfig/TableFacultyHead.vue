@@ -245,10 +245,10 @@
 						:input-value="props.selected"
 					></v-checkbox>
 				</td>
-				<td class="justify-center layout px-0">
+				<td class="justify-center align-center layout px-0">
 				<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn outline class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn outline small class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 								<v-btn outline fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>

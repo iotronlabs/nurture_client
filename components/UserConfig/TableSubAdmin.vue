@@ -15,7 +15,7 @@
 				</v-btn>
 			</template>
 			<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
-			<v-badge color="orange" overlap="">
+			<v-badge color="orange" overlap>
 				<template v-slot:badge>
 					<!-- <span>{{selected.length}} rows selected</span> -->
 					<span>{{selected.length}}</span>
@@ -160,7 +160,7 @@
 							<v-flex xs12 sm12 md6>
 								<v-text-field
 									v-model="editedItem.sub_admin_contact"
-									type="number"
+									type="text"
 									label="Contact no"
 									counter="10"
 									maxlength="10"
@@ -348,7 +348,7 @@
 
 						<v-menu offset-y>
 							<template v-slot:activator="{ on }">
-								<v-btn outline class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
+								<v-btn outline small round class="hidden-sm-and-down" v-on="on">Actions &nbsp;<font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 								<v-btn outline fab small class="hidden-md-and-up" v-on="on"><font-awesome-icon :icon="['fas', 'angle-down']"/></v-btn>
 							</template>
 							<v-list>
