@@ -5,8 +5,8 @@
 		<v-container fluid>
 			<v-layout align-center justify-center>
 				<v-flex xs12>
-					<div v-if="authentication==5"><Table /></div>
-					<div v-if="authentication==4"><Table2 /></div>
+					<div v-if="authentication==5"><TableAdmin /></div>
+					<div v-if="authentication==4"><TableSubadmin /></div>
 				</v-flex>
 			</v-layout>
 		</v-container>
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import Table from '@/components/table'
-import Table2 from '@/components/table2'
+import TableAdmin from '@/components/TableAdmin'
+import TableSubadmin from '@/components/TableSubadmin'
 export default {
 	middleware: ['auth'],
 	components: {
-		Table,
-		Table2
+		TableAdmin,
+		TableSubadmin
 	},
 	layout: 'DashboardNavigationLayout',
 	data() {
