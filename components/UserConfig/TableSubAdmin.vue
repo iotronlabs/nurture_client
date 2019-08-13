@@ -2,7 +2,6 @@
 <div>
 	<v-toolbar flat color="lightgrey">
       	<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
-      	<!-- <span v-if="deleteMode">{{selected.length}} rows selected</span> -->
 		<v-spacer></v-spacer>
 
 		<v-btn fab small class="hidden-md-and-up" v-if="deleteMode==false" color="error" @click="deleteMode=true" dark v-on="on"><font-awesome-icon :icon="['fas', 'trash-alt']"/></v-btn>
@@ -15,12 +14,16 @@
           			<v-icon>close</v-icon>
 				</v-btn>
 			</template>
-			<!-- <v-btn fab dark small> -->
-				<!-- <v-icon>edit</v-icon> -->
-				<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
+			<v-btn small fab class="hidden-md-and-up" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/></v-btn>
+			<v-badge color="orange" overlap="">
+				<template v-slot:badge>
+					<!-- <span>{{selected.length}} rows selected</span> -->
+					<span>{{selected.length}}</span>
+				</template>
 				<v-btn class="hidden-sm-and-down" color="error" @click="deleteItem"><font-awesome-icon :icon="['far', 'check-circle']"/>&nbsp;&nbsp;Confirm</v-btn>
-				<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
-				<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
+			</v-badge>
+			<v-btn small fab class="hidden-md-and-up btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/></v-btn>
+			<v-btn class="hidden-sm-and-down btn-cancel" color="info" @click="deleteMode=false" ><font-awesome-icon :icon="['far', 'times-circle']"/>&nbsp;&nbsp;Cancel</v-btn>
 
 			<!-- </v-btn> -->
 		</v-speed-dial>
