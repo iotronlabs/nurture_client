@@ -88,18 +88,37 @@ export default {
 			formData.append('description',this.item.description)
 			formData.append('upload_file',this.item.upload_file)
 
-			const response = await this.$axios.post(`/api/materials/add`,
-				formData,
-				{
-					headers: {
-						'Content-Type': 'multipart/form-data'
+			let response
+			let message
+			if(this.editMode==false)
+			{
+				response = await this.$axios.post(`/api/materials/add`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
 					}
-				}
-			)
+				)
+				message="New Materials added"
+			}
+			else
+			{
+				response = await this.$axios.post(`/api/materials/update/${this.item.id}`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						}
+					}
+				)
+				message="Materials updated"
+			}
 			if(response.data.success==true)
 			{
-				this.$emit('success','New materials added')
+				this.$emit('success',message)
 			}
+
 		}
 	}
 }

@@ -19,7 +19,7 @@
 					<v-layout row wrap>
 						<v-flex xs10 sm10 md12 lg12>
 							<v-container>
-								<div v-if="authentication==5"><Table /></div>
+								<div><Table /></div>
 								<!-- <div v-if="authentication==5"><TableSuperAdmin /></div> -->
 							</v-container>
 						</v-flex>
